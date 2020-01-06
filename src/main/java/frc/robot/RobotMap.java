@@ -1,5 +1,11 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
@@ -7,9 +13,11 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.util.Color;
 
 /*
  * All universal variables and robot components are found here
@@ -24,21 +32,35 @@ public class RobotMap {
   public static CANSparkMax MiddleRightMotor;
   public static CANSparkMax BackRightMotor;
 
-  /* Initialize DifferentialDrive */
-  public static DifferentialDrive robotDrive;
-
   /* Initialize SpeedControllerGroups for DifferentialDrive */
   public static SpeedControllerGroup leftGroup;
   public static SpeedControllerGroup rightGroup;
+
+  /* Initialize DifferentialDrive */
+  public static DifferentialDrive robotDrive;
+
+  /* Initialize motors */
+  public static WPI_VictorSPX spinnerMotor;
 
   /* Initialize compressor */
   public static Compressor compressor;
 
   /* Initialize solenoids */
 
+  /* Initialize I2C port */
+  public static I2C.Port i2cPort;
 
-  /* Initialize gyroscope */
-  public static ADIS16448_IMU gyro;
+  /* Initialize Color Sensor */
+  public static ColorSensorV3 colorSensor;
+
+  /* Initialize Color Sensor ColorMatch */
+  public static ColorMatch colorMatch;
+
+  /* Initialize Color Sensor color targets */
+  public static Color BlueTarget;
+  public static Color GreenTarget;
+  public static Color RedTarget;
+  public static Color YellowTarget;
 
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
@@ -55,7 +77,7 @@ public class RobotMap {
    */
   public static void init() {
 
-    /* Define drive Victors with CAN id */
+    /* Define drive Sparks with CAN id */
     FrontLeftMotor = new CANSparkMax(1, MotorType.kBrushless);
     MiddleLeftMotor = new CANSparkMax(2, MotorType.kBrushless);
     BackLeftMotor = new CANSparkMax(3, MotorType.kBrushless);
@@ -70,14 +92,28 @@ public class RobotMap {
     /* Define robotDrive as a DifferentialDrive for drivetrain */
     robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
+    /* Define Victors with CAN id */
+    //spinnerMotor = new VictorSPX(7);
+
     /* Define compressor */
     compressor = new Compressor(0);
 
     /* Define solenoids */
     
+    /* Define the I2C port */
+    i2cPort = I2C.Port.kOnboard;
 
-    /* Define gyroscope class */
-    gyro = new ADIS16448_IMU();
+    /* Define the Color Sensor as in the I2C port */
+    colorSensor = new ColorSensorV3(i2cPort);
+    
+    /* Define ColorMatch */
+    colorMatch = new ColorMatch();
+
+    /* Define ColorMatch colors */
+    BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+    GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+    RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+    YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
     /* Define and start camera server */
     UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);

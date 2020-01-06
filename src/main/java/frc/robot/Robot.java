@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.ColorSpinner;
 import frc.robot.subsystems.Drive;
 
 /*
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   /* Initialize OI and Subsystems */
   public static OI oi;
   public static Drive driveTrain;
+  public static ColorSpinner colorSpinner;
 
   /* Initialize the tracking camera */
   public static Tracking trackingCam;
@@ -50,6 +52,7 @@ public class Robot extends TimedRobot {
 
     /* Define OI and Subsystems */
     driveTrain = new Drive();
+    colorSpinner = new ColorSpinner();
     oi = new OI();
 
     /* Define the tracking camera and start stream 1 */
@@ -69,9 +72,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    /* Send gyroscope data to Dashboard */
-    dashboard.setGyroscope(RobotMap.gyro.getAngleX(), RobotMap.gyro.getAngleY(), RobotMap.gyro.getAngleZ());
-
     /* Send battery voltage to Dashboard */
     dashboard.setBattery(RobotController.getBatteryVoltage());
 

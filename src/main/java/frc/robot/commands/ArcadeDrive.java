@@ -24,10 +24,9 @@ public class ArcadeDrive extends Command {
         /* Define joystick axis */
         double xAxis = OI.driver.getRawAxis(1);
         double yAxis = OI.driver.getRawAxis(2);
-        double strafeAxis = OI.driver.getRawAxis(0);
 
         /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
-        Robot.driveTrain.arcadeDrive(xAxis, yAxis, strafeAxis);
+        Robot.driveTrain.arcadeDrive(xAxis, yAxis);
     }
 
     /*
