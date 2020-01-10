@@ -28,8 +28,10 @@ public class SpinToColor extends Command {
         /* Set the `target` variable to the value which the command was called with */
         target = color;
 
+        /* Gets the current color from the color sensor */
         int currentColor = Robot.colorSpinner.getColor();
 
+        /* Checks what is the most efficient direction to spin the disk based on the current color and target */
         if (currentColor == 0) {
             moveClockwise = true;
         } else if (Math.abs(currentColor-target) == 2) {

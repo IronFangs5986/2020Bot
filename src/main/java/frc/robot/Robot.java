@@ -50,6 +50,9 @@ public class Robot extends TimedRobot {
     /* Initialize RobotMap */
     RobotMap.init();
 
+    /* Initialize Launchpad */
+    Launchpad.init();
+
     /* Define OI and Subsystems */
     driveTrain = new Drive();
     colorSpinner = new ColorSpinner();
@@ -154,6 +157,9 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  /*
+   * This function is executed periodically when in test mode
+   */
   @Override
   public void testPeriodic() {
 

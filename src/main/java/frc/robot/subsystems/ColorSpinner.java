@@ -17,18 +17,18 @@ public class ColorSpinner extends Subsystem {
     /* Call spinnerMotor defined in RobotMap */
     WPI_VictorSPX spinnerMotor = RobotMap.spinnerMotor;
 
+    /* Call colorSensor and colorMatch defined in RobotMap */
     ColorSensorV3 colorSensor = RobotMap.colorSensor;
     ColorMatch colorMatch = RobotMap.colorMatch;
     
-
+    /* Make this class public */
     public ColorSpinner() {}
 
+    /* Adds default command (NOT required with 2020 API)*/
     @Override
-    protected void initDefaultCommand() {
-        // TODO Auto-generated method stub
+    protected void initDefaultCommand() {}
 
-    }
-
+    /* Gets the color the color sensor is currently reading*/
     public int getColor() {
         Color detectedColor = colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
@@ -45,6 +45,7 @@ public class ColorSpinner extends Subsystem {
           }
     }
 
+    /* Gets the color that is currently scored based on the current sensor's reading*/
     public int getMatchedColor() {
         Color detectedColor = colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
@@ -61,14 +62,18 @@ public class ColorSpinner extends Subsystem {
           }
     }
 
+    /* Spins disk/control panel with spinnerMotor */
     public void spinDisc(boolean clockwise) {
         if (clockwise) {
-            spinnerMotor.set(-0.7);
+          /* Spins the motor so the disk spins clockwise */
+          spinnerMotor.set(-0.7);
         } else {
-            spinnerMotor.set(-0.7);
+          /* Spins the motor so the disk spins counterclockwise */
+          spinnerMotor.set(-0.7);
         }
     }
 
+    /* Stops the disk spin */
     public void stopDisc() {
         spinnerMotor.set(0);
     }
