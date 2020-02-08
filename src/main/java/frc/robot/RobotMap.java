@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
@@ -41,11 +42,14 @@ public class RobotMap {
 
   /* Initialize motors */
   public static WPI_VictorSPX spinnerMotor;
+  public static CANSparkMax intakeMotor;
+  public static CANSparkMax indexMotor;
+  public static CANSparkMax transportMotor;
+  public static CANSparkMax shooterMotor;
+  public static CANSparkMax climbMotor;
 
-  /* Initialize compressor */
-  public static Compressor compressor;
-
-  /* Initialize solenoids */
+  /* Initialize encoders */
+  public static CANEncoder shooterEncoder;
 
   /* Initialize I2C port */
   public static I2C.Port i2cPort;
@@ -93,13 +97,16 @@ public class RobotMap {
     robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
     /* Define Victors with CAN id */
-    //spinnerMotor = new VictorSPX(7);
-
-    /* Define compressor */
-    compressor = new Compressor(0);
-
-    /* Define solenoids */
+    spinnerMotor = new WPI_VictorSPX(7);
+    intakeMotor = new CANSparkMax(8, MotorType.kBrushless);
+    indexMotor = new CANSparkMax(9, MotorType.kBrushless);
+    transportMotor = new CANSparkMax(10, MotorType.kBrushless);
+    shooterMotor = new CANSparkMax(11, MotorType.kBrushless);
+    climbMotor = new CANSparkMax(12, MotorType.kBrushless);
     
+    /* Define encoders*/
+    shooterEncoder =  shooterMotor.getEncoder();
+
     /* Define the I2C port */
     i2cPort = I2C.Port.kOnboard;
 
@@ -116,9 +123,9 @@ public class RobotMap {
     YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
     /* Define and start camera server */
-    UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
-    server.setResolution(160, 120);
-    server.setFPS(30);
+    //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
+    //server.setResolution(160, 120);
+    //server.setFPS(30);
 
     /* Define robot information */
     robotWidth = 0.0; // Unknown

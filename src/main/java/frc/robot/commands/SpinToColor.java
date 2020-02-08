@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -25,8 +26,23 @@ public class SpinToColor extends Command {
         /* Require the spinner subsystem */
         requires(Robot.colorSpinner);
 
-        /* Set the `target` variable to the value which the command was called with */
-        target = color;
+        String gameData = DriverStation.getInstance().getGameSpecificMessage();
+        
+        if(gameData.length() > 0) {
+            if (gameData.charAt(0) == 'B') {
+                target = 3;
+            } else if (gameData.charAt(0) == 'G') {
+                target = 2;
+            } else if (gameData.charAt(0) == 'Y') {
+                target = 4;
+            } else if (gameData.charAt(0) == 'R') {
+                target = 1;
+            } else {
+                target = 0;
+            }
+        } else {
+            target = 0;
+        }
 
         /* Gets the current color from the color sensor */
         int currentColor = Robot.colorSpinner.getColor();
@@ -58,12 +74,15 @@ public class SpinToColor extends Command {
          * Moves the spinner clockwise or counterclockwise for shortest distance if possible, and executes the right
          * command
          */
-            Robot.colorSpinner.spinDisc(moveClockwise);
+        if (target != 0) {
+            Robot.colorSpinner.spinDisk(moveClockwise);
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return (Robot.colorSpinner.getMatchedColor() == target);
+        System.out.println(Robot.colorSpinner.getMatchedColor()+":"+target);
+        return (Robot.colorSpinner.getMatchedColor() == target || target == 0);
     }
 
      /*

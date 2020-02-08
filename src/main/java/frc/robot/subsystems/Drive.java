@@ -27,25 +27,9 @@ public class Drive extends Subsystem {
      * Arcade drive is used for teleop (manual driving)
      */
     public void arcadeDrive(double moveAxis, double rotateAxis) {
-        /* Set Dead Zones */
-        if (Math.abs(moveAxis) <= .2) {
-            moveAxis = 0;
-        }
-        if (Math.abs(rotateAxis) <= .2) {
-            rotateAxis = 0;
-        }
-        
-        /* Set maximum rotation speed */
-        if (Math.abs(rotateAxis) >= .95) {
-            if (rotateAxis > 0) {
-                rotateAxis = .95;
-            } else {
-                rotateAxis = -.95;
-            }
-        }
 
         /* Sets arcadeDrive values */
-        robotDrive.arcadeDrive(moveAxis, rotateAxis);
+        robotDrive.arcadeDrive(-moveAxis, -rotateAxis);
     }
 
     /*

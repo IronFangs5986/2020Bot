@@ -47,8 +47,9 @@ public class ColorSpinner extends Subsystem {
 
     /* Gets the color that is currently scored based on the current sensor's reading*/
     public int getMatchedColor() {
-        Color detectedColor = colorSensor.getColor();
+        Color detectedColor = RobotMap.colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
+        //System.out.println(match.color);
         if (match.color == RobotMap.RedTarget) {
             return 3;
           } else if (match.color == RobotMap.GreenTarget) {
@@ -63,15 +64,26 @@ public class ColorSpinner extends Subsystem {
     }
 
     /* Spins disk/control panel with spinnerMotor */
-    public void spinDisc(boolean clockwise) {
+    public void spinDisk(boolean clockwise) {
         if (clockwise) {
           /* Spins the motor so the disk spins clockwise */
           spinnerMotor.set(-0.7);
         } else {
           /* Spins the motor so the disk spins counterclockwise */
-          spinnerMotor.set(-0.7);
+          spinnerMotor.set(0.7);
         }
     }
+
+    /* Spins disk/control panel with spinnerMotor */
+    public void adjustDisk(boolean clockwise) {
+      if (clockwise) {
+        /* Spins the motor so the disk spins clockwise */
+        spinnerMotor.set(-0.1);
+      } else {
+        /* Spins the motor so the disk spins counterclockwise */
+        spinnerMotor.set(0.1);
+      }
+  }
 
     /* Stops the disk spin */
     public void stopDisc() {
