@@ -6,7 +6,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /*
- * This is the command that moves the disc to a specific color
+ * This is the command that soots the balls
  */
 public class Shoot extends Command {
 
@@ -20,6 +20,7 @@ public class Shoot extends Command {
         requires(Robot.shooter);
         requires(Robot.ballTransport);
 
+        counter = 0;
         shootRPM = 2700.0;
         approxSpeed = (shootRPM / 5676) + 0.2;
     }
@@ -33,15 +34,19 @@ public class Shoot extends Command {
          * 
          */
         if (counter < 50) {
-            Robot.ballTransport.waitForShooter();
+            Robot.intake.stop();
+            Robot.ballTransport.moveForShooter();
+            Robot.indexer.moveForShooter();
             counter = counter + 1;
         } else {
             System.out.println("RPM: "+RobotMap.shooterEncoder.getVelocity());
             if (Math.abs(RobotMap.shooterEncoder.getVelocity()) < shootRPM) {
                 Robot.ballTransport.stop();
+                Robot.indexer.stop();
                 Robot.shooter.shoot(approxSpeed);
             } else {
                 Robot.ballTransport.moveIn();
+                Robot.indexer.moveIn();
                 Robot.shooter.shoot(approxSpeed);
             }
         }
@@ -64,6 +69,9 @@ public class Shoot extends Command {
     protected void end() {
         Robot.shooter.stopShooter();
         Robot.ballTransport.stop();
+        shootRPM = 0;
+        counter = 0;
+        approxSpeed = 0;
     }
 
     /*

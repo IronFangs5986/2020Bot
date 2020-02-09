@@ -49,7 +49,6 @@ public class ColorSpinner extends Subsystem {
     public int getMatchedColor() {
         Color detectedColor = RobotMap.colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
-        //System.out.println(match.color);
         if (match.color == RobotMap.RedTarget) {
             return 3;
           } else if (match.color == RobotMap.GreenTarget) {

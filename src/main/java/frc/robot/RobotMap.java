@@ -11,11 +11,7 @@ import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.util.Color;
@@ -47,6 +43,7 @@ public class RobotMap {
   public static CANSparkMax transportMotor;
   public static CANSparkMax shooterMotor;
   public static CANSparkMax climbMotor;
+  public static CANSparkMax adjustMotor;
 
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
@@ -103,8 +100,9 @@ public class RobotMap {
     transportMotor = new CANSparkMax(10, MotorType.kBrushless);
     shooterMotor = new CANSparkMax(11, MotorType.kBrushless);
     climbMotor = new CANSparkMax(12, MotorType.kBrushless);
-    
-    /* Define encoders*/
+    adjustMotor = new CANSparkMax(14, MotorType.kBrushless);
+
+    /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
 
     /* Define the I2C port */

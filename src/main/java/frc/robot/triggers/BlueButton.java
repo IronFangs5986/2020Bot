@@ -12,7 +12,7 @@ public class BlueButton extends Trigger {
     public BlueButton() {
       }
 
-    /* Will return true when variable blueButton in Launchpad is true*/
+    /* Will return true when variable blueButton in Launchpad is true */
     @Override
     public boolean get() {
       return Launchpad.blueButton;

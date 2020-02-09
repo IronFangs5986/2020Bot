@@ -23,18 +23,22 @@ public class BallTransport extends Subsystem {
     protected void initDefaultCommand() {
     }
 
+    /* Transports the balls to the shooter */
     public void moveIn() {
         transportMotor.set(transportSpeed);
     }
 
+    /* Transports balls to the indexer */
     public void moveOut() {
         transportMotor.set(transportSpeed * -1);
     }
-
-    public void waitForShooter() {
+ 
+    /* Moves the balls back to wait for shooter to get to correct RPMs*/
+    public void moveForShooter() {
         transportMotor.set(-0.3);
     }
 
+    /* Stops the transport */
     public void stop() {
         transportMotor.set(0);
     }

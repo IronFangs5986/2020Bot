@@ -1,6 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -24,7 +23,6 @@ public class Dashboard {
     NetworkTableEntry gyroZ = table.getEntry("Gyro-Z");
     NetworkTableEntry autoList = table.getEntry("AutoList");
     NetworkTableEntry robotMode = table.getEntry("RobotMode");
-    NetworkTableEntry compState = table.getEntry("CompressorState");
     NetworkTableEntry cameraActive = table.getEntry("CameraActive");
     NetworkTableEntry vision = table.getEntry("vision");
     NetworkTableEntry time = table.getEntry("time");
@@ -61,12 +59,8 @@ public class Dashboard {
         robotMode.setString(mode);
     }
 
-    /* Send the compressor state to NetworkTables */
-    public void setCompressorState(final Boolean enabled) {
-        compState.setBoolean(enabled);
-    }
 
-    /* Send the compressor state to NetworkTables */
+    /* Send the camera state to NetworkTables */
     public void setCameraTrackingStatus(final Boolean active) {
         cameraActive.setBoolean(active);
     }

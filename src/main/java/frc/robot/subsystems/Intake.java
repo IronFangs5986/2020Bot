@@ -23,14 +23,17 @@ public class Intake extends Subsystem {
     protected void initDefaultCommand() {
     }
 
-    public void moveIn() {
+    /* Intakes the ball */
+    public void intake() {
         intakeMotor.set(intakeSpeed);
     }
 
+    /* Spits the ball out of the robot */
     public void moveOut() {
         intakeMotor.set(intakeSpeed * -1);
     }
 
+    /* Stops the intake */
     public void stop() {
         intakeMotor.set(0);
     }

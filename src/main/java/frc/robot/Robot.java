@@ -12,9 +12,8 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.BallTransport;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorSpinner;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer;
@@ -37,6 +36,7 @@ public class Robot extends TimedRobot {
   public static BallTransport ballTransport;
   public static Indexer indexer;
   public static Intake intake;
+  public static Climber climber;
 
   /* Initialize the tracking camera */
   //public static Tracking trackingCam;
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
   String[] autoList = { "Move Straight" };
 
   /* Initialize Dashboard */
-  //Dashboard dashboard = new Dashboard();
+  Dashboard dashboard = new Dashboard();
 
   /*
    * This function is executed only once when the robot boots up
@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
     ballTransport = new BallTransport();
     indexer = new Indexer();
     intake = new Intake();
+    climber = new Climber();
     oi = new OI();
 
     /* Define the tracking camera and start stream 1 */
@@ -75,10 +76,10 @@ public class Robot extends TimedRobot {
     //trackingCam.startCameraStream1();
 
     /* Push autonomous list to Dashboard */
-    //dashboard.setAutonomousList(autoList);
+    dashboard.setAutonomousList(autoList);
 
     /* Select default autonomous mode */
-    //dashboard.setAutonomous(0);
+    dashboard.setAutonomous(0);
 
     RobotMap.colorMatch.addColorMatch(RobotMap.BlueTarget);
     RobotMap.colorMatch.addColorMatch(RobotMap.GreenTarget);
@@ -93,13 +94,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     /* Send battery voltage to Dashboard */
-    //dashboard.setBattery(RobotController.getBatteryVoltage());
-
-    /* Send compressor state to Dashboard */
-    //dashboard.setCompressorState(RobotMap.compressor.enabled());
+    dashboard.setBattery(RobotController.getBatteryVoltage());
 
     /* Send remaining time to Dashboard */
-    //dashboard.setTime(DriverStation.getInstance().getMatchTime());
+    dashboard.setTime(DriverStation.getInstance().getMatchTime());
   }
 
   /*
@@ -108,7 +106,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     /* Send disabled robot mode to Dashboard*/
-    //dashboard.setRobotMode("Disabled");
+    dashboard.setRobotMode("Disabled");
   }
 
   /*
@@ -126,10 +124,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     /* Send autonomous robot mode to Dashboard*/
-    //dashboard.setRobotMode("Autonomous");
+    dashboard.setRobotMode("Autonomous");
 
     /* Set mode variable to the chosen autonomous mode id */
-    //mode = dashboard.getSelectedAutonomous();
+    mode = dashboard.getSelectedAutonomous();
 
     /* Set autonomousCommand to the right command according to the mode variable */
     if (mode == 0) {
@@ -158,7 +156,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
 
     /* Send teleop robot mode to Dashboard*/
-    //dashboard.setRobotMode("Teleop");
+    dashboard.setRobotMode("Teleop");
 
     /* Stop the autonomous if it is still running */
     if (autonomousCommand != null) {
