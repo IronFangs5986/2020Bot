@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Config;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -24,14 +25,14 @@ public class ArcadeDrive extends Command {
     protected void execute() {
 
         /* Define joystick axis */
-        double xAxis = OI.driver.getRawAxis(1);
-        double yAxis = OI.driver.getRawAxis(5);
-        double limitAxis = OI.driver.getRawAxis(3);
+        double moveAxis = OI.driver.getRawAxis(1);
+        double turnAxis = OI.driver.getRawAxis(5);
+        //double limitAxis = OI.driver.getRawAxis(3);
 
-        //System.out.println(xAxis+" "+yAxis);
+        //System.out.println(xAxis+" "+turnAxis);
 
-        double turnSpeed = yAxis/0.48;
-        double moveSpeed = xAxis/0.52;
+        double turnSpeed = turnAxis/0.48;
+        double moveSpeed = moveAxis/0.52;
 
         if (moveSpeed > 0.9) {
             moveSpeed = 1;
@@ -47,42 +48,52 @@ public class ArcadeDrive extends Command {
 
         //System.out.println(moveSpeed+" "+turnSpeed);
 
-        if (Math.abs(yAxis) >= 0.2) {
-        if (currentTurnSpeed < yAxis) {
-            turnSpeed = currentTurnSpeed+0.075;
-        } else if (currentTurnSpeed > yAxis) {
-            turnSpeed = currentTurnSpeed-0.075;
+        /* Limits turn acceleration */
+        if (Math.abs(turnAxis) >= Config.turnMinSpeed) {
+        if (currentTurnSpeed < turnAxis) {
+            turnSpeed = currentTurnSpeed+Config.turnAccel;
+        } else if (currentTurnSpeed > turnAxis) {
+            turnSpeed = currentTurnSpeed-Config.turnAccel;
         }
-    } else {
-        turnSpeed = 0;
-    }
+        } else {
+            turnSpeed = 0;
+        }
 
         currentTurnSpeed = turnSpeed;
 
         /* Set Dead Zones */
-        if (Math.abs(moveSpeed) <= .2) {
+        if (Math.abs(moveSpeed) <= Config.moveMinSpeed) {
             moveSpeed = 0;
         }
-        if (Math.abs(turnSpeed) <= .2) {
+        if (Math.abs(turnSpeed) <= Config.turnMinSpeed) {
             turnSpeed = 0;
         }
         
         /* Set maximum rotation speed */
-        if (Math.abs(turnSpeed) >= .95) {
+        if (Math.abs(turnSpeed) >= Config.turnMaxSpeed) {
             if (turnSpeed > 0) {
-                turnSpeed = .95;
+                turnSpeed = Config.turnMaxSpeed;
             } else {
-                turnSpeed = -.95;
+                turnSpeed = Config.turnMaxSpeed * -1;
             }
         }
 
-        if (limitAxis < 0 && Math.abs(moveSpeed) > 0.8) {
+        /* Set maximum rotation speed */
+        if (Math.abs(moveSpeed) >= Config.moveMaxSpeed) {
+            if (moveSpeed > 0) {
+                moveSpeed = Config.moveMaxSpeed;
+            } else {
+                moveSpeed = Config.moveMaxSpeed * -1;
+            }
+        }
+
+        /*if (limitAxis < 0 && Math.abs(moveSpeed) > 0.8) {
             if (moveSpeed > 0) {
                 moveSpeed = 0.8;
             } else {
                 moveSpeed = -0.8;
             }
-        }
+        }*/
 
         /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
         Robot.driveTrain.arcadeDrive(moveSpeed, turnSpeed);

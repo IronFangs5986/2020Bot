@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
@@ -10,8 +11,6 @@ import frc.robot.RobotMap;
  */
 public class Intake extends Subsystem {
     
-    double intakeSpeed = 0.5;
-
     /* Call intakeMotor defined in RobotMap */
     CANSparkMax intakeMotor = RobotMap.intakeMotor;
     
@@ -25,12 +24,12 @@ public class Intake extends Subsystem {
 
     /* Intakes the ball */
     public void intake() {
-        intakeMotor.set(intakeSpeed);
+        intakeMotor.set(Config.intakeSpeed);
     }
 
     /* Spits the ball out of the robot */
     public void moveOut() {
-        intakeMotor.set(intakeSpeed * -1);
+        intakeMotor.set(Config.intakeSpeed * -1);
     }
 
     /* Stops the intake */

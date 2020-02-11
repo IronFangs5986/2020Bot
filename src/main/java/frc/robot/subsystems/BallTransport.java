@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
@@ -10,8 +11,6 @@ import frc.robot.RobotMap;
  */
 public class BallTransport extends Subsystem {
     
-    double transportSpeed = 0.5;
-
     /* Call transportMotor defined in RobotMap */
     CANSparkMax transportMotor = RobotMap.transportMotor;
     
@@ -25,17 +24,17 @@ public class BallTransport extends Subsystem {
 
     /* Transports the balls to the shooter */
     public void moveIn() {
-        transportMotor.set(transportSpeed);
+        transportMotor.set(Config.ballTransportSpeed);
     }
 
     /* Transports balls to the indexer */
     public void moveOut() {
-        transportMotor.set(transportSpeed * -1);
+        transportMotor.set(Config.ballTransportSpeed * -1);
     }
  
     /* Moves the balls back to wait for shooter to get to correct RPMs*/
     public void moveForShooter() {
-        transportMotor.set(-0.3);
+        transportMotor.set(Config.ballTransportBackSpeed * -1);
     }
 
     /* Stops the transport */

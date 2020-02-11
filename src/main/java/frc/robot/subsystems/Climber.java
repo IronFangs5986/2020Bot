@@ -3,15 +3,14 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
  * This is the Climber subsystem where anything related to climber is found
  */
 public class Climber extends Subsystem {
-    
-    double climbSpeed = 1;
-    double adjustSpeed = 0.3;
+
 
     /* Call motors defined in RobotMap */
     CANSparkMax climbMotor = RobotMap.climbMotor;
@@ -27,7 +26,7 @@ public class Climber extends Subsystem {
 
     /* Climbs */
     public void climb() {
-        climbMotor.set(climbSpeed);
+        climbMotor.set(Config.climbSpeed);
     }
 
     /* Stops the climb motor */
@@ -37,12 +36,12 @@ public class Climber extends Subsystem {
 
     /* Adjusts to the left */
     public void adjustLeft() {
-        adjustMotor.set(adjustSpeed * -1);
+        adjustMotor.set(Config.climbAdjustSpeed * -1);
     }
 
     /* Adjusts to the right */
     public void adjustRight() {
-        adjustMotor.set(adjustSpeed);
+        adjustMotor.set(Config.climbAdjustSpeed);
     }
 
     /* Stops the adjust motor */

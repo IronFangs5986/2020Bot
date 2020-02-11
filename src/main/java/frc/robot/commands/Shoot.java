@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Config;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -22,7 +23,7 @@ public class Shoot extends Command {
 
         counter = 0;
         shootRPM = 2700.0;
-        approxSpeed = (shootRPM / 5676) + 0.2;
+        approxSpeed = (shootRPM / Config.maxShootRPM) + 0.2;
     }
 
     /*

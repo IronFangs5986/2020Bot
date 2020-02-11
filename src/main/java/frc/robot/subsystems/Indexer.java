@@ -3,14 +3,13 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
  * This is the Indexer subsystem where anything related to ball indexer is found
  */
 public class Indexer extends Subsystem {
-    
-    double indexSpeed = 0.5;
 
     /* Call indexMotor defined in RobotMap */
     CANSparkMax indexMotor = RobotMap.indexMotor;
@@ -25,17 +24,17 @@ public class Indexer extends Subsystem {
 
     /* Moves the balls back to wait for shooter to get to correct RPMs*/
     public void moveForShooter() {
-        indexMotor.set(-0.3);
+        indexMotor.set(Config.indexBackSpeed * -1);
     }
 
     /* Indexes the balls to the transport */
     public void moveIn() {
-        indexMotor.set(indexSpeed);
+        indexMotor.set(Config.indexSpeed);
     }
 
     /* Indexes the balls to the intake */
     public void moveOut() {
-        indexMotor.set(indexSpeed * -1);
+        indexMotor.set(Config.indexSpeed * -1);
     }
 
     /* Stops the indexer */

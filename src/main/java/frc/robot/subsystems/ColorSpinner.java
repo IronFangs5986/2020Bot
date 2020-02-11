@@ -7,6 +7,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
@@ -66,10 +67,10 @@ public class ColorSpinner extends Subsystem {
     public void spinDisk(boolean clockwise) {
         if (clockwise) {
           /* Spins the motor so the disk spins clockwise */
-          spinnerMotor.set(-0.7);
+          spinnerMotor.set(Config.colorSpinSpeed * -1);
         } else {
           /* Spins the motor so the disk spins counterclockwise */
-          spinnerMotor.set(0.7);
+          spinnerMotor.set(Config.colorSpinSpeed);
         }
     }
 
@@ -77,10 +78,10 @@ public class ColorSpinner extends Subsystem {
     public void adjustDisk(boolean clockwise) {
       if (clockwise) {
         /* Spins the motor so the disk spins clockwise */
-        spinnerMotor.set(-0.1);
+        spinnerMotor.set(Config.colorAdjustSpeed * -1);
       } else {
         /* Spins the motor so the disk spins counterclockwise */
-        spinnerMotor.set(0.1);
+        spinnerMotor.set(Config.colorAdjustSpeed);
       }
   }
 
