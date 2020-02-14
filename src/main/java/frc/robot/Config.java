@@ -11,12 +11,12 @@ public class Config {
     public static double colorSpinSpeed = 0.7;
     public static double colorAdjustSpeed = 0.1;
 
-    public static double indexSpeed = 0.5;
-    public static double indexBackSpeed = 0.3;
+    public static double indexSpeed = 0.1;
+    public static double indexBackSpeed = 0.1;
 
     public static double intakeSpeed = 0.5;
 
-    public static double ballTransportSpeed = 0.5;
+    public static double ballTransportSpeed = 0.3;
     public static double ballTransportBackSpeed = 0.3;
 
     public static double climbSpeed = 1.0;

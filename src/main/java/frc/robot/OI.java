@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.AdjustDisk;
 import frc.robot.commands.Climb;
 import frc.robot.commands.IntakeBalls;
+import frc.robot.commands.RawShoot;
+import frc.robot.commands.ReverseBalls;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinToColor;
 import frc.robot.triggers.BlueButton;
@@ -28,6 +30,8 @@ public class OI {
   public static JoystickButton adjDiskCCW;
   public static JoystickButton shoot;
   public static JoystickButton intake;
+  public static JoystickButton reverse;
+  public static JoystickButton rawShoot;
 
   /* Define triggers */
   public static Trigger redButton = new RedButton();
@@ -48,6 +52,8 @@ public class OI {
     adjDiskCCW = new JoystickButton(driver, 8);
     shoot = new JoystickButton(driver, 2);
     intake = new JoystickButton(driver, 3);
+    reverse = new JoystickButton(driver, 4);
+    rawShoot = new JoystickButton(driver, 11);
 
     /* Handle button presses */
     testColor.whenPressed(new SpinToColor(4));
@@ -55,6 +61,8 @@ public class OI {
     adjDiskCCW.whenPressed(new AdjustDisk(false));
     shoot.whenPressed(new Shoot());
     intake.whenPressed(new IntakeBalls());
+    reverse.whenPressed(new ReverseBalls());
+    rawShoot.whenPressed(new RawShoot());
 
     /* Handle launchpad triggers */
     redButton.whenActive(new SpinToColor(1));

@@ -20,6 +20,7 @@ public class Shoot extends Command {
         /* Require the spinner subsystem */
         requires(Robot.shooter);
         requires(Robot.ballTransport);
+        requires(Robot.indexer);
 
         counter = 0;
         shootRPM = 2700.0;

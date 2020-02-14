@@ -31,7 +31,7 @@ public class IntakeBalls extends Command {
 
     @Override
     protected boolean isFinished() {
-        return !OI.driver.getRawButton(2);
+        return !OI.driver.getRawButton(3);
     }
 
      /*
