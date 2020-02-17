@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 
@@ -38,6 +39,22 @@ public class Drive extends Subsystem {
     public void tankDrive(double leftSpeed, double rightSpeed) {
         /* Sets tankDrive values */
         robotDrive.tankDrive(leftSpeed, rightSpeed);
+    }
+
+    /*
+     * Adjusts robot to turn to the left for target
+     */
+    public void adjustTargetLeft() {
+        /* Sets tankDrive values */
+        robotDrive.tankDrive(Config.driveTargetAdjustSpeed * -1, Config.driveTargetAdjustSpeed);
+    }
+
+    /*
+     * Adjusts robot to turn to the right for target
+     */
+    public void adjustTargetRight() {
+        /* Sets tankDrive values */
+        robotDrive.tankDrive(Config.driveTargetAdjustSpeed, Config.driveTargetAdjustSpeed * -1);
     }
 
     /*

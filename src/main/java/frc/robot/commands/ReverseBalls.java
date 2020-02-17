@@ -15,6 +15,8 @@ public class ReverseBalls extends Command {
         /* Require the necessary subsystems */
         requires(Robot.indexer);
         requires(Robot.ballTransport);
+        requires(Robot.intake);
+        requires(Robot.shootControl);
     }
 
     /*
@@ -22,8 +24,10 @@ public class ReverseBalls extends Command {
      */
     protected void execute() {
 
+        Robot.intake.moveOut();
         Robot.indexer.moveOut();
         Robot.ballTransport.moveOut();
+        Robot.shootControl.moveOut();
        
     }
 
@@ -36,8 +40,10 @@ public class ReverseBalls extends Command {
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
+        Robot.intake.stop();
         Robot.indexer.stop();
         Robot.ballTransport.stop();
+        Robot.shootControl.stop();
     }
 
     /*

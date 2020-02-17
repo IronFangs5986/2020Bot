@@ -26,6 +26,7 @@ public class Dashboard {
     NetworkTableEntry cameraActive = table.getEntry("CameraActive");
     NetworkTableEntry vision = table.getEntry("vision");
     NetworkTableEntry time = table.getEntry("time");
+    NetworkTableEntry shooterRPM = table.getEntry("shooterRPM");
 
     /* Send battery voltage to NetworkTables */
     public void setBattery(final Double voltage) {
@@ -68,6 +69,11 @@ public class Dashboard {
     /* Send vision data to NetworkTables */
     public void setVision(final Double data) {
         vision.setDouble(data);
+    }
+
+    /* Send shooter rpm to NetworkTables */
+    public void setShooterRPM(final Double rpm) {
+        shooterRPM.setDouble(rpm);
     }
 
     /* Send time to NetworkTables */

@@ -18,6 +18,7 @@ import frc.robot.subsystems.ColorSpinner;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.ShootControl;
 import frc.robot.subsystems.Shooter;
 
 /*
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
   public static Indexer indexer;
   public static Intake intake;
   public static Climber climber;
+  public static ShootControl shootControl;
 
   /* Initialize the tracking camera */
   //public static Tracking trackingCam;
@@ -69,6 +71,7 @@ public class Robot extends TimedRobot {
     indexer = new Indexer();
     intake = new Intake();
     climber = new Climber();
+    shootControl = new ShootControl();
     oi = new OI();
 
     /* Define the tracking camera and start stream 1 */
@@ -98,6 +101,9 @@ public class Robot extends TimedRobot {
 
     /* Send remaining time to Dashboard */
     dashboard.setTime(DriverStation.getInstance().getMatchTime());
+
+    /* Send shooter rpm to Dashboard */
+    dashboard.setShooterRPM(RobotMap.shooterEncoder.getVelocity());
   }
 
   /*

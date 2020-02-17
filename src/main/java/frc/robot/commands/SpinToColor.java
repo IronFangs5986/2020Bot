@@ -20,28 +20,33 @@ public class SpinToColor extends Command {
      * 2 - Green
      * 3 - Blue
      * 4 - Yellow
+     * 5 - Auto
      * 
      */
     public SpinToColor(int color) {
         /* Require the spinner subsystem */
         requires(Robot.colorSpinner);
 
-        String gameData = DriverStation.getInstance().getGameSpecificMessage();
+        if (color == 5) {
+            String gameData = DriverStation.getInstance().getGameSpecificMessage();
         
-        if(gameData.length() > 0) {
-            if (gameData.charAt(0) == 'B') {
-                target = 3;
-            } else if (gameData.charAt(0) == 'G') {
-                target = 2;
-            } else if (gameData.charAt(0) == 'Y') {
-                target = 4;
-            } else if (gameData.charAt(0) == 'R') {
-                target = 1;
+            if(gameData.length() > 0) {
+                if (gameData.charAt(0) == 'B') {
+                    target = 3;
+                } else if (gameData.charAt(0) == 'G') {
+                    target = 2;
+                } else if (gameData.charAt(0) == 'Y') {
+                    target = 4;
+                } else if (gameData.charAt(0) == 'R') {
+                    target = 1;
+                } else {
+                    target = 0;
+                }
             } else {
                 target = 0;
             }
         } else {
-            target = 0;
+            target = color;
         }
 
         /* Gets the current color from the color sensor */

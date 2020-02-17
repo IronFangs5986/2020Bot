@@ -21,9 +21,13 @@ public class Shoot extends Command {
         requires(Robot.shooter);
         requires(Robot.ballTransport);
         requires(Robot.indexer);
+        requires(Robot.shootControl);
+        requires(Robot.driveTrain);
 
         counter = 0;
+
         shootRPM = 2700.0;
+
         approxSpeed = (shootRPM / Config.maxShootRPM) + 0.2;
     }
 
@@ -35,7 +39,7 @@ public class Shoot extends Command {
         /*
          * 
          */
-        if (counter < 50) {
+        /*if (counter < 50) {
             Robot.intake.stop();
             Robot.ballTransport.moveForShooter();
             Robot.indexer.moveForShooter();
@@ -51,6 +55,35 @@ public class Shoot extends Command {
                 Robot.indexer.moveIn();
                 Robot.shooter.shoot(approxSpeed);
             }
+        }*/
+
+        double targetX = 0.0;
+        if (Math.abs(targetX) <= Config.shootTurnTolerance) {
+            Robot.driveTrain.stopTank();
+            System.out.println("RPM: "+RobotMap.shooterEncoder.getVelocity());
+            if (Math.abs(RobotMap.shooterEncoder.getVelocity()) < shootRPM) {
+                Robot.shootControl.stop();
+                Robot.ballTransport.stop();
+                Robot.indexer.stop();
+                Robot.shooter.shoot(approxSpeed);
+            } else {
+                Robot.shootControl.moveToShooter();
+                Robot.ballTransport.moveIn();
+                Robot.indexer.moveIn();
+                Robot.shooter.shoot(approxSpeed);
+            }
+        } else if (targetX < 0.0) {
+            Robot.shootControl.stop();
+            Robot.shooter.stopShooter();
+            Robot.ballTransport.stop();
+            Robot.indexer.stop();
+            Robot.driveTrain.adjustTargetLeft();
+        } else if (targetX > 0.0) {
+            Robot.shootControl.stop();
+            Robot.shooter.stopShooter();
+            Robot.ballTransport.stop();
+            Robot.indexer.stop();
+            Robot.driveTrain.adjustTargetRight();
         }
 
         /*if (OI.driver.getRawButton(2)) {
@@ -69,8 +102,11 @@ public class Shoot extends Command {
      * Sets the spinner to stop once the command is finished
      */
     protected void end() {
+        Robot.shootControl.stop();
         Robot.shooter.stopShooter();
         Robot.ballTransport.stop();
+        Robot.indexer.stop();
+        Robot.driveTrain.stopTank();
         shootRPM = 0;
         counter = 0;
         approxSpeed = 0;

@@ -1,6 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
@@ -9,8 +8,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode.PixelFormat;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -37,13 +34,14 @@ public class RobotMap {
   public static DifferentialDrive robotDrive;
 
   /* Initialize motors */
-  public static WPI_VictorSPX spinnerMotor;
+  public static CANSparkMax spinnerMotor;
   public static CANSparkMax intakeMotor;
   public static CANSparkMax indexMotor;
   public static CANSparkMax transportMotor;
   public static CANSparkMax shooterMotor;
   public static CANSparkMax climbMotor;
   public static CANSparkMax adjustMotor;
+  public static CANSparkMax controlMotor;
 
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
@@ -67,12 +65,6 @@ public class RobotMap {
   public static UsbCamera driverCamera = null;
   public static MjpegServer driverCameraServer = null;
 
-  /* Initialize robot information */
-  public static Double robotWidth;
-  public static Double robotLength;
-  public static Double robotHeight;
-  public static Double minDriveSpeed;
-
   /*
    * Initialize all components
    */
@@ -93,14 +85,18 @@ public class RobotMap {
     /* Define robotDrive as a DifferentialDrive for drivetrain */
     robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
-    /* Define Victors with CAN id */
-    spinnerMotor = new WPI_VictorSPX(7);
+    /* Define SPARK MAX with CAN id */
+    spinnerMotor = new CANSparkMax(7, MotorType.kBrushed);
     intakeMotor = new CANSparkMax(8, MotorType.kBrushless);
     indexMotor = new CANSparkMax(9, MotorType.kBrushless);
     transportMotor = new CANSparkMax(10, MotorType.kBrushless);
     shooterMotor = new CANSparkMax(11, MotorType.kBrushless);
     climbMotor = new CANSparkMax(12, MotorType.kBrushless);
     adjustMotor = new CANSparkMax(14, MotorType.kBrushless);
+    controlMotor = new CANSparkMax(15, MotorType.kBrushless);
+
+    /* Motor Settings */
+    shooterMotor.setInverted(true);
 
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
@@ -124,11 +120,5 @@ public class RobotMap {
     //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
     //server.setResolution(160, 120);
     //server.setFPS(30);
-
-    /* Define robot information */
-    robotWidth = 0.0; // Unknown
-    robotLength = 0.0; // Unknown
-    robotHeight = 0.0; // Unknown
-    minDriveSpeed = 0.0; // Unknown
   }
 }

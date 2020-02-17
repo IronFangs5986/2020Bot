@@ -14,7 +14,10 @@ public class Launchpad {
     public static boolean greenButton = false;
     public static boolean blueButton = false;
     public static boolean yellowButton = false;
+    public static boolean autoColorButton = false;
     public static boolean spinButton = false;
+    public static boolean adjustCWButton = false;
+    public static boolean adjustCCWButton = false; 
     public static boolean climbButton1 = false;
     public static boolean climbButton2 = false;
 
@@ -66,6 +69,16 @@ public class Launchpad {
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 
+        /* Add listener for Auto color button*/
+        table.addEntryListener("autoColorButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad Auto Color changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                autoColorButton = true;
+            } else {
+                autoColorButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
         /* Add listener for Spin button*/
         table.addEntryListener("spinButton", (table, key, entry, value, flags) -> {
             System.out.println("Launchpad Spin changed to: " + value.getValue());
@@ -73,6 +86,26 @@ public class Launchpad {
                 spinButton = true;
             } else {
                 spinButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for Adjust CW button*/
+        table.addEntryListener("adjustCWButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad adjustCW changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                adjustCWButton = true;
+            } else {
+                adjustCWButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for Adjust CCW button*/
+        table.addEntryListener("adjustCCWButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad adjustCCW changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                adjustCCWButton = true;
+            } else {
+                adjustCCWButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 

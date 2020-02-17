@@ -22,7 +22,7 @@ public class Shooter extends Subsystem {
 
     /* Sets the shooter to move at a given speed */
     public void shoot(double speed) {
-        shooterMotor.set(speed * -1);
+        shooterMotor.set(speed);
     }
 
     /* Stops the shooter */

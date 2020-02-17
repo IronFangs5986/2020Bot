@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -16,7 +16,7 @@ import frc.robot.RobotMap;
 public class ColorSpinner extends Subsystem {
     
     /* Call spinnerMotor defined in RobotMap */
-    WPI_VictorSPX spinnerMotor = RobotMap.spinnerMotor;
+    CANSparkMax spinnerMotor = RobotMap.spinnerMotor;
 
     /* Call colorSensor and colorMatch defined in RobotMap */
     ColorSensorV3 colorSensor = RobotMap.colorSensor;
@@ -84,6 +84,16 @@ public class ColorSpinner extends Subsystem {
         spinnerMotor.set(Config.colorAdjustSpeed);
       }
   }
+
+    /* Moves spinnerMotor up */
+    public void moveUp() {
+      
+    }
+
+    /* Moves spinnerMotor down */
+    public void moveDown() {
+
+    }
 
     /* Stops the disk spin */
     public void stopDisc() {
