@@ -97,6 +97,7 @@ public class RobotMap {
 
     /* Motor Settings */
     shooterMotor.setInverted(true);
+    controlMotor.setInverted(true);
 
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
