@@ -42,6 +42,7 @@ public class RobotMap {
   public static CANSparkMax climbMotor;
   public static CANSparkMax adjustMotor;
   public static CANSparkMax controlMotor;
+  public static CANSparkMax raiseSpinnerMotor;
 
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
@@ -86,7 +87,7 @@ public class RobotMap {
     robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
     /* Define SPARK MAX with CAN id */
-    spinnerMotor = new CANSparkMax(7, MotorType.kBrushed);
+    spinnerMotor = new CANSparkMax(7, MotorType.kBrushless);
     intakeMotor = new CANSparkMax(8, MotorType.kBrushless);
     indexMotor = new CANSparkMax(9, MotorType.kBrushless);
     transportMotor = new CANSparkMax(10, MotorType.kBrushless);
@@ -94,6 +95,7 @@ public class RobotMap {
     climbMotor = new CANSparkMax(12, MotorType.kBrushless);
     adjustMotor = new CANSparkMax(14, MotorType.kBrushless);
     controlMotor = new CANSparkMax(15, MotorType.kBrushless);
+    raiseSpinnerMotor = new CANSparkMax(16, MotorType.kBrushed);
 
     /* Motor Settings */
     shooterMotor.setInverted(true);

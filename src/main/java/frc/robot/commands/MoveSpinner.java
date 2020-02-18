@@ -5,18 +5,19 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 /*
- * This is the command that intakes the balls
+ * This is the command that raises or lowers the spinner
  */
-public class IntakeBalls extends Command {
+public class MoveSpinner extends Command {
 
     /* Variables set when calling the command */
+    boolean moveUp;
 
-    public IntakeBalls() {
+    public MoveSpinner(boolean up) {
         /* Require the necessary subsystems */
-        requires(Robot.intake);
-        requires(Robot.indexer);
-        requires(Robot.ballTransport);
-        //requires(Robot.shootControl);
+        requires(Robot.colorSpinner);
+
+        /* Set moveUp to the provided up variable */
+        moveUp = up;
     }
 
     /*
@@ -24,26 +25,28 @@ public class IntakeBalls extends Command {
      */
     protected void execute() {
 
-        Robot.intake.intake();
-        Robot.indexer.moveIn();
-        Robot.ballTransport.moveIn();
-        //Robot.shootControl.keepBallsIn();
+        if (moveUp) {
+            Robot.colorSpinner.moveUp();
+        } else {
+            Robot.colorSpinner.moveDown();
+        }
 
     }
 
     @Override
     protected boolean isFinished() {
-        return !OI.driver.getRawButton(3);
+        if (moveUp) {
+            return !OI.spinnerUpButton.get();
+        } else {
+            return !OI.spinnerDownButton.get();
+        }
     }
 
      /*
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
-        Robot.intake.stop();
-        Robot.indexer.stop();
-        Robot.ballTransport.stop();
-        //Robot.shootControl.stop();
+        Robot.colorSpinner.stopRaise();
     }
 
     /*

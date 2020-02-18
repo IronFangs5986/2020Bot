@@ -11,6 +11,7 @@ public class Config {
 
     public static double colorSpinSpeed = 0.7;
     public static double colorAdjustSpeed = 0.1;
+    public static double colorRaiseSpeed = 0.7;
 
     public static double indexSpeed = 0.1;
     public static double indexBackSpeed = 0.1;

@@ -18,8 +18,12 @@ public class Launchpad {
     public static boolean spinButton = false;
     public static boolean adjustCWButton = false;
     public static boolean adjustCCWButton = false; 
+    public static boolean spinnerUpButton = false;
+    public static boolean spinnerDownButton = false;
     public static boolean climbButton1 = false;
     public static boolean climbButton2 = false;
+    public static boolean climbAdjustLeftButton = false;
+    public static boolean climbAdjustRightButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -89,6 +93,26 @@ public class Launchpad {
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 
+        /* Add listener for Spinner Up button*/
+        table.addEntryListener("spinnerUpButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad spinner up changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                spinnerUpButton = true;
+            } else {
+                spinnerUpButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for Spinner Down button*/
+        table.addEntryListener("spinnerDownButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad spinner down changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                spinnerDownButton = true;
+            } else {
+                spinnerDownButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
         /* Add listener for Adjust CW button*/
         table.addEntryListener("adjustCWButton", (table, key, entry, value, flags) -> {
             System.out.println("Launchpad adjustCW changed to: " + value.getValue());
@@ -126,6 +150,26 @@ public class Launchpad {
                 climbButton2 = true;
             } else {
                 climbButton2 = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+         /* Add listener for Climb adjust left button */
+         table.addEntryListener("climbAdjustLeftButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad Climb adjust left changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                climbAdjustLeftButton = true;
+            } else {
+                climbAdjustLeftButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+         /* Add listener for Climb adjust right button */
+         table.addEntryListener("climbAdjustRightButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad Climb adjust right changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                climbAdjustRightButton = true;
+            } else {
+                climbAdjustRightButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }

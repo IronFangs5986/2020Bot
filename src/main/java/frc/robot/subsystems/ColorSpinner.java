@@ -15,8 +15,9 @@ import frc.robot.RobotMap;
  */
 public class ColorSpinner extends Subsystem {
     
-    /* Call spinnerMotor defined in RobotMap */
+    /* Call motors defined in RobotMap */
     CANSparkMax spinnerMotor = RobotMap.spinnerMotor;
+    CANSparkMax raiseSpinnerMotor = RobotMap.raiseSpinnerMotor;
 
     /* Call colorSensor and colorMatch defined in RobotMap */
     ColorSensorV3 colorSensor = RobotMap.colorSensor;
@@ -87,12 +88,17 @@ public class ColorSpinner extends Subsystem {
 
     /* Moves spinnerMotor up */
     public void moveUp() {
-      
+      raiseSpinnerMotor.set(Config.colorRaiseSpeed);
     }
 
     /* Moves spinnerMotor down */
     public void moveDown() {
+      raiseSpinnerMotor.set(Config.colorRaiseSpeed * -1);
+    }
 
+    /* Stops raiseSpinnerMotor */
+    public void stopRaise() {
+      raiseSpinnerMotor.set(0);
     }
 
     /* Stops the disk spin */
