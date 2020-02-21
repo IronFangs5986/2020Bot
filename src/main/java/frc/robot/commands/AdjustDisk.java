@@ -33,13 +33,13 @@ public class AdjustDisk extends Command {
     @Override
     protected boolean isFinished() {
         if (moveClockwise) {
-            if (OI.driver.getRawButton(7) == false) {
+            if (!OI.adjustCWButton.get()) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (OI.driver.getRawButton(8) == false) {
+            if (!OI.adjustCCWButton.get()) {
                 return true;
             } else {
                 return false;

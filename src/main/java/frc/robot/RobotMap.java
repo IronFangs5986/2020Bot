@@ -98,8 +98,10 @@ public class RobotMap {
     raiseSpinnerMotor = new CANSparkMax(16, MotorType.kBrushed);
 
     /* Motor Settings */
+    spinnerMotor.setInverted(true);
     shooterMotor.setInverted(true);
     controlMotor.setInverted(true);
+    raiseSpinnerMotor.setInverted(true);
 
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
