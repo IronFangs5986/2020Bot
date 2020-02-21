@@ -223,6 +223,7 @@ def findTargets(frame, mask):
 	else:
 		# pushes that it deosn't see vision target to network tables
 		networkTable.putBoolean("tapeDetected", False)
+		print("No contours found")
 
 	# Shows the contours overlayed on the original video
 	return image
@@ -478,6 +479,7 @@ def findTape(contours, image, centerX, centerY):
 	if (len(targets) > 0):
 		# pushes that it sees vision target to network tables
 		networkTable.putBoolean("tapeDetected", True)
+		print("Sees only one target")
 		#Sorts targets based on x coords to break any angle tie
 		targets.sort(key=lambda x: math.fabs(x[0]))
 		finalTarget = min(targets, key=lambda x: math.fabs(x[1]))
@@ -753,6 +755,7 @@ if __name__ == "__main__":
 			# Checks if you just want camera for Tape processing , False by default
 			if(networkTable.getBoolean("Tape", True)):
 				#Lowers exposure to 0
+				cap.webcam.setExposureManual(0)
 				cap.autoExpose = False
 				boxBlur = blurImg(frame, green_blur)
 				threshold = threshold_video(lower_green, upper_green, boxBlur)

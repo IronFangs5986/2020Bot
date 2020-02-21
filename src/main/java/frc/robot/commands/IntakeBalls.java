@@ -16,7 +16,6 @@ public class IntakeBalls extends Command {
         requires(Robot.intake);
         requires(Robot.indexer);
         requires(Robot.ballTransport);
-        //requires(Robot.shootControl);
     }
 
     /*
@@ -27,7 +26,6 @@ public class IntakeBalls extends Command {
         Robot.intake.intake();
         Robot.indexer.moveIn();
         Robot.ballTransport.moveIn();
-        //Robot.shootControl.keepBallsIn();
 
     }
 
@@ -43,7 +41,6 @@ public class IntakeBalls extends Command {
         Robot.intake.stop();
         Robot.indexer.stop();
         Robot.ballTransport.stop();
-        //Robot.shootControl.stop();
     }
 
     /*

@@ -24,17 +24,17 @@ public class Indexer extends Subsystem {
 
     /* Moves the balls back to wait for shooter to get to correct RPMs*/
     public void moveForShooter() {
-        indexMotor.set(Config.indexBackSpeed * -1);
+        indexMotor.set(Config.ballTransportBackSpeed * -1);
     }
 
     /* Indexes the balls to the transport */
     public void moveIn() {
-        indexMotor.set(Config.indexSpeed);
+        indexMotor.set(Config.ballTransportSpeed);
     }
 
     /* Indexes the balls to the intake */
     public void moveOut() {
-        indexMotor.set(Config.indexSpeed * -1);
+        indexMotor.set(Config.ballTransportBackSpeed * -1);
     }
 
     /* Stops the indexer */

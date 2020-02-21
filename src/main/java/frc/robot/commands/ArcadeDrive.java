@@ -25,28 +25,20 @@ public class ArcadeDrive extends Command {
     protected void execute() {
 
         /* Define joystick axis */
-        double moveAxis = OI.driver.getRawAxis(1);
-        double turnAxis = OI.driver.getRawAxis(5);
+        //double moveAxis = OI.driver.getRawAxis(1);
+        //double turnAxis = OI.driver.getRawAxis(5);
         //double limitAxis = OI.driver.getRawAxis(3);
 
-        //System.out.println(xAxis+" "+turnAxis);
+        double moveAxis = OI.driver.getRawAxis(2);
+        double turnAxis = OI.driver.getRawAxis(1);
 
-        double turnSpeed = turnAxis/0.48;
-        double moveSpeed = moveAxis/0.52;
+        //double turnSpeed = turnAxis/0.48;
+        //double moveSpeed = moveAxis/0.52;
 
-        if (moveSpeed > 0.9) {
-            moveSpeed = 1;
-        } else if (moveSpeed < -0.9) {
-            moveSpeed = -1;
-        }
+        boolean fastMode = true;
 
-        if (turnSpeed > 0.9) {
-            turnSpeed = 1;
-        } else if (turnSpeed < -0.9) {
-            turnSpeed = -1;
-        }
-
-        //System.out.println(moveSpeed+" "+turnSpeed);
+        double turnSpeed = turnAxis;
+        double moveSpeed = moveAxis;
 
         /* Limits turn acceleration */
         if (Math.abs(turnAxis) >= Config.turnMinSpeed) {
@@ -58,7 +50,6 @@ public class ArcadeDrive extends Command {
         } else {
             turnSpeed = 0;
         }
-
         currentTurnSpeed = turnSpeed;
 
         /* Set Dead Zones */
@@ -87,13 +78,10 @@ public class ArcadeDrive extends Command {
             }
         }
 
-        /*if (limitAxis < 0 && Math.abs(moveSpeed) > 0.8) {
-            if (moveSpeed > 0) {
-                moveSpeed = 0.8;
-            } else {
-                moveSpeed = -0.8;
-            }
-        }*/
+        /* Sets fast or slow mode */
+        if (!fastMode) {
+            moveSpeed = moveSpeed * 0.8;
+        }
 
         /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
         Robot.driveTrain.arcadeDrive(moveSpeed, turnSpeed);

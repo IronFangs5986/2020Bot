@@ -24,6 +24,18 @@ public class Launchpad {
     public static boolean climbButton2 = false;
     public static boolean climbAdjustLeftButton = false;
     public static boolean climbAdjustRightButton = false;
+    public static boolean autoShootButton = false;
+    public static boolean semiAutoShootButton = false;
+    public static boolean semiAutoRevButton = false;
+    public static boolean intakeOutButton = false;
+    public static boolean intakeInButton = false;
+    public static boolean indexerOutButton = false;
+    public static boolean indexerInButton = false;
+    public static boolean transportOutButton = false;
+    public static boolean transportInButton = false;
+    public static boolean controlOutButton = false;
+    public static boolean controlInButton = false;
+    public static boolean manualShootButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -170,6 +182,126 @@ public class Launchpad {
                 climbAdjustRightButton = true;
             } else {
                 climbAdjustRightButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for auto shoot button */
+        table.addEntryListener("autoShootButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad auto shoot changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                autoShootButton = true;
+            } else {
+                autoShootButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for semi auto shoot button */
+        table.addEntryListener("semiAutoShootButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad semi auto shoot changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                semiAutoShootButton = true;
+            } else {
+                semiAutoShootButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for semi auto rev button */
+        table.addEntryListener("semiAutoRevButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad semi auto rev changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                semiAutoRevButton = true;
+            } else {
+                semiAutoRevButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for intake out button */
+        table.addEntryListener("intakeOutButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad intake out changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                intakeOutButton = true;
+            } else {
+                intakeOutButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for intake in button */
+        table.addEntryListener("intakeInButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad intake in changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                intakeInButton = true;
+            } else {
+                intakeInButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for indexer out button */
+        table.addEntryListener("indexerOutButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad indexer out changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                indexerOutButton = true;
+            } else {
+                indexerOutButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for indexer in button */
+        table.addEntryListener("indexerInButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad indexer in changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                indexerInButton = true;
+            } else {
+                indexerInButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for transport out button */
+        table.addEntryListener("transportOutButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad transport out changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                transportOutButton = true;
+            } else {
+                transportOutButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for transport in button */
+        table.addEntryListener("transportInButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad transport in changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                transportInButton = true;
+            } else {
+                transportInButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for control out button */
+        table.addEntryListener("controlOutButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad control out changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                controlOutButton = true;
+            } else {
+                controlOutButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for control in button */
+        table.addEntryListener("controlInButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad control in changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                controlInButton = true;
+            } else {
+                controlInButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for manual shoot button */
+        table.addEntryListener("manualShootButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad manual shoot changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                manualShootButton = true;
+            } else {
+                manualShootButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }

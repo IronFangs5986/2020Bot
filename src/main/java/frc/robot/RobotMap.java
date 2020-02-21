@@ -46,6 +46,7 @@ public class RobotMap {
 
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
+  public static CANEncoder spinnerEncoder;
 
   /* Initialize I2C port */
   public static I2C.Port i2cPort;
@@ -105,6 +106,7 @@ public class RobotMap {
 
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
+    spinnerEncoder = spinnerMotor.getEncoder();
 
     /* Define the I2C port */
     i2cPort = I2C.Port.kOnboard;
