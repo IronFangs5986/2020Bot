@@ -2,32 +2,37 @@ package frc.robot;
 
 public class Config {
 
+    /* Configuration for drivetrain speeds */
     public static double moveMinSpeed = 0.2;
     public static double turnMinSpeed = 0.2;
     public static double moveMaxSpeed = 1.0;
     public static double turnMaxSpeed = 0.95;
     public static double turnAccel = 0.075;
     public static double driveTargetAdjustSpeed = 0.3;
+    public static double driveManualAdjustSpeed = 0.3;
 
-    public static double colorSpinSpeed = 0.7;
+    /* Configuration for color spinner speeds */
+    public static double colorSpinSpeed = 0.1;
     public static double colorAdjustSpeed = 0.1;
     public static double colorRaiseSpeed = 1.0;
-
-    //public static double indexSpeed = 0.5;
-    //public static double indexBackSpeed = 0.5;
-
+ 
+    /* Configuration for intake speed */
     public static double intakeSpeed = 0.5;
-
+ 
+    /* Configuration for ball transport speeds */
     public static double ballTransportSpeed = 0.3;
     public static double ballTransportBackSpeed = 0.3;
 
+    /* Configuration for shooter control speeds */
     public static double controlShootSpeed = 0.3;
     public static double controlReverseSpeed = 0.3;
     public static double controlKeepInSpeed = 0.1;
 
+    /* Configuration for climber speeds */
     public static double climbSpeed = 0.3;
     public static double climbAdjustSpeed = 0.3;
 
+    /* Shooting configurations */
     public static double maxShootRPM = 3600.0;
     public static double shootTurnTolerance = 0.0;
 }

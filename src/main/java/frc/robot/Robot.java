@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.autonomous.paths.ShootNMove;
+import frc.robot.autonomous.paths.Straight;
 import frc.robot.subsystems.BallTransport;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorSpinner;
@@ -47,7 +49,7 @@ public class Robot extends TimedRobot {
   private int mode = 0;
 
   /* Initialize and define autonomous modes list */
-  String[] autoList = { "Move Straight" };
+  String[] autoList = { "Move Straight", "Shoot N' Move" };
 
   /* Initialize Dashboard */
   Dashboard dashboard = new Dashboard();
@@ -137,8 +139,11 @@ public class Robot extends TimedRobot {
 
     /* Set autonomousCommand to the right command according to the mode variable */
     if (mode == 0) {
+      autonomousCommand = (Command) new Straight();
     } else if (mode == 1) {
+      autonomousCommand = (Command) new ShootNMove();
     } else {
+      autonomousCommand = (Command) new Straight();
     }
 
     /* Start the autonomous command if it has not been started already */

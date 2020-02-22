@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
@@ -48,6 +49,8 @@ public class RobotMap {
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
   public static CANEncoder spinnerEncoder;
+
+  public static CANPIDController shooterPIDController;
 
   /* Initialize I2C port */
   public static I2C.Port i2cPort;
@@ -110,6 +113,14 @@ public class RobotMap {
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
     spinnerEncoder = spinnerMotor.getEncoder();
+
+    shooterPIDController = shooterMotor.getPIDController();
+    shooterPIDController.setP(0.1);
+    shooterPIDController.setI(1e-4);
+    shooterPIDController.setD(1);
+    shooterPIDController.setIZone(0);
+    shooterPIDController.setFF(0);
+    shooterPIDController.setOutputRange(-1, 1);
 
     /* Define the I2C port */
     i2cPort = I2C.Port.kOnboard;

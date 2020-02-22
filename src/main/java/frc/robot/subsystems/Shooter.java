@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -23,6 +24,11 @@ public class Shooter extends Subsystem {
     /* Sets the shooter to move at a given speed */
     public void shoot(double speed) {
         shooterMotor.set(speed);
+    }
+
+    /* Shoots at a certain rpm */
+    public void shootRPM(double rpm) {
+        RobotMap.shooterPIDController.setReference(rpm, ControlType.kVelocity);
     }
 
     /* Stops the shooter */

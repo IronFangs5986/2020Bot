@@ -25,15 +25,8 @@ public class ArcadeDrive extends Command {
     protected void execute() {
 
         /* Define joystick axis */
-        //double moveAxis = OI.driver.getRawAxis(1);
-        //double turnAxis = OI.driver.getRawAxis(5);
-        //double limitAxis = OI.driver.getRawAxis(3);
-
         double moveAxis = OI.driver.getRawAxis(1);
         double turnAxis = OI.driver.getRawAxis(0);
-
-        //double turnSpeed = turnAxis/0.48;
-        //double moveSpeed = moveAxis/0.52;
 
         boolean fastMode = true;
 
@@ -83,8 +76,20 @@ public class ArcadeDrive extends Command {
             moveSpeed = moveSpeed * 0.8;
         }
 
-        /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
-        Robot.driveTrain.arcadeDrive(moveSpeed, turnSpeed);
+        if (moveSpeed == 0.0 && turnSpeed == 0.0) {
+            if (OI.robotSpinLeftButton.get()) {
+                Robot.driveTrain.spinAdjustLeft();
+            } else if (OI.robotSpinRightButton.get()) {
+                Robot.driveTrain.spinAdjustRight();
+            } else {
+                /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
+                Robot.driveTrain.arcadeDrive(moveSpeed, turnSpeed);
+            }
+        } else {
+            /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
+            Robot.driveTrain.arcadeDrive(moveSpeed, turnSpeed);
+        }
+
     }
 
     /*

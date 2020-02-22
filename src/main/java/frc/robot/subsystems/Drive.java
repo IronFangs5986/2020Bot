@@ -57,6 +57,16 @@ public class Drive extends Subsystem {
         robotDrive.tankDrive(Config.driveTargetAdjustSpeed, Config.driveTargetAdjustSpeed * -1);
     }
 
+    /* Spins robot to the left for manual adjustment */
+    public void spinAdjustLeft() {
+        robotDrive.tankDrive(Config.driveManualAdjustSpeed * -1, Config.driveManualAdjustSpeed);
+    }
+
+    /* Spins robot to the right for manual adjustment */
+    public void spinAdjustRight() {
+        robotDrive.tankDrive(Config.driveManualAdjustSpeed, Config.driveManualAdjustSpeed * -1);
+    }
+
     /*
      * Return distance recorded by left drivetrain encoder
      */

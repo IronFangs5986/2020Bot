@@ -47,7 +47,7 @@ public class LaunchpadButton extends Trigger {
         } else if (buttonId == 15) {
             return Launchpad.climbAdjustRightButton;
         } else if (buttonId == 16) {
-            return false;
+            return Launchpad.visionOnButton;
         } else if (buttonId == 17) { // new
             return Launchpad.autoShootButton;
         } else if (buttonId == 18) {
@@ -73,7 +73,9 @@ public class LaunchpadButton extends Trigger {
         } else if (buttonId == 28) {
             return Launchpad.manualShootButton;
         } else if (buttonId == 29) {
-            return Launchpad.visionOnButton;
+            return Launchpad.robotSpinLeftButton;
+        } else if (buttonId == 30 ) {
+            return Launchpad.robotSpinRightButton;
         } else {
             return false;
         }

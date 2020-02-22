@@ -5,38 +5,37 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 /*
- * This is the command that only indexes balls
+ * This is the command that spins the robot to adjust
  */
-public class RawIndexer extends Command {
+public class RobotAdjustSpin extends Command {
 
     /* Variables set when calling the command */
-    boolean moveIn;
+    boolean spinRight;
 
-    public RawIndexer(boolean in) {
+    public RobotAdjustSpin(boolean right) {
         /* Require the necessary subsystems */
-        requires(Robot.indexer);
+        requires(Robot.driveTrain);
 
-        moveIn = in;
+        spinRight = right;
     }
 
     /*
      * Executes the command
      */
     protected void execute() {
-        if (moveIn) {
-            Robot.indexer.moveIn();
+        if (spinRight) {
+            Robot.driveTrain.spinAdjustLeft();
         } else {
-            Robot.indexer.moveOut();
+            Robot.driveTrain.spinAdjustRight();
         }
-       
     }
 
     @Override
     protected boolean isFinished() {
-        if (moveIn) {
-            return !OI.indexerInButton.get();
+        if (spinRight) {
+            return !OI.robotSpinRightButton.get();
         } else {
-            return !OI.indexerOutButton.get();
+            return !OI.robotSpinLeftButton.get();
         }
     }
 
@@ -44,7 +43,7 @@ public class RawIndexer extends Command {
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
-        Robot.indexer.stop();
+        Robot.driveTrain.stopTank();
     }
 
     /*

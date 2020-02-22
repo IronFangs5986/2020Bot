@@ -11,7 +11,6 @@ import frc.robot.commands.ManualShoot;
 import frc.robot.commands.MoveSpinner;
 import frc.robot.commands.OnlyShoot;
 import frc.robot.commands.RawControl;
-import frc.robot.commands.RawIndexer;
 import frc.robot.commands.RawIntake;
 import frc.robot.commands.RawTransport;
 import frc.robot.commands.ReverseBalls;
@@ -19,20 +18,7 @@ import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinToColor;
 import frc.robot.commands.TrackingLight;
-import frc.robot.triggers.AdjustCCWButton;
-import frc.robot.triggers.AdjustCWButton;
-import frc.robot.triggers.AutoColorButton;
-import frc.robot.triggers.BlueButton;
-import frc.robot.triggers.ClimbAdjustLeftButton;
-import frc.robot.triggers.ClimbAdjustRightButton;
-import frc.robot.triggers.ClimbButton;
-import frc.robot.triggers.GreenButton;
 import frc.robot.triggers.LaunchpadButton;
-import frc.robot.triggers.RedButton;
-import frc.robot.triggers.SpinButton;
-import frc.robot.triggers.SpinnerDownButton;
-import frc.robot.triggers.SpinnerUpButton;
-import frc.robot.triggers.YellowButton;
 
 /*
  * This class defines everything related to joysticks and controls
@@ -88,7 +74,9 @@ public class OI {
   public static Trigger controlOutButton = new LaunchpadButton(26);
   public static Trigger controlInButton = new LaunchpadButton(27);
   public static Trigger manualShootButton = new LaunchpadButton(28);
-  public static Trigger visionOnButton = new LaunchpadButton(29);
+  public static Trigger visionOnButton = new LaunchpadButton(16);
+  public static Trigger robotSpinLeftButton = new LaunchpadButton(29);
+  public static Trigger robotSpinRightButton = new LaunchpadButton(30);
   
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {

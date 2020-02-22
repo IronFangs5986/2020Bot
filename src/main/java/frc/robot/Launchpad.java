@@ -37,6 +37,8 @@ public class Launchpad {
     public static boolean controlInButton = false;
     public static boolean manualShootButton = false;
     public static boolean visionOnButton = false;
+    public static boolean robotSpinLeftButton = false;
+    public static boolean robotSpinRightButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -311,6 +313,26 @@ public class Launchpad {
         visionTable.addEntryListener("Tape", (table, key, entry, value, flags) -> {
             System.out.println("Launchpad tape changed to: " + value.getValue());
             visionOnButton = value.getBoolean();
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for robot spin to the left button */
+        table.addEntryListener("robotSpinLeftButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad robot spin left changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                robotSpinLeftButton = true;
+            } else {
+                robotSpinLeftButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for robot spin to the right button */
+        table.addEntryListener("robotSpinRightButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad robot spin right changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                robotSpinRightButton = true;
+            } else {
+                robotSpinRightButton = false;
+            }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }
 
