@@ -9,10 +9,16 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.MoveSpinner;
+import frc.robot.commands.OnlyShoot;
+import frc.robot.commands.RawControl;
+import frc.robot.commands.RawIndexer;
+import frc.robot.commands.RawIntake;
+import frc.robot.commands.RawTransport;
 import frc.robot.commands.ReverseBalls;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinToColor;
+import frc.robot.commands.TrackingLight;
 import frc.robot.triggers.AdjustCCWButton;
 import frc.robot.triggers.AdjustCWButton;
 import frc.robot.triggers.AutoColorButton;
@@ -21,6 +27,7 @@ import frc.robot.triggers.ClimbAdjustLeftButton;
 import frc.robot.triggers.ClimbAdjustRightButton;
 import frc.robot.triggers.ClimbButton;
 import frc.robot.triggers.GreenButton;
+import frc.robot.triggers.LaunchpadButton;
 import frc.robot.triggers.RedButton;
 import frc.robot.triggers.SpinButton;
 import frc.robot.triggers.SpinnerDownButton;
@@ -42,7 +49,7 @@ public class OI {
   public static JoystickButton rawShoot;
 
   /* Define triggers */
-  public static Trigger redButton = new RedButton();
+  /*public static Trigger redButton = new RedButton();
   public static Trigger greenButton = new GreenButton();
   public static Trigger blueButton = new BlueButton();
   public static Trigger yellowButton = new YellowButton();
@@ -54,8 +61,35 @@ public class OI {
   public static Trigger spinnerUpButton = new SpinnerUpButton();
   public static Trigger spinnerDownButton = new SpinnerDownButton();
   public static Trigger adjustCWButton = new AdjustCWButton();
-  public static Trigger adjustCCWButton = new AdjustCCWButton();
+  public static Trigger adjustCCWButton = new AdjustCCWButton();*/
 
+  public static Trigger redButton = new LaunchpadButton(1);
+  public static Trigger greenButton = new LaunchpadButton(2);
+  public static Trigger blueButton = new LaunchpadButton(3);
+  public static Trigger yellowButton = new LaunchpadButton(4);
+  public static Trigger climbButton = new LaunchpadButton(6);
+  public static Trigger climbAdjustRightButton = new LaunchpadButton(15);
+  public static Trigger climbAdjustLeftButton = new LaunchpadButton(14);
+  public static Trigger autoColorButton = new LaunchpadButton(10);
+  public static Trigger spinButton = new LaunchpadButton(5);
+  public static Trigger spinnerUpButton = new LaunchpadButton(8);
+  public static Trigger spinnerDownButton = new LaunchpadButton(9);
+  public static Trigger adjustCWButton = new LaunchpadButton(11);
+  public static Trigger adjustCCWButton = new LaunchpadButton(12);
+  public static Trigger autoShootButton = new LaunchpadButton(17);
+  public static Trigger semiAutoShootButton = new LaunchpadButton(18);
+  public static Trigger semiAutoRevButton = new LaunchpadButton(19);
+  public static Trigger intakeOutButton = new LaunchpadButton(20);
+  public static Trigger intakeInButton = new LaunchpadButton(21);
+  public static Trigger indexerOutButton = new LaunchpadButton(22);
+  public static Trigger indexerInButton = new LaunchpadButton(23);
+  public static Trigger transportOutButton = new LaunchpadButton(24);
+  public static Trigger transportInButton = new LaunchpadButton(25);
+  public static Trigger controlOutButton = new LaunchpadButton(26);
+  public static Trigger controlInButton = new LaunchpadButton(27);
+  public static Trigger manualShootButton = new LaunchpadButton(28);
+  public static Trigger visionOnButton = new LaunchpadButton(29);
+  
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {
 
@@ -66,13 +100,13 @@ public class OI {
     shoot = new JoystickButton(driver, 2);
     intake = new JoystickButton(driver, 3);
     reverse = new JoystickButton(driver, 4);
-    rawShoot = new JoystickButton(driver, 11);
+    //rawShoot = new JoystickButton(driver, 11);
 
     /* Handle button presses */
-    shoot.whenPressed(new Shoot());
+    shoot.whenPressed(new Shoot(false));
     intake.whenPressed(new IntakeBalls());
     reverse.whenPressed(new ReverseBalls());
-    rawShoot.whenPressed(new ManualShoot());
+    //rawShoot.whenPressed(new ManualShoot(false));
 
     /* Handle launchpad triggers */
     redButton.whenActive(new SpinToColor(1));
@@ -88,5 +122,17 @@ public class OI {
     spinnerDownButton.whenActive(new MoveSpinner(false));
     adjustCWButton.whenActive(new AdjustDisk(true));
     adjustCCWButton.whenActive(new AdjustDisk(false));
+    autoShootButton.whenActive(new Shoot(true));
+    semiAutoRevButton.whenActive(new ManualShoot(true));
+    intakeOutButton.whenActive(new RawIntake(false));
+    intakeInButton.whenActive(new RawIntake(true));
+    transportOutButton.whenActive(new RawTransport(false));
+    transportInButton.whenActive(new RawTransport(true));
+    controlOutButton.whenActive(new RawControl(false));
+    controlInButton.whenActive(new RawControl(true));
+    manualShootButton.whenActive(new OnlyShoot());
+    visionOnButton.whenActive(new TrackingLight(true));
+
+    visionOnButton.whenInactive(new TrackingLight(false));
   }
 }

@@ -15,14 +15,17 @@ public class Shoot extends Command {
     double shootRPM = 0;
     double counter = 0;
     double approxSpeed = 0;
+    boolean lp;
 
-    public Shoot() {
+    public Shoot(boolean launchpad) {
         /* Require the spinner subsystem */
         requires(Robot.shooter);
         requires(Robot.ballTransport);
         requires(Robot.indexer);
         requires(Robot.shootControl);
         requires(Robot.driveTrain);
+
+        lp = launchpad;
 
         counter = 0;
 
@@ -95,7 +98,11 @@ public class Shoot extends Command {
 
     @Override
     protected boolean isFinished() {
-        return !OI.driver.getRawButton(2);
+        if (lp) {
+            return !OI.autoShootButton.get();
+        } else {
+            return !OI.driver.getRawButton(2);
+        }
     }
 
      /*

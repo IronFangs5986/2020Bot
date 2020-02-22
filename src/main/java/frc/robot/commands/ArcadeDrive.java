@@ -29,8 +29,8 @@ public class ArcadeDrive extends Command {
         //double turnAxis = OI.driver.getRawAxis(5);
         //double limitAxis = OI.driver.getRawAxis(3);
 
-        double moveAxis = OI.driver.getRawAxis(2);
-        double turnAxis = OI.driver.getRawAxis(1);
+        double moveAxis = OI.driver.getRawAxis(1);
+        double turnAxis = OI.driver.getRawAxis(0);
 
         //double turnSpeed = turnAxis/0.48;
         //double moveSpeed = moveAxis/0.52;

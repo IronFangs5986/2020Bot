@@ -36,12 +36,14 @@ public class Launchpad {
     public static boolean controlOutButton = false;
     public static boolean controlInButton = false;
     public static boolean manualShootButton = false;
+    public static boolean visionOnButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
     /* Fetch table 'FangsLaunchpad' from NetworkTables */
     static NetworkTable table = inst.getTable("FangsLaunchpad");
+    static NetworkTable visionTable = inst.getTable("ChickenVision");
 
     /* Create Listeners for Launchpad */
     public static void init() {
@@ -303,6 +305,12 @@ public class Launchpad {
             } else {
                 manualShootButton = false;
             }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for tape button */
+        visionTable.addEntryListener("Tape", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad tape changed to: " + value.getValue());
+            visionOnButton = value.getBoolean();
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }
 

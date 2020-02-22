@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.util.Color;
@@ -63,6 +64,8 @@ public class RobotMap {
   public static Color RedTarget;
   public static Color YellowTarget;
 
+  public static Solenoid trackingLight;
+  
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
   public static MjpegServer driverCameraServer = null;
@@ -122,6 +125,8 @@ public class RobotMap {
     GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
     RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
     YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
+    trackingLight = new Solenoid(0);
 
     /* Define and start camera server */
     //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);

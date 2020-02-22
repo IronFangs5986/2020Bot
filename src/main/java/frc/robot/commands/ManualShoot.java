@@ -10,14 +10,16 @@ import frc.robot.Robot;
 public class ManualShoot extends Command {
 
     /* Variables set when calling the command */
-
-    public ManualShoot() {
+    boolean lp;
+    public ManualShoot(boolean launchpad) {
         /* Require the necessary subsystems */
         requires(Robot.shooter);
         requires(Robot.shootControl);
         requires(Robot.ballTransport);
         requires(Robot.indexer);
         requires(Robot.intake);
+
+        lp = launchpad;
     }
 
     /*
@@ -25,7 +27,7 @@ public class ManualShoot extends Command {
      */
     protected void execute() {
 
-        if (OI.driver.getRawButton(1)) {
+        if (OI.driver.getRawButton(1) || OI.semiAutoShootButton.get()) {
             Robot.shootControl.moveToShooter();
             Robot.ballTransport.moveIn();
             Robot.indexer.moveIn();
@@ -36,13 +38,17 @@ public class ManualShoot extends Command {
             Robot.indexer.stop();
             Robot.intake.stop();
         }
-        Robot.shooter.shoot(0.8);
+        Robot.shooter.shoot(0.4);
        
     }
 
     @Override
     protected boolean isFinished() {
-        return !OI.driver.getRawButton(11);
+        if (lp) {
+            return !OI.semiAutoRevButton.get();
+        } else {
+            return !OI.driver.getRawButton(11);
+        }
     }
 
      /*
