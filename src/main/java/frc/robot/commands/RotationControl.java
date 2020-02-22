@@ -11,13 +11,13 @@ public class RotationControl extends Command {
 
     /* Variables set when calling the command */
     double controlPanelCircumference = 32.0 * Math.PI;
-    double motorCircumference = 1.0 * Math.PI;
-    double distanceToSpin = controlPanelCircumference * 4.0;
+    double motorCircumference = 1.25 * Math.PI;
+    double moveDistance = (controlPanelCircumference/motorCircumference) * 4.0;
 
     public RotationControl() {
         /* Require the necessary subsystems */
         requires(Robot.colorSpinner);
-
+        System.out.println("Pos " + moveDistance);
         RobotMap.spinnerEncoder.setPosition(0.0);
     }
 
@@ -30,7 +30,11 @@ public class RotationControl extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        if (Math.abs(RobotMap.spinnerEncoder.getPosition()) > moveDistance) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
      /*
@@ -38,6 +42,7 @@ public class RotationControl extends Command {
      */
     protected void end() {
         Robot.colorSpinner.stopDisc();
+        RobotMap.spinnerEncoder.setPosition(0.0);
     }
 
     /*

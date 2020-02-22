@@ -106,6 +106,8 @@ public class Robot extends TimedRobot {
 
     /* Send shooter rpm to Dashboard */
     dashboard.setShooterRPM(RobotMap.shooterEncoder.getVelocity());
+
+    //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
   }
 
   /*

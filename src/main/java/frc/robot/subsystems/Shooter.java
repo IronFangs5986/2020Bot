@@ -33,6 +33,11 @@ public class Shooter extends Subsystem {
 
     /* Stops the shooter */
     public void stopShooter() {
-        shooterMotor.set(0);
+        shooterMotor.stopMotor();
+    }
+
+    public void stopRPMShooter() {
+        RobotMap.shooterPIDController.setReference(0, ControlType.kVelocity);
+        
     }
 }

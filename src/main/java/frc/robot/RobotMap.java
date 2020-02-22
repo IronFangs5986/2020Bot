@@ -115,9 +115,21 @@ public class RobotMap {
     spinnerEncoder = spinnerMotor.getEncoder();
 
     shooterPIDController = shooterMotor.getPIDController();
-    shooterPIDController.setP(0.1);
+    /*shooterPIDController.setP(0.1);
     shooterPIDController.setI(1e-4);
     shooterPIDController.setD(1);
+    shooterPIDController.setIZone(0);
+    shooterPIDController.setFF(0);*/
+    
+    /*shooterPIDController.setP(5e-5);
+    shooterPIDController.setI(1e-6);
+    shooterPIDController.setD(0);
+    shooterPIDController.setIZone(0);
+    shooterPIDController.setFF(0.000156);*/
+
+    shooterPIDController.setP(1e-4);
+    shooterPIDController.setI(0);
+    shooterPIDController.setD(0);
     shooterPIDController.setIZone(0);
     shooterPIDController.setFF(0);
     shooterPIDController.setOutputRange(-1, 1);

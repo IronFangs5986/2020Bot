@@ -20,13 +20,14 @@ public class OnlyShoot extends Command {
      * Executes the command
      */
     protected void execute() {
-        Robot.shooter.shoot(0.8);
-       
+        //Robot.shooter.shoot(0.8);
+        Robot.shooter.shootRPM(1000);
     }
 
     @Override
     protected boolean isFinished() {
-            return !OI.manualShootButton.get();
+        //return false;    
+        return !OI.manualShootButton.get();
     }
 
      /*

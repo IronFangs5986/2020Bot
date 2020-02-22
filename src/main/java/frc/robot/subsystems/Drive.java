@@ -30,7 +30,7 @@ public class Drive extends Subsystem {
     public void arcadeDrive(double moveAxis, double rotateAxis) {
 
         /* Sets arcadeDrive values */
-        robotDrive.arcadeDrive(-moveAxis, -rotateAxis);
+        robotDrive.arcadeDrive(moveAxis, -rotateAxis);
     }
 
     /*
@@ -59,12 +59,12 @@ public class Drive extends Subsystem {
 
     /* Spins robot to the left for manual adjustment */
     public void spinAdjustLeft() {
-        robotDrive.tankDrive(Config.driveManualAdjustSpeed * -1, Config.driveManualAdjustSpeed);
+        robotDrive.tankDrive(Config.driveManualAdjustSpeed, Config.driveManualAdjustSpeed * -1);
     }
 
     /* Spins robot to the right for manual adjustment */
     public void spinAdjustRight() {
-        robotDrive.tankDrive(Config.driveManualAdjustSpeed, Config.driveManualAdjustSpeed * -1);
+        robotDrive.tankDrive(Config.driveManualAdjustSpeed * -1, Config.driveManualAdjustSpeed);
     }
 
     /*

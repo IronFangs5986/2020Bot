@@ -12,8 +12,8 @@ public class Config {
     public static double driveManualAdjustSpeed = 0.3;
 
     /* Configuration for color spinner speeds */
-    public static double colorSpinSpeed = 0.1;
-    public static double colorAdjustSpeed = 0.1;
+    public static double colorSpinSpeed = 0.2;
+    public static double colorAdjustSpeed = 0.2;
     public static double colorRaiseSpeed = 1.0;
  
     /* Configuration for intake speed */
