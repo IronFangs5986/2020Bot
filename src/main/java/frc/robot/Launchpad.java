@@ -39,6 +39,7 @@ public class Launchpad {
     public static boolean visionOnButton = false;
     public static boolean robotSpinLeftButton = false;
     public static boolean robotSpinRightButton = false;
+    public static boolean autoIntakeButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -332,6 +333,16 @@ public class Launchpad {
                 robotSpinRightButton = true;
             } else {
                 robotSpinRightButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for auto intake button */
+        table.addEntryListener("autoIntakeButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad auto intake changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                autoIntakeButton = true;
+            } else {
+                autoIntakeButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }

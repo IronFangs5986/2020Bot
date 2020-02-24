@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   private int mode = 0;
 
   /* Initialize and define autonomous modes list */
-  String[] autoList = { "Move Straight", "Shoot N' Move" };
+  String[] autoList = { "Move Straight", "Move and Shoot" };
 
   /* Initialize Dashboard */
   Dashboard dashboard = new Dashboard();

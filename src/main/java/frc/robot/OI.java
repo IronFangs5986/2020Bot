@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.AdjustClimb;
 import frc.robot.commands.AdjustDisk;
 import frc.robot.commands.Climb;
+import frc.robot.commands.Intake;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.MoveSpinner;
@@ -77,6 +78,7 @@ public class OI {
   public static Trigger visionOnButton = new LaunchpadButton(16);
   public static Trigger robotSpinLeftButton = new LaunchpadButton(29);
   public static Trigger robotSpinRightButton = new LaunchpadButton(30);
+  public static Trigger autoIntakeButton = new LaunchpadButton(31);
   
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {
@@ -120,6 +122,7 @@ public class OI {
     controlInButton.whenActive(new RawControl(true));
     manualShootButton.whenActive(new OnlyShoot());
     visionOnButton.whenActive(new TrackingLight(true));
+    autoIntakeButton.whenActive(new Intake());
 
     visionOnButton.whenInactive(new TrackingLight(false));
   }

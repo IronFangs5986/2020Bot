@@ -18,6 +18,7 @@ public class Config {
  
     /* Configuration for intake speed */
     public static double intakeSpeed = 0.5;
+    public static double intakeSensorDist = 5.0;
  
     /* Configuration for ball transport speeds */
     public static double ballTransportSpeed = 0.3;
@@ -35,4 +36,11 @@ public class Config {
     /* Shooting configurations */
     public static double maxShootRPM = 3600.0;
     public static double shootTurnTolerance = 0.0;
+
+    /* Shooting parabola variables */
+    public static double shootRPMA = 0.106487;
+    public static double shootRPMB = -15.235;
+    public static double shootRPMC = 1824.18;
+
+    public static double robotWidth = 0.0;
 }

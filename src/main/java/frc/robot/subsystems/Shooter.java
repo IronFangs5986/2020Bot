@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Config;
 import frc.robot.RobotMap;
 
 /*
@@ -38,6 +39,9 @@ public class Shooter extends Subsystem {
 
     public void stopRPMShooter() {
         RobotMap.shooterPIDController.setReference(0, ControlType.kVelocity);
-        
+    }
+
+    public double calculateRPM(double inches) {
+        return Config.shootRPMA*inches*inches+Config.shootRPMB*inches+Config.shootRPMC;
     }
 }

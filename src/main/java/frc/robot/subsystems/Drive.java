@@ -46,7 +46,7 @@ public class Drive extends Subsystem {
      */
     public void adjustTargetLeft() {
         /* Sets tankDrive values */
-        robotDrive.tankDrive(Config.driveTargetAdjustSpeed * -1, Config.driveTargetAdjustSpeed);
+        robotDrive.tankDrive(Config.driveTargetAdjustSpeed, Config.driveTargetAdjustSpeed* -1);
     }
 
     /*
@@ -54,7 +54,7 @@ public class Drive extends Subsystem {
      */
     public void adjustTargetRight() {
         /* Sets tankDrive values */
-        robotDrive.tankDrive(Config.driveTargetAdjustSpeed, Config.driveTargetAdjustSpeed * -1);
+        robotDrive.tankDrive(Config.driveTargetAdjustSpeed* -1, Config.driveTargetAdjustSpeed);
     }
 
     /* Spins robot to the left for manual adjustment */
@@ -68,17 +68,25 @@ public class Drive extends Subsystem {
     }
 
     /*
-     * Return distance recorded by left drivetrain encoder
+     * Return distance in feet recorded by left drivetrain encoder
      */
     public double getLeftDistance() {
-        return 0.0;
+        return RobotMap.leftDriveEncoder.getPosition() * (6.0 / 12.0) * Math.PI;
     }
 
     /*
-     * Return distance recorded by right drivetrain encoder
+     * Return distance in feet recorded by right drivetrain encoder
      */
     public double getRightDistance() {
-        return 0.0;
+        return RobotMap.rightDriveEncoder.getPosition() * (6.0 / 12.0) * Math.PI;
+    }
+
+    /*
+     * Resets encoder distances
+     */
+    public void resetDriveEncoders() {
+        RobotMap.leftDriveEncoder.setPosition(0.0);
+        RobotMap.rightDriveEncoder.setPosition(0.0);
     }
 
     /*

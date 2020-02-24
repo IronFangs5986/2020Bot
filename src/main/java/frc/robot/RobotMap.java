@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -49,6 +50,8 @@ public class RobotMap {
   /* Initialize encoders */
   public static CANEncoder shooterEncoder;
   public static CANEncoder spinnerEncoder;
+  public static CANEncoder leftDriveEncoder;
+  public static CANEncoder rightDriveEncoder;
 
   public static CANPIDController shooterPIDController;
 
@@ -69,6 +72,11 @@ public class RobotMap {
 
   public static Solenoid trackingLight;
   
+  /* Initialize gyroscope */
+  public static ADIS16448_IMU gyro;
+
+  public static AnalogInput intakeUltra;
+
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
   public static MjpegServer driverCameraServer = null;
@@ -113,6 +121,8 @@ public class RobotMap {
     /* Define encoders */
     shooterEncoder =  shooterMotor.getEncoder();
     spinnerEncoder = spinnerMotor.getEncoder();
+    leftDriveEncoder = MiddleLeftMotor.getEncoder();
+    rightDriveEncoder = MiddleRightMotor.getEncoder();
 
     shooterPIDController = shooterMotor.getPIDController();
     /*shooterPIDController.setP(0.1);
@@ -151,6 +161,11 @@ public class RobotMap {
 
     trackingLight = new Solenoid(0);
 
+    /* Define gyroscope class */
+    gyro = new ADIS16448_IMU();
+
+    intakeUltra = new AnalogInput(0);
+    
     /* Define and start camera server */
     //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
     //server.setResolution(160, 120);

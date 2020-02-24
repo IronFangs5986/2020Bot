@@ -10,10 +10,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class Dashboard {
 
     /* Initialize NetworkTables instance */
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    static NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
-    /* Fetch table 'FangsDashboard' from NetworkTables */
+    /* Fetch tables 'FangsDashboard' and 'ChickenVision' from NetworkTables */
     NetworkTable table = inst.getTable("FangsDashboard");
+    static NetworkTable visionTable = inst.getTable("ChickenVision");
 
     /* Define NetworkTable entries */
     NetworkTableEntry battery = table.getEntry("battery");
@@ -27,6 +28,8 @@ public class Dashboard {
     NetworkTableEntry vision = table.getEntry("vision");
     NetworkTableEntry time = table.getEntry("time");
     NetworkTableEntry shooterRPM = table.getEntry("shooterRPM");
+    static NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
+    static NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
 
     /* Send battery voltage to NetworkTables */
     public void setBattery(final Double voltage) {
@@ -55,11 +58,12 @@ public class Dashboard {
         autoList.setStringArray(list);
     }
 
-    /* Send the current robot mode to NetworkTables (Disabled, Teleop, Autonomous)*/
+    /*
+     * Send the current robot mode to NetworkTables (Disabled, Teleop, Autonomous)
+     */
     public void setRobotMode(final String mode) {
         robotMode.setString(mode);
     }
-
 
     /* Send the camera state to NetworkTables */
     public void setCameraTrackingStatus(final Boolean active) {
@@ -81,10 +85,20 @@ public class Dashboard {
         if (seconds == -1.0) {
             time.setString("2:15");
         } else {
-        final int minutes = (int) (seconds / 60);
-        final int secondsRemaining = (int) (seconds - (minutes * 60));
-        time.setString(minutes+":"+secondsRemaining);
+            final int minutes = (int) (seconds / 60);
+            final int secondsRemaining = (int) (seconds - (minutes * 60));
+            time.setString(minutes + ":" + secondsRemaining);
         }
+    }
+
+    /* Get the current tape yaw from NetworkTables */
+    public static double getTapeYaw() {
+        return tapeYaw.getDouble(0.0);
+    }
+
+    /* Check if tape can be seen from NetworkTables */
+    public static boolean getTapeDetected() {
+        return tapeDetected.getBoolean(false);
     }
 
 }
