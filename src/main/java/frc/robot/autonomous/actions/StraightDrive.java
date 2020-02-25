@@ -83,7 +83,7 @@ public class StraightDrive extends Command {
 
         if (setIntake) {
             Robot.intake.intake();
-            if (RobotMap.intakeUltra.getValue() * 0.125 < Config.intakeSensorDist) {
+            if (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist) {
                 Robot.indexer.moveIn();
                 Robot.ballTransport.moveIn();
             } else {

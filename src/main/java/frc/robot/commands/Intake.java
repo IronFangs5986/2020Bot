@@ -12,6 +12,8 @@ import frc.robot.RobotMap;
 public class Intake extends Command {
 
     /* Variables set when calling the command */
+    int counter = 0;
+    int fifthCounter = 0;
 
     public Intake() {
         /* Require the necessary subsystems */
@@ -25,12 +27,21 @@ public class Intake extends Command {
      */
     protected void execute() {
         Robot.intake.intake();
-        if (RobotMap.intakeUltra.getValue() * 0.125 < Config.intakeSensorDist) {
+
+        if (fifthCounter < 60 && (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist || (counter < 60 && counter != 0))) {
             Robot.indexer.moveIn();
             Robot.ballTransport.moveIn();
+            counter = counter + 1;
         } else {
             Robot.indexer.stop();
             Robot.ballTransport.stop();
+            counter = 0;
+        }
+
+        if (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist) {
+            fifthCounter = fifthCounter + 1;
+        } else {
+            fifthCounter = 0;
         }
     }
 

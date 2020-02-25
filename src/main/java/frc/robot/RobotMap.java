@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.util.Color;
 
@@ -75,7 +76,7 @@ public class RobotMap {
   /* Initialize gyroscope */
   public static ADIS16448_IMU gyro;
 
-  public static AnalogInput intakeUltra;
+  public static Ultrasonic intakeUltra;
 
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
@@ -159,12 +160,13 @@ public class RobotMap {
     RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
     YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-    trackingLight = new Solenoid(0);
+    //trackingLight = new Solenoid(0);
 
     /* Define gyroscope class */
     gyro = new ADIS16448_IMU();
 
-    intakeUltra = new AnalogInput(0);
+    intakeUltra = new Ultrasonic(0, 1);
+    intakeUltra.setAutomaticMode(true);
     
     /* Define and start camera server */
     //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
