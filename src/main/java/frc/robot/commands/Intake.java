@@ -13,7 +13,6 @@ public class Intake extends Command {
 
     /* Variables set when calling the command */
     int counter = 0;
-    int fifthCounter = 0;
 
     public Intake() {
         /* Require the necessary subsystems */
@@ -28,7 +27,7 @@ public class Intake extends Command {
     protected void execute() {
         Robot.intake.intake();
 
-        if (fifthCounter < 60 && (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist || (counter < 60 && counter != 0))) {
+        if (!hasFourBalls() && (Robot.ballTransport.hasFifthBall() || (counter < Config.intakeCounter && counter != 0))) {
             Robot.indexer.moveIn();
             Robot.ballTransport.moveIn();
             counter = counter + 1;
@@ -38,11 +37,6 @@ public class Intake extends Command {
             counter = 0;
         }
 
-        if (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist) {
-            fifthCounter = fifthCounter + 1;
-        } else {
-            fifthCounter = 0;
-        }
     }
 
     @Override
@@ -64,5 +58,15 @@ public class Intake extends Command {
      */
     protected void interrupted() {
         end();
+    }
+
+    /* Checks if robot has four balls in system */
+    private boolean hasFourBalls() {
+        if (Robot.ballTransport.hasFirstBall() && Robot.ballTransport.hasSecondBall() && Robot.ballTransport.hasThirdBall() && Robot.ballTransport.hasFourthBall()) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }

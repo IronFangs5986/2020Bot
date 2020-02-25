@@ -13,16 +13,18 @@ public class Config {
 
     /* Configuration for color spinner speeds */
     public static double colorSpinSpeed = 0.2;
-    public static double colorAdjustSpeed = 0.2;
+    public static double colorAdjustSpeed = 0.1;
     public static double colorRaiseSpeed = 1.0;
  
     /* Configuration for intake speed */
     public static double intakeSpeed = 0.5;
     public static double intakeSensorDist = 5.0;
+    public static double intakeCounter = 60.0;
  
     /* Configuration for ball transport speeds */
     public static double ballTransportSpeed = 0.3;
     public static double ballTransportBackSpeed = 0.3;
+    public static double ballSensorDist = 3.0;
 
     /* Configuration for shooter control speeds */
     public static double controlShootSpeed = 0.3;
@@ -36,6 +38,7 @@ public class Config {
     /* Shooting configurations */
     public static double maxShootRPM = 3600.0;
     public static double shootTurnTolerance = 0.0;
+    public static double shootRPMTolerance = 5.0;
 
     /* Shooting parabola variables */
     public static double shootRPMA = 0.106487;

@@ -37,6 +37,26 @@ public class BallTransport extends Subsystem {
         transportMotor.set(Config.ballTransportBackSpeed * -1 * (34.0/70.0));
     }
 
+    public boolean hasFirstBall() {
+        return (RobotMap.firstBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.firstBallUltra.getRangeInches() != 0.0);
+    }
+
+    public boolean hasSecondBall() {
+        return (RobotMap.secondBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.secondBallUltra.getRangeInches() != 0.0);
+    }
+
+    public boolean hasThirdBall() {
+        return (RobotMap.thirdBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.thirdBallUltra.getRangeInches() != 0.0);
+    }
+
+    public boolean hasFourthBall() {
+        return (RobotMap.fourthBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.fourthBallUltra.getRangeInches() != 0.0);
+    }
+
+    public boolean hasFifthBall() {
+        return (RobotMap.fifthBallUltra.getRangeInches() < Config.intakeSensorDist && RobotMap.fifthBallUltra.getRangeInches() != 0.0);
+    }
+
     /* Stops the transport */
     public void stop() {
         transportMotor.set(0);

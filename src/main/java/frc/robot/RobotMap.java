@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -76,7 +75,12 @@ public class RobotMap {
   /* Initialize gyroscope */
   public static ADIS16448_IMU gyro;
 
-  public static Ultrasonic intakeUltra;
+  /* Initialize untrasonic sensors */
+  public static Ultrasonic firstBallUltra;
+  public static Ultrasonic secondBallUltra;
+  public static Ultrasonic thirdBallUltra;
+  public static Ultrasonic fourthBallUltra;
+  public static Ultrasonic fifthBallUltra;
 
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
@@ -125,6 +129,7 @@ public class RobotMap {
     leftDriveEncoder = MiddleLeftMotor.getEncoder();
     rightDriveEncoder = MiddleRightMotor.getEncoder();
 
+    /* Define PID controllers */
     shooterPIDController = shooterMotor.getPIDController();
     /*shooterPIDController.setP(0.1);
     shooterPIDController.setI(1e-4);
@@ -138,6 +143,7 @@ public class RobotMap {
     shooterPIDController.setIZone(0);
     shooterPIDController.setFF(0.000156);*/
 
+    /* Configure PID controllers */
     shooterPIDController.setP(1e-4);
     shooterPIDController.setI(0);
     shooterPIDController.setD(0);
@@ -165,8 +171,21 @@ public class RobotMap {
     /* Define gyroscope class */
     gyro = new ADIS16448_IMU();
 
-    intakeUltra = new Ultrasonic(0, 1);
-    intakeUltra.setAutomaticMode(true);
+    /* Define and configure ultrasonic sensors */
+    firstBallUltra = new Ultrasonic(0, 1);
+    firstBallUltra.setAutomaticMode(true);
+
+    secondBallUltra = new Ultrasonic(2, 3);
+    secondBallUltra.setAutomaticMode(true);
+
+    thirdBallUltra = new Ultrasonic(4, 5);
+    thirdBallUltra.setAutomaticMode(true);
+
+    fourthBallUltra = new Ultrasonic(6, 7);
+    fourthBallUltra.setAutomaticMode(true);
+
+    fifthBallUltra = new Ultrasonic(8, 9);
+    fifthBallUltra.setAutomaticMode(true);
     
     /* Define and start camera server */
     //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);

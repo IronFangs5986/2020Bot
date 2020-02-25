@@ -18,6 +18,7 @@ public class StraightDrive extends Command {
     double endDistanceL;
     double endDistanceR;
     boolean setIntake;
+    int counter = 0;
 
     /*
      * Declares public function that takes direction and distance in feet and inches
@@ -83,13 +84,16 @@ public class StraightDrive extends Command {
 
         if (setIntake) {
             Robot.intake.intake();
-            if (RobotMap.intakeUltra.getRangeInches() < Config.intakeSensorDist) {
+            if (!hasFourBalls() && (RobotMap.fifthBallUltra.getRangeInches() < Config.intakeSensorDist || (counter < Config.intakeCounter && counter != 0))) {
                 Robot.indexer.moveIn();
                 Robot.ballTransport.moveIn();
+                counter = counter + 1;
             } else {
                 Robot.indexer.stop();
                 Robot.ballTransport.stop();
+                counter = 0;
             }
+    
         } else {
             Robot.intake.stop();
             Robot.indexer.stop();
@@ -137,6 +141,16 @@ public class StraightDrive extends Command {
         Robot.intake.stop();
         Robot.indexer.stop();
         Robot.ballTransport.stop();
+    }
+
+    /* Checks if robot has four balls in system */
+    private boolean hasFourBalls() {
+        if (Robot.ballTransport.hasFirstBall() && Robot.ballTransport.hasSecondBall() && Robot.ballTransport.hasThirdBall() && Robot.ballTransport.hasFourthBall()) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     /*

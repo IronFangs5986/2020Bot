@@ -6,8 +6,8 @@ import frc.robot.autonomous.actions.StraightDrive;
 public class Straight extends CommandGroup {
     public Straight() {
 
-        /* Drives forward for ~19ft 0in */
-         addSequential(new StraightDrive(true, 19, 0, true));
+        /* Drives back for 6ft 0in */
+        addSequential(new StraightDrive(false, 6, 0, false));
     }
 }
 

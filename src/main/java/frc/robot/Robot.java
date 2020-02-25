@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   private int mode = 0;
 
   /* Initialize and define autonomous modes list */
-  String[] autoList = { "Move Straight", "Move and Shoot" };
+  String[] autoList = { "Move Straight", "Shoot and Move" };
 
   /* Initialize Dashboard */
   Dashboard dashboard = new Dashboard();
@@ -98,6 +98,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    /* Send gyroscope data to Dashboard */
+    dashboard.setGyroscope(RobotMap.gyro.getGyroAngleX(), RobotMap.gyro.getGyroAngleY(), RobotMap.gyro.getGyroAngleZ());
+
     /* Send battery voltage to Dashboard */
     dashboard.setBattery(RobotController.getBatteryVoltage());
 
@@ -107,8 +110,11 @@ public class Robot extends TimedRobot {
     /* Send shooter rpm to Dashboard */
     dashboard.setShooterRPM(RobotMap.shooterEncoder.getVelocity());
 
+    /* Send ball information to Dashboard*/
+    dashboard.setBalls(ballTransport.hasFirstBall(), ballTransport.hasSecondBall(), ballTransport.hasThirdBall(), ballTransport.hasFourthBall(), ballTransport.hasFifthBall());
+
     //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
-    System.out.println(RobotMap.intakeUltra.getRangeInches());
+    //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
   }
 
   /*

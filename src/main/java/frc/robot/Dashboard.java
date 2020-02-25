@@ -28,6 +28,11 @@ public class Dashboard {
     NetworkTableEntry vision = table.getEntry("vision");
     NetworkTableEntry time = table.getEntry("time");
     NetworkTableEntry shooterRPM = table.getEntry("shooterRPM");
+    NetworkTableEntry firstBall = table.getEntry("firstBall");
+    NetworkTableEntry secondBall = table.getEntry("secondBall");
+    NetworkTableEntry thirdBall = table.getEntry("thirdBall");
+    NetworkTableEntry fourthBall = table.getEntry("fourthBall");
+    NetworkTableEntry fifthBall = table.getEntry("fifthBall");
     static NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
     static NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
 
@@ -89,6 +94,15 @@ public class Dashboard {
             final int secondsRemaining = (int) (seconds - (minutes * 60));
             time.setString(minutes + ":" + secondsRemaining);
         }
+    }
+
+    /* Sends current ball positions to NetworkTables */
+    public void setBalls(boolean first, boolean second, boolean third, boolean fourth, boolean fifth) {
+        firstBall.setBoolean(first);
+        secondBall.setBoolean(second);
+        thirdBall.setBoolean(third);
+        fourthBall.setBoolean(fourth);
+        fifthBall.setBoolean(fifth);
     }
 
     /* Get the current tape yaw from NetworkTables */
