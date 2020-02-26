@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Config;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -19,6 +20,7 @@ public class ManualShoot extends Command {
         requires(Robot.indexer);
         requires(Robot.intake);
 
+        Config.revSpeed = 0.3;
         lp = launchpad;
     }
 
@@ -38,7 +40,7 @@ public class ManualShoot extends Command {
             Robot.indexer.stop();
             Robot.intake.stop();
         }
-        Robot.shooter.shoot(0.4);
+        Robot.shooter.shoot(Config.revSpeed);
        
     }
 
@@ -55,6 +57,7 @@ public class ManualShoot extends Command {
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
+        Config.revSpeed = 0.3;
         Robot.shootControl.stop();
         Robot.ballTransport.stop();
         Robot.indexer.stop();

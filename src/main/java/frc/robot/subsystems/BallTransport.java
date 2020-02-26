@@ -38,19 +38,23 @@ public class BallTransport extends Subsystem {
     }
 
     public boolean hasFirstBall() {
-        return (RobotMap.firstBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.firstBallUltra.getRangeInches() != 0.0);
+        //return (RobotMap.firstBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.firstBallUltra.getRangeInches() != 0.0);
+        return false;
     }
 
     public boolean hasSecondBall() {
-        return (RobotMap.secondBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.secondBallUltra.getRangeInches() != 0.0);
+        //return (RobotMap.secondBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.secondBallUltra.getRangeInches() != 0.0);
+        return false;
     }
 
     public boolean hasThirdBall() {
-        return (RobotMap.thirdBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.thirdBallUltra.getRangeInches() != 0.0);
+        //return (RobotMap.thirdBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.thirdBallUltra.getRangeInches() != 0.0);
+        return false;
     }
 
     public boolean hasFourthBall() {
-        return (RobotMap.fourthBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.fourthBallUltra.getRangeInches() != 0.0);
+        //return (RobotMap.fourthBallUltra.getRangeInches() < Config.ballSensorDist && RobotMap.fourthBallUltra.getRangeInches() != 0.0);
+        return false;
     }
 
     public boolean hasFifthBall() {

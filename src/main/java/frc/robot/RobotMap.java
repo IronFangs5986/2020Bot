@@ -144,12 +144,13 @@ public class RobotMap {
     shooterPIDController.setFF(0.000156);*/
 
     /* Configure PID controllers */
-    shooterPIDController.setP(1e-4);
+    shooterPIDController.setP(0.000009);//0.000009
     shooterPIDController.setI(0);
-    shooterPIDController.setD(0);
-    shooterPIDController.setIZone(0);
-    shooterPIDController.setFF(0);
+    //shooterPIDController.setFF(0.000241);
+    shooterPIDController.setFF(0.000214); //227
     shooterPIDController.setOutputRange(-1, 1);
+
+    //0.000214
 
     /* Define the I2C port */
     i2cPort = I2C.Port.kOnboard;
@@ -172,17 +173,17 @@ public class RobotMap {
     gyro = new ADIS16448_IMU();
 
     /* Define and configure ultrasonic sensors */
-    firstBallUltra = new Ultrasonic(0, 1);
-    firstBallUltra.setAutomaticMode(true);
+    //firstBallUltra = new Ultrasonic(0, 1);
+    //firstBallUltra.setAutomaticMode(true);
 
-    secondBallUltra = new Ultrasonic(2, 3);
-    secondBallUltra.setAutomaticMode(true);
+    //secondBallUltra = new Ultrasonic(2, 3);
+    //secondBallUltra.setAutomaticMode(true);
 
-    thirdBallUltra = new Ultrasonic(4, 5);
-    thirdBallUltra.setAutomaticMode(true);
+    //thirdBallUltra = new Ultrasonic(4, 5);
+    //thirdBallUltra.setAutomaticMode(true);
 
-    fourthBallUltra = new Ultrasonic(6, 7);
-    fourthBallUltra.setAutomaticMode(true);
+    //fourthBallUltra = new Ultrasonic(6, 7);
+    //fourthBallUltra.setAutomaticMode(true);
 
     fifthBallUltra = new Ultrasonic(8, 9);
     fifthBallUltra.setAutomaticMode(true);

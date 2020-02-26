@@ -40,6 +40,8 @@ public class Launchpad {
     public static boolean robotSpinLeftButton = false;
     public static boolean robotSpinRightButton = false;
     public static boolean autoIntakeButton = false;
+    public static boolean revDownButton = false;
+    public static boolean revUpButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -345,6 +347,27 @@ public class Launchpad {
                 autoIntakeButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for rev down button */
+        table.addEntryListener("revDownButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad auto rev down changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                revDownButton = true;
+            } else {
+                revDownButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for rev up button */
+        table.addEntryListener("revUpButton", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad auto rev up changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                revUpButton = true;
+            } else {
+                revUpButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
     }
 
 }

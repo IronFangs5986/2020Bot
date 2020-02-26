@@ -11,7 +11,7 @@ import frc.robot.RobotMap;
  * This is the Shooter subsystem where anything related to shooter is found
  */
 public class Shooter extends Subsystem {
-    
+
     /* Call shooterMotor defined in RobotMap */
     CANSparkMax shooterMotor = RobotMap.shooterMotor;
     
@@ -29,7 +29,15 @@ public class Shooter extends Subsystem {
 
     /* Shoots at a certain rpm */
     public void shootRPM(double rpm) {
-        RobotMap.shooterPIDController.setReference(rpm, ControlType.kVelocity);
+        //if (Math.abs(RobotMap.shooterEncoder.getVelocity() - rpm) <= 50) {
+            RobotMap.shooterPIDController.setReference(rpm, ControlType.kVelocity);
+        /*} else {
+            if (RobotMap.shooterEncoder.getVelocity() < rpm) {
+                shooterMotor.set(1.0);
+            } else {
+                shooterMotor.set(0.0);
+            }
+        }*/
     }
 
     /* Stops the shooter */

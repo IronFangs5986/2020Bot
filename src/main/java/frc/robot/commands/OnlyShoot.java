@@ -21,7 +21,7 @@ public class OnlyShoot extends Command {
      */
     protected void execute() {
         //Robot.shooter.shoot(0.8);
-        Robot.shooter.shootRPM(1000);
+        Robot.shooter.shootRPM(1700);
     }
 
     @Override

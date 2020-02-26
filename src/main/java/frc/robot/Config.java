@@ -46,4 +46,6 @@ public class Config {
     public static double shootRPMC = 1824.18;
 
     public static double robotWidth = 0.0;
+
+    public static double revSpeed = 0.3;
 }

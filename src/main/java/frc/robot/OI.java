@@ -79,6 +79,8 @@ public class OI {
   public static Trigger robotSpinLeftButton = new LaunchpadButton(29);
   public static Trigger robotSpinRightButton = new LaunchpadButton(30);
   public static Trigger autoIntakeButton = new LaunchpadButton(31);
+  public static Trigger revDownButton = new LaunchpadButton(32);
+  public static Trigger revUpButton = new LaunchpadButton(33);
   
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {

@@ -78,6 +78,10 @@ public class LaunchpadButton extends Trigger {
             return Launchpad.robotSpinRightButton;
         } else if (buttonId == 31) {
             return Launchpad.autoIntakeButton;
+        } else if (buttonId == 32) {
+            return Launchpad.revDownButton;
+        } else if (buttonId == 33) {
+            return Launchpad.revUpButton;
         } else {
             return false;
         }
