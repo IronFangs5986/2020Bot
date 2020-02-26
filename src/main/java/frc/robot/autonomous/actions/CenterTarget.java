@@ -35,8 +35,8 @@ public class CenterTarget extends Command {
     protected void execute() {
 
         /* Get distance moved since command started */
-        degreesOff = Dashboard.getTapeYaw();
-        tapeFound = Dashboard.getTapeDetected();
+        degreesOff = Robot.dashboard.getTapeYaw();
+        tapeFound = Robot.dashboard.getTapeDetected();
 
         if (tapeFound) {
             if (Math.abs(degreesOff) > Config.shootTurnTolerance) {

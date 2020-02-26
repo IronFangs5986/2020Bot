@@ -39,6 +39,7 @@ public class Config {
     public static double maxShootRPM = 3600.0;
     public static double shootTurnTolerance = 0.0;
     public static double shootRPMTolerance = 5.0;
+    public static double defaultRevSpeed = 3.0;
 
     /* Shooting parabola variables */
     public static double shootRPMA = 0.106487;

@@ -493,6 +493,7 @@ def findTape(contours, image, centerX, centerY):
 		# pushes vision target angle to network tables
 		networkTable.putNumber("tapeYaw", currentAngleError)
 		networkTable.putNumber("tapePitch", pitch)
+		networkTable.putNumber("distance", calculateDistance(12, 87, pitch))
 	else:
 		# pushes that it deosn't see vision target to network tables
 		networkTable.putBoolean("tapeDetected", False)

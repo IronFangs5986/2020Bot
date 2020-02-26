@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.AdjustClimb;
 import frc.robot.commands.AdjustDisk;
+import frc.robot.commands.AdjustRevSpeed;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Intake;
 import frc.robot.commands.IntakeBalls;
@@ -125,6 +126,8 @@ public class OI {
     manualShootButton.whenActive(new OnlyShoot());
     visionOnButton.whenActive(new TrackingLight(true));
     autoIntakeButton.whenActive(new Intake());
+    //revDownButton.whenActive(new AdjustRevSpeed(false));
+    //revUpButton.whenActive(new AdjustRevSpeed(true));
 
     visionOnButton.whenInactive(new TrackingLight(false));
   }

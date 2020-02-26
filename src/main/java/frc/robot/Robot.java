@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   String[] autoList = { "Move Straight", "Shoot and Move" };
 
   /* Initialize Dashboard */
-  Dashboard dashboard = new Dashboard();
+  public static Dashboard dashboard = new Dashboard();
 
   /*
    * This function is executed only once when the robot boots up
@@ -113,6 +113,12 @@ public class Robot extends TimedRobot {
     /* Send ball information to Dashboard*/
     dashboard.setBalls(ballTransport.hasFirstBall(), ballTransport.hasSecondBall(), ballTransport.hasThirdBall(), ballTransport.hasFourthBall(), ballTransport.hasFifthBall());
 
+    /* Send calculated rpm to Dashboard */
+    if (dashboard.getTapeDetected()) {
+      dashboard.setCalcRPM(shooter.calculateRPM(dashboard.getTargetDistance()));
+    } else {
+      dashboard.setCalcRPM(0.0);
+    }
     //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
     //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
   }

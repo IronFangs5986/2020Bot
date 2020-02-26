@@ -14,7 +14,7 @@ public class Dashboard {
 
     /* Fetch tables 'FangsDashboard' and 'ChickenVision' from NetworkTables */
     NetworkTable table = inst.getTable("FangsDashboard");
-    static NetworkTable visionTable = inst.getTable("ChickenVision");
+    NetworkTable visionTable = inst.getTable("ChickenVision");
 
     /* Define NetworkTable entries */
     NetworkTableEntry battery = table.getEntry("battery");
@@ -33,8 +33,12 @@ public class Dashboard {
     NetworkTableEntry thirdBall = table.getEntry("thirdBall");
     NetworkTableEntry fourthBall = table.getEntry("fourthBall");
     NetworkTableEntry fifthBall = table.getEntry("fifthBall");
-    static NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
-    static NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
+    NetworkTableEntry revSpeed = table.getEntry("revSpeed");
+    NetworkTableEntry calcRPM = table.getEntry("calcRPM");
+
+    NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
+    NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
+    NetworkTableEntry targetDistance = visionTable.getEntry("distance");
 
     /* Send battery voltage to NetworkTables */
     public void setBattery(final Double voltage) {
@@ -106,13 +110,28 @@ public class Dashboard {
     }
 
     /* Get the current tape yaw from NetworkTables */
-    public static double getTapeYaw() {
+    public double getTapeYaw() {
         return tapeYaw.getDouble(0.0);
     }
 
     /* Check if tape can be seen from NetworkTables */
-    public static boolean getTapeDetected() {
+    public boolean getTapeDetected() {
         return tapeDetected.getBoolean(false);
     }
 
+    public void setRevSpeed(double speed) {
+        revSpeed.setDouble(speed);
+    }
+
+    public double getRevSpeed() {
+        return revSpeed.getDouble(0.0);
+    }
+
+    public void setCalcRPM(double rpm) {
+        calcRPM.setDouble(rpm);
+    }
+
+    public double getTargetDistance() {
+        return targetDistance.getDouble(0.0);
+    }
 }

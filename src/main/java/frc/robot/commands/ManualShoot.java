@@ -20,7 +20,7 @@ public class ManualShoot extends Command {
         requires(Robot.indexer);
         requires(Robot.intake);
 
-        Config.revSpeed = 0.3;
+        //Config.revSpeed = Config.defaultRevSpeed;
         lp = launchpad;
     }
 
@@ -40,7 +40,7 @@ public class ManualShoot extends Command {
             Robot.indexer.stop();
             Robot.intake.stop();
         }
-        Robot.shooter.shoot(Config.revSpeed);
+        Robot.shooter.shoot(Robot.dashboard.getRevSpeed());
        
     }
 
@@ -57,7 +57,7 @@ public class ManualShoot extends Command {
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
-        Config.revSpeed = 0.3;
+        //Config.revSpeed = Config.defaultRevSpeed;
         Robot.shootControl.stop();
         Robot.ballTransport.stop();
         Robot.indexer.stop();
