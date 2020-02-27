@@ -124,7 +124,7 @@ public class Dashboard {
     }
 
     public double getRevSpeed() {
-        return revSpeed.getDouble(0.0);
+        return revSpeed.getDouble(Config.defaultRevSpeed);
     }
 
     public void setCalcRPM(double rpm) {

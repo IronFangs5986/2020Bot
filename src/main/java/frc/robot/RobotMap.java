@@ -162,10 +162,15 @@ public class RobotMap {
     colorMatch = new ColorMatch();
 
     /* Define ColorMatch colors */
-    BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-    GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-    RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-    YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+    //BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+    //GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+    //RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+    //YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
+    BlueTarget = ColorMatch.makeColor(0.330, 0.930, 0.950); //3
+    GreenTarget = ColorMatch.makeColor(0.280, 0.900, 0.430); //2
+    RedTarget = ColorMatch.makeColor(0.700, 0.540, 0.230); //1
+    YellowTarget = ColorMatch.makeColor(1.000, 1.600, 0.410); //4
 
     //trackingLight = new Solenoid(0);
 
@@ -173,19 +178,16 @@ public class RobotMap {
     gyro = new ADIS16448_IMU();
 
     /* Define and configure ultrasonic sensors */
-    //firstBallUltra = new Ultrasonic(0, 1);
-    //firstBallUltra.setAutomaticMode(true);
-
-    //secondBallUltra = new Ultrasonic(2, 3);
-    //secondBallUltra.setAutomaticMode(true);
-
-    //thirdBallUltra = new Ultrasonic(4, 5);
-    //thirdBallUltra.setAutomaticMode(true);
-
-    //fourthBallUltra = new Ultrasonic(6, 7);
-    //fourthBallUltra.setAutomaticMode(true);
-
+    firstBallUltra = new Ultrasonic(0, 1);
+    secondBallUltra = new Ultrasonic(2, 3);
+    thirdBallUltra = new Ultrasonic(4, 5);
+    fourthBallUltra = new Ultrasonic(6, 7);
     fifthBallUltra = new Ultrasonic(8, 9);
+
+    firstBallUltra.setAutomaticMode(true);
+    secondBallUltra.setAutomaticMode(true);
+    thirdBallUltra.setAutomaticMode(true);
+    fourthBallUltra.setAutomaticMode(true);
     fifthBallUltra.setAutomaticMode(true);
     
     /* Define and start camera server */

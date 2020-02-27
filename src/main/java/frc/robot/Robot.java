@@ -121,6 +121,8 @@ public class Robot extends TimedRobot {
     }
     //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
     //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
+    //System.out.println(RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
+    //System.out.println(colorSpinner.getColor()+" "+RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
   }
 
   /*
