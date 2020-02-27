@@ -8,8 +8,8 @@ import frc.robot.autonomous.actions.TurnInPlace;
 public class ShootNMove extends CommandGroup {
     public ShootNMove() {
 
-        /* Shoots balls 89.25 inches from target */
-        addSequential(new AutoShoot(89.25));
+        /* Shoots balls at 1350 RPM, estimated initial speed of 30% */
+        addSequential(new AutoShoot(1350, 0.30));
 
         /* Drives back for 6ft 0in */
         addSequential(new StraightDrive(false, 6, 0, false));

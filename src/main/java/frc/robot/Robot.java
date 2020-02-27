@@ -90,6 +90,8 @@ public class Robot extends TimedRobot {
     RobotMap.colorMatch.addColorMatch(RobotMap.GreenTarget);
     RobotMap.colorMatch.addColorMatch(RobotMap.RedTarget);
     RobotMap.colorMatch.addColorMatch(RobotMap.YellowTarget);
+
+    dashboard.setRevSpeed(Config.defaultRevSpeed);
   }
 
   /*

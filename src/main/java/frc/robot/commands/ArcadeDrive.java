@@ -77,9 +77,9 @@ public class ArcadeDrive extends Command {
         }
 
         if (moveSpeed == 0.0 && turnSpeed == 0.0) {
-            if (OI.robotSpinLeftButton.get()) {
+            if (OI.robotSpinLeftButton.get() || OI.driver.getRawButton(2)) {
                 Robot.driveTrain.spinAdjustLeft();
-            } else if (OI.robotSpinRightButton.get()) {
+            } else if (OI.robotSpinRightButton.get() || OI.driver.getRawButton(1)) {
                 Robot.driveTrain.spinAdjustRight();
             } else {
                 /* Sets the arcadeDrive to the 2 drive axis and strafe axis */

@@ -2,7 +2,6 @@ package frc.robot.autonomous.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Config;
-import frc.robot.Dashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -12,13 +11,16 @@ import frc.robot.RobotMap;
 public class AutoShoot extends Command {
 
     /* Initialize variables */
-    double inches;
-    double rpm;
+    //double inches;
+    double spinRpm;
+    double moveSpeed;
+    int waitCounter;
+    int endCounter;
 
     /*
      * Declares public function that takes direction and distance in feet and inches
      */
-    public AutoShoot(double inchesFromTarget) {
+    public AutoShoot(double rpm, double speed) {
 
         /* Require the necessary subsystems */
         requires(Robot.indexer);
@@ -26,7 +28,9 @@ public class AutoShoot extends Command {
         requires(Robot.shootControl);
         requires(Robot.shooter);
 
-        inches = inchesFromTarget;
+        spinRpm = rpm;
+        moveSpeed = speed;
+        //inches = inchesFromTarget;
 
     }
 
@@ -34,7 +38,8 @@ public class AutoShoot extends Command {
      * Function runs only once when the command starts
      */
     protected void initialize() {
-        rpm = Robot.shooter.calculateRPM(inches);
+        //rpm = Robot.shooter.calculateRPM(inches);
+        Robot.dashboard.setRevSpeed(moveSpeed);
     }
 
     /*
@@ -42,19 +47,35 @@ public class AutoShoot extends Command {
      */
     protected void execute() {
 
-        Robot.shooter.shootRPM(rpm);
+        //Robot.shooter.shootRPM(rpm);
+        Robot.shooter.shoot(Robot.dashboard.getRevSpeed());
 
-        if (Math.abs(RobotMap.shooterEncoder.getVelocity() - rpm) <= Config.shootRPMTolerance) {
-            Robot.shootControl.moveToShooter();
-            Robot.ballTransport.moveIn();
-            Robot.indexer.moveIn();
-            Robot.intake.intake();
-        } else {
-            Robot.shootControl.stop();
-            Robot.ballTransport.stop();
-            Robot.indexer.stop();
-            Robot.intake.stop();
-        }
+            if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance) {
+                if (waitCounter > 30) {
+                    Robot.shootControl.moveToShooter();
+                    Robot.ballTransport.moveIn();
+                    Robot.indexer.moveIn();
+                    Robot.intake.intake();
+                } else {
+                    waitCounter = waitCounter + 1;
+                    Robot.shootControl.stop();
+                    Robot.ballTransport.stop();
+                    Robot.indexer.stop();
+                    Robot.intake.stop();
+                }
+            } else {
+                waitCounter = 0;
+
+                if (RobotMap.shooterEncoder.getVelocity() < spinRpm) {
+                    Robot.dashboard.setRevSpeed(Robot.dashboard.getRevSpeed() + 0.025);
+                } else {
+                    Robot.dashboard.setRevSpeed(Robot.dashboard.getRevSpeed() - 0.025); 
+                }
+                Robot.shootControl.stop();
+                Robot.ballTransport.stop();
+                Robot.indexer.stop();
+                Robot.intake.stop();
+            }
 
     }
 
@@ -64,8 +85,14 @@ public class AutoShoot extends Command {
     @Override
     protected boolean isFinished() {
         if (!Robot.ballTransport.hasFirstBall() && !Robot.ballTransport.hasSecondBall() && !Robot.ballTransport.hasThirdBall() && !Robot.ballTransport.hasFourthBall() && !Robot.ballTransport.hasFifthBall()) {
-            return true;
+            if (endCounter > 30) {
+                return true;
+            } else {
+                endCounter = endCounter + 1;
+                return false;
+            }
         } else {
+            endCounter = 0;
             return false;
         }
     }
@@ -74,6 +101,7 @@ public class AutoShoot extends Command {
      * Stops drivetrain when command ends
      */
     protected void end() {
+        Robot.dashboard.setRevSpeed(Config.defaultRevSpeed);
         Robot.indexer.stop();
         Robot.ballTransport.stop();
         Robot.shootControl.stop();
