@@ -16,6 +16,7 @@ public class AutoShoot extends Command {
     double moveSpeed;
     int waitCounter;
     int endCounter;
+    double previousSpeed;
 
     /*
      * Declares public function that takes direction and distance in feet and inches
@@ -48,8 +49,16 @@ public class AutoShoot extends Command {
     protected void execute() {
 
         //Robot.shooter.shootRPM(rpm);
-        Robot.shooter.shoot(Robot.dashboard.getRevSpeed());
-
+        if (RobotMap.shooterEncoder.getVelocity() < spinRpm && (spinRpm - RobotMap.shooterEncoder.getVelocity()) > 20) {
+            double tempSpeed = moveSpeed + 0.05;
+            Robot.dashboard.setRevSpeed(tempSpeed);
+            Robot.shooter.shoot(tempSpeed);
+        } else {
+            double tempSpeed = moveSpeed;
+            Robot.dashboard.setRevSpeed(tempSpeed);
+            Robot.shooter.shoot(tempSpeed);
+        }
+        System.out.println(Robot.dashboard.getRevSpeed());
             if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance) {
                 if (waitCounter > 30) {
                     Robot.shootControl.moveToShooter();
@@ -66,15 +75,25 @@ public class AutoShoot extends Command {
             } else {
                 waitCounter = 0;
 
-                if (RobotMap.shooterEncoder.getVelocity() < spinRpm) {
+                if (Math.abs(previousSpeed - RobotMap.shooterEncoder.getVelocity()) <= 1) {
+                /*if (RobotMap.shooterEncoder.getVelocity() < spinRpm) {
                     Robot.dashboard.setRevSpeed(Robot.dashboard.getRevSpeed() + 0.025);
                 } else {
                     Robot.dashboard.setRevSpeed(Robot.dashboard.getRevSpeed() - 0.025); 
+                }*/
                 }
+
                 Robot.shootControl.stop();
-                Robot.ballTransport.stop();
-                Robot.indexer.stop();
-                Robot.intake.stop();
+                previousSpeed = RobotMap.shooterEncoder.getVelocity();
+                if (!Robot.ballTransport.hasFirstBall()) {
+                    Robot.ballTransport.moveIn();
+                    Robot.indexer.moveIn();
+                    Robot.intake.intake();
+                } else {
+                    Robot.ballTransport.stop();
+                    Robot.indexer.stop();
+                    Robot.intake.stop();
+                }
             }
 
     }
@@ -85,14 +104,17 @@ public class AutoShoot extends Command {
     @Override
     protected boolean isFinished() {
         if (!Robot.ballTransport.hasFirstBall() && !Robot.ballTransport.hasSecondBall() && !Robot.ballTransport.hasThirdBall() && !Robot.ballTransport.hasFourthBall() && !Robot.ballTransport.hasFifthBall()) {
-            if (endCounter > 30) {
+            if (endCounter > 300) {
+                System.out.println("ended");
                 return true;
             } else {
                 endCounter = endCounter + 1;
+                System.out.println("noc");
                 return false;
             }
         } else {
             endCounter = 0;
+            System.out.println("no");
             return false;
         }
     }

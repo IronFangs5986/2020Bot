@@ -167,10 +167,10 @@ public class RobotMap {
     //RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
     //YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-    BlueTarget = ColorMatch.makeColor(0.330, 0.930, 0.950); //3
-    GreenTarget = ColorMatch.makeColor(0.280, 0.900, 0.430); //2
-    RedTarget = ColorMatch.makeColor(0.700, 0.540, 0.230); //1
-    YellowTarget = ColorMatch.makeColor(1.000, 1.600, 0.410); //4
+    BlueTarget = ColorMatch.makeColor(0.420, 1.390, 1.490); //3
+    GreenTarget = ColorMatch.makeColor(0.412, 1.350, 0.603); //2
+    RedTarget = ColorMatch.makeColor(1.050, 0.790, 0.321); //1
+    YellowTarget = ColorMatch.makeColor(1.600, 2.850, 0.670); //4
 
     //trackingLight = new Solenoid(0);
 

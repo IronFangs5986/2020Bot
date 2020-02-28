@@ -55,14 +55,14 @@ public class StraightDrive extends Command {
              * Set end distance for both sides by adding the distance to move to the current
              * distance
              */
-            endDistanceL = Robot.driveTrain.getLeftDistance() + driveDistance;
+            endDistanceL = Robot.driveTrain.getLeftDistance() - driveDistance;
             endDistanceR = Robot.driveTrain.getRightDistance() + driveDistance;
         } else {
             /*
              * Set end distance for both sides by subtracting the distance to move to the
              * current distance
              */
-            endDistanceL = Robot.driveTrain.getLeftDistance() - driveDistance;
+            endDistanceL = Robot.driveTrain.getLeftDistance() + driveDistance;
             endDistanceR = Robot.driveTrain.getRightDistance() - driveDistance;
         }
 
@@ -101,15 +101,27 @@ public class StraightDrive extends Command {
         }
 
         /* Get distance moved since command started */
-        double currentL = Robot.driveTrain.getLeftDistance() - startDistanceL;
-        double currentR = Robot.driveTrain.getRightDistance() - startDistanceR;
+        double currentL = 0.0;
+        double currentR = 0.0;
 
+        if (forwardMovement) {
+            currentL = startDistanceL - Robot.driveTrain.getLeftDistance();
+            currentR = Robot.driveTrain.getRightDistance() - startDistanceR;
+        } else {
+            currentL = Robot.driveTrain.getLeftDistance() - startDistanceL;
+            currentR = startDistanceR - Robot.driveTrain.getRightDistance();
+        }
         /* Find an average of both distances moved to calculate an appropriate speed */
-        double averageDistance = (currentL + currentR) / 2;
+        //double averageDistance = (currentL + currentR) / 2;
 
         /* Set a tank drive movement with speed returning from getSpeed() */
-        Robot.driveTrain.tankDrive(getSpeed(averageDistance, driveDistance), getSpeed(averageDistance, driveDistance));
-
+        if (forwardMovement) {
+            //Robot.driveTrain.tankDrive(getSpeed(currentL, driveDistance) * -1, getSpeed(currentL, driveDistance) * -1);
+            Robot.driveTrain.tankDrive(-0.2, -0.2);
+        } else {
+            //Robot.driveTrain.tankDrive(getSpeed(currentL, driveDistance), getSpeed(currentL, driveDistance));
+            Robot.driveTrain.tankDrive(0.2, 0.2);
+        }
         /* Print debug information in console */
         System.out.println("Distance: " + Robot.driveTrain.getRightDistance());
     }
@@ -121,15 +133,14 @@ public class StraightDrive extends Command {
     protected boolean isFinished() {
         if (forwardMovement) {
             /* Command ends if current distance is greater than the end distance */
-            return (Robot.driveTrain.getRightDistance() >= endDistanceR
-                    || Robot.driveTrain.getLeftDistance() >= endDistanceL);
+            return (Robot.driveTrain.getRightDistance() >= endDistanceR);
         } else {
             /*
              * Command ends if current distance is less than the end distance, as it is
              * moving back
              */
-            return (Robot.driveTrain.getRightDistance() <= endDistanceR
-                    || Robot.driveTrain.getLeftDistance() <= endDistanceL);
+            System.out.println("****"+Robot.driveTrain.getLeftDistance()+" "+endDistanceL);
+            return (Robot.driveTrain.getRightDistance() <= endDistanceR);
         }
     }
 

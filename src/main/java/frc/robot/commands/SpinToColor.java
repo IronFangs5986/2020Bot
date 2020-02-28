@@ -86,8 +86,9 @@ public class SpinToColor extends Command {
 
     @Override
     protected boolean isFinished() {
-        System.out.println(Robot.colorSpinner.getMatchedColor()+":"+target);
-        return (Robot.colorSpinner.getMatchedColor() == target || target == 0);
+        int matched = Robot.colorSpinner.getMatchedColor();
+        System.out.println(matched+":"+target);
+        return (matched == target || target == 0);
     }
 
      /*

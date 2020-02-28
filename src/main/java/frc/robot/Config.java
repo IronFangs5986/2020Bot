@@ -38,7 +38,7 @@ public class Config {
     /* Shooting configurations */
     public static double maxShootRPM = 3600.0;
     public static double shootTurnTolerance = 0.0;
-    public static double shootRPMTolerance = 5.0;
+    public static double shootRPMTolerance = 25.0;
     public static double defaultRevSpeed = 0.3;
 
     /* Shooting parabola variables */

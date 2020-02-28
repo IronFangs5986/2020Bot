@@ -9,7 +9,7 @@ public class ShootNMove extends CommandGroup {
     public ShootNMove() {
 
         /* Shoots balls at 1350 RPM, estimated initial speed of 30% */
-        addSequential(new AutoShoot(1350, 0.30));
+        addSequential(new AutoShoot(1350, 0.27));
 
         /* Drives back for 6ft 0in */
         addSequential(new StraightDrive(false, 6, 0, false));
