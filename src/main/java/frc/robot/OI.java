@@ -96,9 +96,9 @@ public class OI {
     //rawShoot = new JoystickButton(driver, 11);
 
     /* Handle button presses */
-    shoot.whenPressed(new Shoot(false));
-    intake.whenPressed(new IntakeBalls());
-    reverse.whenPressed(new ReverseBalls());
+    //shoot.whenPressed(new Shoot(false));
+    //intake.whenPressed(new IntakeBalls());
+    //reverse.whenPressed(new ReverseBalls());
     //rawShoot.whenPressed(new ManualShoot(false));
 
     /* Handle launchpad triggers */

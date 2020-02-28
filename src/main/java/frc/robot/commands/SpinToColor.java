@@ -80,7 +80,7 @@ public class SpinToColor extends Command {
          * command
          */
         if (target != 0) {
-            Robot.colorSpinner.spinDisk(moveClockwise);
+            Robot.colorSpinner.spinColor(moveClockwise);
         }
     }
 

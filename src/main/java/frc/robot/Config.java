@@ -15,6 +15,7 @@ public class Config {
     public static double colorSpinSpeed = 0.2;
     public static double colorAdjustSpeed = 0.1;
     public static double colorRaiseSpeed = 1.0;
+    public static double colorColorSpeed = 0.05;
  
     /* Configuration for intake speed */
     public static double intakeSpeed = 0.5;

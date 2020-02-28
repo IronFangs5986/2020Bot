@@ -51,16 +51,16 @@ public class ColorSpinner extends Subsystem {
         
         if (red > blue && red > green) {
             return 1;
+        }  else if (green > red && red > blue) {
+          return 4;
         } else if (green > red && green >= blue) {
-            if (Math.abs(green - blue) < 0.150) {
+            if (Math.abs(green - blue) < 200) {
                 return 3;
             } else {
                 return 2;
             }
         } else if (blue >= green && blue > red) {
             return 3;
-        } else if (green > red && red > blue) {
-            return 4;
         } else {
             return 0;
         }
@@ -68,7 +68,7 @@ public class ColorSpinner extends Subsystem {
 
     /* Gets the color that is currently scored based on the current sensor's reading*/
     public int getMatchedColor() {
-        Color detectedColor = RobotMap.colorSensor.getColor();
+        /*Color detectedColor = RobotMap.colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
         if (match.color == RobotMap.RedTarget) {
             return 3;
@@ -80,7 +80,27 @@ public class ColorSpinner extends Subsystem {
             return 2;
           } else {
             return 0;
-          }
+          }*/
+
+          double red = colorSensor.getRed();
+        double green = colorSensor.getGreen();
+        double blue = colorSensor.getBlue();
+        
+        if (red > blue && red > green) {
+            return 3;
+        }  else if (green > red && red > blue) {
+          return 2;
+        } else if (green > red && green >= blue) {
+            if (Math.abs(green - blue) < 200) {
+                return 1;
+            } else {
+                return 4;
+            }
+        } else if (blue >= green && blue > red) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /* Spins disk/control panel with spinnerMotor */
@@ -103,6 +123,16 @@ public class ColorSpinner extends Subsystem {
         /* Spins the motor so the disk spins counterclockwise */
         spinnerMotor.set(Config.colorAdjustSpeed);
       }
+  }
+
+  public void spinColor(boolean clockwise) {
+    if (clockwise) {
+      /* Spins the motor so the disk spins clockwise */
+      spinnerMotor.set(Config.colorColorSpeed * -1);
+    } else {
+      /* Spins the motor so the disk spins counterclockwise */
+      spinnerMotor.set(Config.colorColorSpeed);
+    }
   }
 
     /* Moves spinnerMotor up */
