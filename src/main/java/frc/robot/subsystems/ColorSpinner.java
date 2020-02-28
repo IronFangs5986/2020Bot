@@ -32,7 +32,7 @@ public class ColorSpinner extends Subsystem {
 
     /* Gets the color the color sensor is currently reading*/
     public int getColor() {
-        Color detectedColor = colorSensor.getColor();
+        /*Color detectedColor = colorSensor.getColor();
         ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
         if (match.color == RobotMap.RedTarget) {
             return 1;
@@ -44,7 +44,26 @@ public class ColorSpinner extends Subsystem {
             return 4;
           } else {
             return 0;
-          }
+          }*/
+        double red = colorSensor.getRed();
+        double green = colorSensor.getGreen();
+        double blue = colorSensor.getBlue();
+        
+        if (red > blue && red > green) {
+            return 1;
+        } else if (green > red && green >= blue) {
+            if (Math.abs(green - blue) < 0.150) {
+                return 3;
+            } else {
+                return 2;
+            }
+        } else if (blue >= green && blue > red) {
+            return 3;
+        } else if (green > red && red > blue) {
+            return 4;
+        } else {
+            return 0;
+        }
     }
 
     /* Gets the color that is currently scored based on the current sensor's reading*/
