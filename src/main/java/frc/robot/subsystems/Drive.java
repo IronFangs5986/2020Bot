@@ -71,14 +71,14 @@ public class Drive extends Subsystem {
      * Return distance in feet recorded by left drivetrain encoder
      */
     public double getLeftDistance() {
-        return (RobotMap.leftDriveEncoder.getPosition() * Math.PI)/12;
+        return (RobotMap.leftDriveEncoder.getPosition() * 2.61)/12;
     }
 
     /*
      * Return distance in feet recorded by right drivetrain encoder
      */
     public double getRightDistance() {
-        return (RobotMap.rightDriveEncoder.getPosition() * Math.PI)/12;
+        return (RobotMap.rightDriveEncoder.getPosition() * 2.61)/12;
     }
 
     /*

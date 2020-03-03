@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -82,6 +84,8 @@ public class RobotMap {
   public static Ultrasonic fourthBallUltra;
   public static Ultrasonic fifthBallUltra;
 
+  public static AnalogInput distanceSensor;
+
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
   public static MjpegServer driverCameraServer = null;
@@ -99,6 +103,14 @@ public class RobotMap {
     MiddleRightMotor = new CANSparkMax(5, MotorType.kBrushless);
     BackRightMotor = new CANSparkMax(6, MotorType.kBrushless);
 
+
+    FrontLeftMotor.setOpenLoopRampRate(0.1);
+    MiddleLeftMotor.setOpenLoopRampRate(0.1);
+    BackLeftMotor.setOpenLoopRampRate(0.1);
+    FrontRightMotor.setOpenLoopRampRate(0.1);
+    MiddleRightMotor.setOpenLoopRampRate(0.1);
+    BackRightMotor.setOpenLoopRampRate(0.1);
+    
     /* Define SpeedControllerGroups for DifferentialDrive */
     leftGroup = new SpeedControllerGroup(FrontLeftMotor, MiddleLeftMotor, BackLeftMotor);
     rightGroup = new SpeedControllerGroup(FrontRightMotor, MiddleRightMotor, BackRightMotor);
@@ -189,10 +201,12 @@ public class RobotMap {
     thirdBallUltra.setAutomaticMode(true);
     fourthBallUltra.setAutomaticMode(true);
     fifthBallUltra.setAutomaticMode(true);
+
+    distanceSensor = new AnalogInput(0);
     
     /* Define and start camera server */
-    //UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
-    //server.setResolution(160, 120);
-    //server.setFPS(30);
+    UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);
+    server.setResolution(160, 120);
+    server.setFPS(30);
   }
 }

@@ -35,6 +35,7 @@ public class Dashboard {
     NetworkTableEntry fifthBall = table.getEntry("fifthBall");
     NetworkTableEntry revSpeed = table.getEntry("revSpeed");
     NetworkTableEntry calcRPM = table.getEntry("calcRPM");
+    NetworkTableEntry newTargetDistance = table.getEntry("targetDistance");
 
     NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
     NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
@@ -101,7 +102,8 @@ public class Dashboard {
     }
 
     /* Sends current ball positions to NetworkTables */
-    public void setBalls(boolean first, boolean second, boolean third, boolean fourth, boolean fifth) {
+    public void setBalls(final boolean first, final boolean second, final boolean third, final boolean fourth,
+            final boolean fifth) {
         firstBall.setBoolean(first);
         secondBall.setBoolean(second);
         thirdBall.setBoolean(third);
@@ -119,7 +121,7 @@ public class Dashboard {
         return tapeDetected.getBoolean(false);
     }
 
-    public void setRevSpeed(double speed) {
+    public void setRevSpeed(final double speed) {
         revSpeed.setDouble(speed);
     }
 
@@ -127,11 +129,15 @@ public class Dashboard {
         return revSpeed.getDouble(Config.defaultRevSpeed);
     }
 
-    public void setCalcRPM(double rpm) {
+    public void setCalcRPM(final double rpm) {
         calcRPM.setDouble(rpm);
     }
 
     public double getTargetDistance() {
         return targetDistance.getDouble(0.0);
+    }
+
+    public void setDistance(final double distance) {
+        newTargetDistance.setDouble(distance);
     }
 }

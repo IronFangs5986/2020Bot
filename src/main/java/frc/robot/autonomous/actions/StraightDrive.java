@@ -30,6 +30,7 @@ public class StraightDrive extends Command {
         requires(Robot.intake);
         requires(Robot.indexer);
         requires(Robot.ballTransport);
+        //requires(Robot.shooter);
 
         /* Sets wether the movement is forward or not */
         forwardMovement = forward;
@@ -82,6 +83,7 @@ public class StraightDrive extends Command {
      */
     protected void execute() {
 
+        //Robot.sho
         if (setIntake) {
             Robot.intake.intake();
             if (!hasFourBalls() && (RobotMap.fifthBallUltra.getRangeInches() < Config.intakeSensorDist || (counter < Config.intakeCounter && counter != 0))) {
@@ -117,10 +119,10 @@ public class StraightDrive extends Command {
         /* Set a tank drive movement with speed returning from getSpeed() */
         if (forwardMovement) {
             //Robot.driveTrain.tankDrive(getSpeed(currentL, driveDistance) * -1, getSpeed(currentL, driveDistance) * -1);
-            Robot.driveTrain.tankDrive(-0.2, -0.2);
+            Robot.driveTrain.tankDrive(-0.4, -0.4);
         } else {
             //Robot.driveTrain.tankDrive(getSpeed(currentL, driveDistance), getSpeed(currentL, driveDistance));
-            Robot.driveTrain.tankDrive(0.2, 0.2);
+            Robot.driveTrain.tankDrive(0.4, 0.4);
         }
         /* Print debug information in console */
         System.out.println("Distance: " + Robot.driveTrain.getRightDistance());

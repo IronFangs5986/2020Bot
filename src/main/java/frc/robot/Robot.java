@@ -116,16 +116,19 @@ public class Robot extends TimedRobot {
     dashboard.setBalls(ballTransport.hasFirstBall(), ballTransport.hasSecondBall(), ballTransport.hasThirdBall(), ballTransport.hasFourthBall(), ballTransport.hasFifthBall());
 
     /* Send calculated rpm to Dashboard */
-    if (dashboard.getTapeDetected()) {
+    /*if (dashboard.getTapeDetected()) {
       dashboard.setCalcRPM(shooter.calculateRPM(dashboard.getTargetDistance()));
     } else {
       dashboard.setCalcRPM(0.0);
-    }
+    }*/
     //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
     //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
     //System.out.println(RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
-    System.out.println(colorSpinner.getColor()+" "+RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
-    //System.out.println(RobotMap.rightDriveEncoder.getPosition()+" "+driveTrain.getRightDistance());
+    //System.out.println(colorSpinner.getColor()+" "+RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
+    System.out.println(RobotMap.rightDriveEncoder.getPosition()+" "+driveTrain.getRightDistance());
+  
+    dashboard.setDistance(RobotMap.distanceSensor.getValue()*0.125);
+    dashboard.setCalcRPM(shooter.calculateRPM(RobotMap.distanceSensor.getValue()*0.125));
   }
 
   /*

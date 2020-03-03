@@ -17,6 +17,7 @@ public class AutoShoot extends Command {
     int waitCounter;
     int endCounter;
     double previousSpeed;
+    int endCounter2;
 
     /*
      * Declares public function that takes direction and distance in feet and inches
@@ -47,9 +48,9 @@ public class AutoShoot extends Command {
      * Function running periodically as long as isFinished() returns false
      */
     protected void execute() {
-
+        endCounter2 = endCounter2 + 1;
         //Robot.shooter.shootRPM(rpm);
-        if (RobotMap.shooterEncoder.getVelocity() < spinRpm && (spinRpm - RobotMap.shooterEncoder.getVelocity()) > 20) {
+        /*if (RobotMap.shooterEncoder.getVelocity() < spinRpm && (spinRpm - RobotMap.shooterEncoder.getVelocity()) > 20) {
             double tempSpeed = moveSpeed + 0.05;
             Robot.dashboard.setRevSpeed(tempSpeed);
             Robot.shooter.shoot(tempSpeed);
@@ -57,7 +58,8 @@ public class AutoShoot extends Command {
             double tempSpeed = moveSpeed;
             Robot.dashboard.setRevSpeed(tempSpeed);
             Robot.shooter.shoot(tempSpeed);
-        }
+        }*/
+        Robot.shooter.shoot(moveSpeed);
         System.out.println(Robot.dashboard.getRevSpeed());
             if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance) {
                 if (waitCounter > 30) {
@@ -103,6 +105,10 @@ public class AutoShoot extends Command {
      */
     @Override
     protected boolean isFinished() {
+        if (endCounter2 > 700) {
+            System.out.println(endCounter2);
+            return true;
+        }
         if (!Robot.ballTransport.hasFirstBall() && !Robot.ballTransport.hasSecondBall() && !Robot.ballTransport.hasThirdBall() && !Robot.ballTransport.hasFourthBall() && !Robot.ballTransport.hasFifthBall()) {
             if (endCounter > 300) {
                 System.out.println("ended");
