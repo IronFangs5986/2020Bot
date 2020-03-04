@@ -2,11 +2,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Config;
 import frc.robot.RobotMap;
 
@@ -32,19 +30,6 @@ public class ColorSpinner extends Subsystem {
 
     /* Gets the color the color sensor is currently reading*/
     public int getColor() {
-        /*Color detectedColor = colorSensor.getColor();
-        ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
-        if (match.color == RobotMap.RedTarget) {
-            return 1;
-          } else if (match.color == RobotMap.GreenTarget) {
-            return 2;
-          } else if (match.color == RobotMap.BlueTarget) {
-            return 3;
-          } else if (match.color == RobotMap.YellowTarget) {
-            return 4;
-          } else {
-            return 0;
-          }*/
         double red = colorSensor.getRed();
         double green = colorSensor.getGreen();
         double blue = colorSensor.getBlue();
@@ -68,20 +53,6 @@ public class ColorSpinner extends Subsystem {
 
     /* Gets the color that is currently scored based on the current sensor's reading*/
     public int getMatchedColor() {
-        /*Color detectedColor = RobotMap.colorSensor.getColor();
-        ColorMatchResult match = RobotMap.colorMatch.matchClosestColor(detectedColor);
-        if (match.color == RobotMap.RedTarget) {
-            return 3;
-          } else if (match.color == RobotMap.GreenTarget) {
-            return 4;
-          } else if (match.color == RobotMap.BlueTarget) {
-            return 1;
-          } else if (match.color == RobotMap.YellowTarget) {
-            return 2;
-          } else {
-            return 0;
-          }*/
-
           double red = colorSensor.getRed();
         double green = colorSensor.getGreen();
         double blue = colorSensor.getBlue();

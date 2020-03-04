@@ -54,6 +54,9 @@ public class Robot extends TimedRobot {
   /* Initialize Dashboard */
   public static Dashboard dashboard = new Dashboard();
 
+  /* Initialize Limelight */
+  public static Limelight limelight = new Limelight();
+
   /*
    * This function is executed only once when the robot boots up
    */

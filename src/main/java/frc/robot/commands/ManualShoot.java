@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Config;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -20,7 +19,6 @@ public class ManualShoot extends Command {
         requires(Robot.indexer);
         requires(Robot.intake);
 
-        //Config.revSpeed = Config.defaultRevSpeed;
         lp = launchpad;
     }
 

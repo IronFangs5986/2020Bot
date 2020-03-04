@@ -38,7 +38,7 @@ public class Config {
 
     /* Shooting configurations */
     public static double maxShootRPM = 3600.0;
-    public static double shootTurnTolerance = 0.0;
+    public static double shootTurnTolerance = 1.0;
     public static double shootRPMTolerance = 20.0;
     public static double defaultRevSpeed = 0.37;
 
@@ -47,7 +47,10 @@ public class Config {
     public static double shootRPMB = -15.235;
     public static double shootRPMC = 1824.18;
 
-    public static double robotWidth = 0.0;
+    /* Limelight variables */
+    public static double limelightHeight = 0.0; //Feet
+    public static double targetHeight = 0.0; //Feet
+    public static double limelightAngle = 0.0; //Degrees
 
-    public static double revSpeed = 0.3;
+    public static double robotWidth = 0.0;
 }

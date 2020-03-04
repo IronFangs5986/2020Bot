@@ -59,7 +59,14 @@ public class AutoShoot extends Command {
             Robot.dashboard.setRevSpeed(tempSpeed);
             Robot.shooter.shoot(tempSpeed);
         }*/
-        Robot.shooter.shoot(moveSpeed);
+
+
+
+        //Robot.shooter.shoot(moveSpeed);
+
+        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), spinRpm, moveSpeed));
+
+
         System.out.println(Robot.dashboard.getRevSpeed());
             if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance) {
                 if (waitCounter > 30) {
@@ -141,6 +148,20 @@ public class AutoShoot extends Command {
      */
     protected void interrupted() {
         end();
+    }
+
+    /*
+     * Calculates speed based on distance to target. Demo of this function can be
+     * found here: https://www.desmos.com/calculator/mjxmn8nmug
+     */
+    private double getSpeed(double current, double total, double min) {
+        double speed = (-1 / ((-1 - ((total - 1) / 2)) * (-1 - ((total - 1) / 2))));
+        speed = speed * (current - ((total - 1) / 2)) * (current - ((total - 1) / 2));
+        speed = speed + 1;
+        if (speed < min) {
+            speed = min;
+        }
+        return speed;
     }
 
 }

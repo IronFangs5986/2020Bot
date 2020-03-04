@@ -5,17 +5,14 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.AdjustClimb;
 import frc.robot.commands.AdjustDisk;
-import frc.robot.commands.AdjustRevSpeed;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Intake;
-import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.MoveSpinner;
 import frc.robot.commands.OnlyShoot;
 import frc.robot.commands.RawControl;
 import frc.robot.commands.RawIntake;
 import frc.robot.commands.RawTransport;
-import frc.robot.commands.ReverseBalls;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinToColor;
@@ -37,20 +34,6 @@ public class OI {
   public static JoystickButton rawShoot;
 
   /* Define triggers */
-  /*public static Trigger redButton = new RedButton();
-  public static Trigger greenButton = new GreenButton();
-  public static Trigger blueButton = new BlueButton();
-  public static Trigger yellowButton = new YellowButton();
-  public static Trigger climbButton = new ClimbButton();
-  public static Trigger climbAdjustRightButton = new ClimbAdjustRightButton();
-  public static Trigger climbAdjustLeftButton = new ClimbAdjustLeftButton();
-  public static Trigger autoColorButton = new AutoColorButton();
-  public static Trigger spinButton = new SpinButton();
-  public static Trigger spinnerUpButton = new SpinnerUpButton();
-  public static Trigger spinnerDownButton = new SpinnerDownButton();
-  public static Trigger adjustCWButton = new AdjustCWButton();
-  public static Trigger adjustCCWButton = new AdjustCCWButton();*/
-
   public static Trigger redButton = new LaunchpadButton(1);
   public static Trigger greenButton = new LaunchpadButton(2);
   public static Trigger blueButton = new LaunchpadButton(3);
@@ -96,10 +79,6 @@ public class OI {
     //rawShoot = new JoystickButton(driver, 11);
 
     /* Handle button presses */
-    //shoot.whenPressed(new Shoot(false));
-    //intake.whenPressed(new IntakeBalls());
-    //reverse.whenPressed(new ReverseBalls());
-    //rawShoot.whenPressed(new ManualShoot(false));
 
     /* Handle launchpad triggers */
     redButton.whenActive(new SpinToColor(1));
@@ -126,8 +105,6 @@ public class OI {
     manualShootButton.whenActive(new OnlyShoot());
     visionOnButton.whenActive(new TrackingLight(true));
     autoIntakeButton.whenActive(new Intake());
-    //revDownButton.whenActive(new AdjustRevSpeed(false));
-    //revUpButton.whenActive(new AdjustRevSpeed(true));
 
     visionOnButton.whenInactive(new TrackingLight(false));
   }

@@ -2,7 +2,6 @@ package frc.robot.autonomous.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Config;
-import frc.robot.Dashboard;
 import frc.robot.Robot;
 
 /*
@@ -35,8 +34,8 @@ public class CenterTarget extends Command {
     protected void execute() {
 
         /* Get distance moved since command started */
-        degreesOff = Robot.dashboard.getTapeYaw();
-        tapeFound = Robot.dashboard.getTapeDetected();
+        degreesOff = Robot.limelight.getTx();
+        tapeFound = Robot.limelight.hasTarget();
 
         if (tapeFound) {
             if (Math.abs(degreesOff) > Config.shootTurnTolerance) {
@@ -75,7 +74,7 @@ public class CenterTarget extends Command {
     }
 
     /*
-     * Ends the command of autonomous is stopped or interrupted
+     * Ends the command if autonomous is stopped or interrupted
      */
     protected void interrupted() {
         end();
