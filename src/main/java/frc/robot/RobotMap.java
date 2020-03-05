@@ -72,7 +72,10 @@ public class RobotMap {
   public static Color RedTarget;
   public static Color YellowTarget;
 
-  public static Solenoid trackingLight;
+  public static Solenoid leftRedLights;
+  public static Solenoid leftBlueLights;
+  public static Solenoid rightRedLights;
+  public static Solenoid rightBlueLights;
   
   /* Initialize gyroscope */
   public static ADIS16448_IMU gyro;
@@ -184,7 +187,11 @@ public class RobotMap {
     RedTarget = ColorMatch.makeColor(1.050, 0.790, 0.321); //1
     YellowTarget = ColorMatch.makeColor(1.600, 2.850, 0.670); //4
 
-    trackingLight = new Solenoid(0);
+    //trackingLight = new Solenoid(0);
+    leftRedLights = new Solenoid(0);
+    leftBlueLights = new Solenoid(1);
+    rightRedLights = new Solenoid(2);
+    rightBlueLights = new Solenoid(3);
 
     /* Define gyroscope class */
     gyro = new ADIS16448_IMU();

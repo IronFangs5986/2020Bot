@@ -16,7 +16,6 @@ import frc.robot.commands.RawTransport;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinToColor;
-import frc.robot.commands.TrackingLight;
 import frc.robot.triggers.LaunchpadButton;
 
 /*
@@ -103,9 +102,7 @@ public class OI {
     controlOutButton.whenActive(new RawControl(false));
     controlInButton.whenActive(new RawControl(true));
     manualShootButton.whenActive(new OnlyShoot());
-    visionOnButton.whenActive(new TrackingLight(true));
     autoIntakeButton.whenActive(new Intake());
 
-    visionOnButton.whenInactive(new TrackingLight(false));
   }
 }
