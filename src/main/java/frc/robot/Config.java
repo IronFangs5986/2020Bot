@@ -18,7 +18,7 @@ public class Config {
     public static double colorColorSpeed = 0.05;
  
     /* Configuration for intake speed */
-    public static double intakeSpeed = 0.5;
+    public static double intakeSpeed = 0.7;
     public static double intakeSensorDist = 5.0;
     public static double intakeCounter = 60.0;
  

@@ -64,7 +64,7 @@ public class AutoShoot extends Command {
 
         //Robot.shooter.shoot(moveSpeed);
 
-        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), spinRpm, moveSpeed));
+        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), spinRpm + 100, moveSpeed));
 
 
         System.out.println(Robot.dashboard.getRevSpeed());

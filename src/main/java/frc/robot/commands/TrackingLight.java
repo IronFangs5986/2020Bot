@@ -9,7 +9,7 @@ import frc.robot.RobotMap;
  */
 public class TrackingLight extends Command {
 
-    //Solenoid trackingLight = RobotMap.trackingLight;
+    Solenoid trackingLight = RobotMap.trackingLight;
 
     /* Variables set when calling the command */
     boolean turnOn;
@@ -22,7 +22,7 @@ public class TrackingLight extends Command {
      * Executes the command
      */
     protected void execute() {
-       //trackingLight.set(turnOn);
+       trackingLight.set(turnOn);
        System.out.println("Light "+turnOn);
     }
 

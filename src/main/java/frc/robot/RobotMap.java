@@ -184,7 +184,7 @@ public class RobotMap {
     RedTarget = ColorMatch.makeColor(1.050, 0.790, 0.321); //1
     YellowTarget = ColorMatch.makeColor(1.600, 2.850, 0.670); //4
 
-    //trackingLight = new Solenoid(0);
+    trackingLight = new Solenoid(0);
 
     /* Define gyroscope class */
     gyro = new ADIS16448_IMU();

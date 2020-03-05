@@ -21,7 +21,7 @@ public class OnlyShoot extends Command {
      * Executes the command
      */
     protected void execute() {
-        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), 1800, 0.43));
+        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), 1900, 0.43));
         //Robot.shooter.shootRPM(1700);
     }
 
