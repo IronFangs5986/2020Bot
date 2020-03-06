@@ -28,7 +28,12 @@ public class Limelight {
 
     /* Get whether Limelight has found a target */
     public boolean hasTarget() {
-        return tv.getBoolean(false);
+        double target = tv.getDouble(0.0);
+        if (target == 1.0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /* Get the current x coordinate of target */
@@ -80,7 +85,7 @@ public class Limelight {
 
     /* Get distance to target */
     public double getDistance() {
-        return (Config.targetHeight-Config.limelightHeight) / Math.tan(Config.limelightAngle+getTy());
+        return ((Config.targetHeight-Config.limelightHeight) / Math.tan(Math.toRadians(Config.limelightAngle)+Math.toRadians(getTy())))-4.0;
     }
 
 

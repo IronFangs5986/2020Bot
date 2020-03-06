@@ -41,6 +41,7 @@ public class CenterTarget extends Command {
         tapeFound = Robot.limelight.hasTarget();
 
         if (tapeFound) {
+            System.out.println("Tape found");
             if (Math.abs(degreesOff) > Config.shootTurnTolerance) {
                 if (degreesOff > 0) {
                     Robot.driveTrain.adjustTargetRight();
@@ -51,6 +52,7 @@ public class CenterTarget extends Command {
                 Robot.driveTrain.stopTank();
             }
         } else {
+            System.out.println("No Tape found");
             Robot.driveTrain.stopTank();
         }
         /* Print debug information in console */
@@ -64,12 +66,14 @@ public class CenterTarget extends Command {
     protected boolean isFinished() {
         if (!OI.autoShootButton.get()) {
             return true;
-        }
-        if (Math.abs(degreesOff) <= Config.shootTurnTolerance || !tapeFound) {
-            return true;
         } else {
             return false;
         }
+        /*if (Math.abs(degreesOff) <= Config.shootTurnTolerance || !tapeFound) {
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     /*
