@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.PoliceLights;
 
 /*
  * This is the lights subsystem where anything related to lights is found
@@ -21,6 +22,7 @@ public class Lights extends Subsystem {
     /* Adds default command (NOT required with 2020 API)*/
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new PoliceLights());
     }
 
     /* Sets lights to blue */

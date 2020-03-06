@@ -20,6 +20,7 @@ import frc.robot.subsystems.ColorSpinner;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.ShootControl;
 import frc.robot.subsystems.Shooter;
 
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static Intake intake;
   public static Climber climber;
   public static ShootControl shootControl;
+  public static Lights lights;
 
   /* Initialize the tracking camera */
   //public static Tracking trackingCam;
@@ -77,6 +79,7 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     climber = new Climber();
     shootControl = new ShootControl();
+    lights = new Lights();
     oi = new OI();
 
     /* Define the tracking camera and start stream 1 */
