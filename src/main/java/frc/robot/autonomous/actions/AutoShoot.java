@@ -18,6 +18,7 @@ public class AutoShoot extends Command {
     int endCounter;
     double previousSpeed;
     int endCounter2;
+    boolean shotOnce = false;
 
     /*
      * Declares public function that takes direction and distance in feet and inches
@@ -41,6 +42,7 @@ public class AutoShoot extends Command {
      */
     protected void initialize() {
         //rpm = Robot.shooter.calculateRPM(inches);
+        Robot.limelight.ledOn();
         Robot.dashboard.setRevSpeed(moveSpeed);
     }
 
@@ -49,27 +51,16 @@ public class AutoShoot extends Command {
      */
     protected void execute() {
         endCounter2 = endCounter2 + 1;
-        //Robot.shooter.shootRPM(rpm);
-        /*if (RobotMap.shooterEncoder.getVelocity() < spinRpm && (spinRpm - RobotMap.shooterEncoder.getVelocity()) > 20) {
-            double tempSpeed = moveSpeed + 0.05;
-            Robot.dashboard.setRevSpeed(tempSpeed);
-            Robot.shooter.shoot(tempSpeed);
-        } else {
-            double tempSpeed = moveSpeed;
-            Robot.dashboard.setRevSpeed(tempSpeed);
-            Robot.shooter.shoot(tempSpeed);
-        }*/
-
-
-
+        
         //Robot.shooter.shoot(moveSpeed);
 
         Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), spinRpm + 100, moveSpeed));
 
 
         System.out.println(Robot.dashboard.getRevSpeed());
-            if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance) {
+            if (Math.abs(RobotMap.shooterEncoder.getVelocity() - spinRpm) <= Config.shootRPMTolerance || shotOnce) {
                 if (waitCounter > 30) {
+                    shotOnce = true;
                     Robot.shootControl.moveToShooter();
                     Robot.ballTransport.moveIn();
                     Robot.indexer.moveIn();
@@ -117,7 +108,7 @@ public class AutoShoot extends Command {
             return true;
         }
         if (!Robot.ballTransport.hasFirstBall() && !Robot.ballTransport.hasSecondBall() && !Robot.ballTransport.hasThirdBall() && !Robot.ballTransport.hasFourthBall() && !Robot.ballTransport.hasFifthBall()) {
-            if (endCounter > 300) {
+            if (endCounter > 100) {
                 System.out.println("ended");
                 return true;
             } else {
@@ -136,6 +127,8 @@ public class AutoShoot extends Command {
      * Stops drivetrain when command ends
      */
     protected void end() {
+        shotOnce = false;
+        Robot.limelight.ledOff();
         Robot.dashboard.setRevSpeed(Config.defaultRevSpeed);
         Robot.indexer.stop();
         Robot.ballTransport.stop();

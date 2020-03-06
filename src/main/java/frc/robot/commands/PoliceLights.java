@@ -22,25 +22,35 @@ public class PoliceLights extends Command {
      */
     protected void execute() {
         if (counter < 10) {
-            Robot.lights.setAlternate(true);
-        } else if (counter >= 10 && counter <= 20) {
-            Robot.lights.setAlternate(false);
-            if (counter == 20) {
-                counter = 0;
+            if (counter % 2 == 0) {
+                Robot.lights.setAlternate(true);
+            } else {
+                Robot.lights.setOff();
+            }
+        } else if (counter >= 10) {
+            if (counter % 2 == 0) {
+                Robot.lights.setAlternate(false);
+            } else {
+                Robot.lights.setOff();
             }
         }
-       counter = counter + 1;
+        if (counter == 20) {
+            counter = 0;
+        } else {
+            counter = counter + 1;
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return !OI.policeLightsButton.get();
     }
 
      /*
      * Sets the subsystems to stop once the command is finished
      */
     protected void end() {
+        Robot.lights.setOff();
     }
 
     /*

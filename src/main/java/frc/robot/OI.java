@@ -5,11 +5,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.AdjustClimb;
 import frc.robot.commands.AdjustDisk;
+import frc.robot.commands.CenterTarget;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Intake;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.MoveSpinner;
 import frc.robot.commands.OnlyShoot;
+import frc.robot.commands.PoliceLights;
 import frc.robot.commands.RawControl;
 import frc.robot.commands.RawIntake;
 import frc.robot.commands.RawTransport;
@@ -64,6 +66,7 @@ public class OI {
   public static Trigger autoIntakeButton = new LaunchpadButton(31);
   public static Trigger revDownButton = new LaunchpadButton(32);
   public static Trigger revUpButton = new LaunchpadButton(33);
+  public static Trigger policeLightsButton = new LaunchpadButton(34);
   
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {
@@ -93,7 +96,8 @@ public class OI {
     spinnerDownButton.whenActive(new MoveSpinner(false));
     adjustCWButton.whenActive(new AdjustDisk(true));
     adjustCCWButton.whenActive(new AdjustDisk(false));
-    autoShootButton.whenActive(new Shoot(true));
+    //autoShootButton.whenActive(new Shoot(true));
+    autoShootButton.whenActive(new CenterTarget());
     semiAutoRevButton.whenActive(new ManualShoot(true));
     intakeOutButton.whenActive(new RawIntake(false));
     intakeInButton.whenActive(new RawIntake(true));
@@ -103,6 +107,7 @@ public class OI {
     controlInButton.whenActive(new RawControl(true));
     manualShootButton.whenActive(new OnlyShoot());
     autoIntakeButton.whenActive(new Intake());
+    policeLightsButton.whenActive(new PoliceLights());
 
   }
 }

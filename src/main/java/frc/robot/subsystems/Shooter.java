@@ -5,6 +5,7 @@ import com.revrobotics.ControlType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Config;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /*
@@ -25,6 +26,7 @@ public class Shooter extends Subsystem {
     /* Sets the shooter to move at a given speed */
     public void shoot(double speed) {
         shooterMotor.set(speed);
+        Robot.lights.setPurple();
     }
 
     /* Shoots at a certain rpm */
@@ -43,6 +45,7 @@ public class Shooter extends Subsystem {
     /* Stops the shooter */
     public void stopShooter() {
         shooterMotor.stopMotor();
+        Robot.lights.setOff();
     }
 
     public void stopRPMShooter() {

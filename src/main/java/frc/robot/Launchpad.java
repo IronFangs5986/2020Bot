@@ -42,6 +42,7 @@ public class Launchpad {
     public static boolean autoIntakeButton = false;
     public static boolean revDownButton = false;
     public static boolean revUpButton = false;
+    public static boolean policeLightsButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -365,6 +366,16 @@ public class Launchpad {
                 revUpButton = true;
             } else {
                 revUpButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
+        /* Add listener for police lights button */
+        table.addEntryListener("policeLights", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad police lights changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                policeLightsButton = true;
+            } else {
+                policeLightsButton = false;
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 
