@@ -30,7 +30,6 @@ public class StraightDrive extends Command {
         requires(Robot.intake);
         requires(Robot.indexer);
         requires(Robot.ballTransport);
-        //requires(Robot.shooter);
 
         /* Sets wether the movement is forward or not */
         forwardMovement = forward;
@@ -38,6 +37,7 @@ public class StraightDrive extends Command {
         /* Determine distance to move in feet */
         driveDistance = (userFeet + (userInches / 12));
 
+        /* Determine whether to start the intake or not while moving */
         setIntake = intake;
     }
 

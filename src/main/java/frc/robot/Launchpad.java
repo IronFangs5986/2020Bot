@@ -43,6 +43,7 @@ public class Launchpad {
     public static boolean revDownButton = false;
     public static boolean revUpButton = false;
     public static boolean policeLightsButton = false;
+    public static boolean autoAlignButton = false;
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
@@ -379,6 +380,15 @@ public class Launchpad {
             }
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 
+        /* Add listener for auto align button */
+        table.addEntryListener("autoAlign", (table, key, entry, value, flags) -> {
+            System.out.println("Launchpad auto align changed to: " + value.getValue());
+            if (value.getDouble() == 1.0) {
+                autoAlignButton = true;
+            } else {
+                autoAlignButton = false;
+            }
+        }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     }
 
 }

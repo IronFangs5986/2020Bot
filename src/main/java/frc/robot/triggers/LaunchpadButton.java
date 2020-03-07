@@ -84,6 +84,8 @@ public class LaunchpadButton extends Trigger {
             return Launchpad.revUpButton;
         } else if (buttonId == 34) {
             return Launchpad.policeLightsButton;
+        } else if (buttonId == 35) {
+            return Launchpad.autoAlignButton;
         } else {
             return false;
         }

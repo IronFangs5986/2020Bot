@@ -67,6 +67,7 @@ public class OI {
   public static Trigger revDownButton = new LaunchpadButton(32);
   public static Trigger revUpButton = new LaunchpadButton(33);
   public static Trigger policeLightsButton = new LaunchpadButton(34);
+  public static Trigger autoAlignButton = new LaunchpadButton(35);
   
   /* Allows buttons and joysticks to be accessed from anywhere */
   public OI() {
@@ -96,8 +97,8 @@ public class OI {
     spinnerDownButton.whenActive(new MoveSpinner(false));
     adjustCWButton.whenActive(new AdjustDisk(true));
     adjustCCWButton.whenActive(new AdjustDisk(false));
-    //autoShootButton.whenActive(new Shoot(true));
-    autoShootButton.whenActive(new CenterTarget());
+    autoShootButton.whenActive(new Shoot());
+    autoAlignButton.whenActive(new CenterTarget());
     semiAutoRevButton.whenActive(new ManualShoot(true));
     intakeOutButton.whenActive(new RawIntake(false));
     intakeInButton.whenActive(new RawIntake(true));

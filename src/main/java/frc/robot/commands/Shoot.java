@@ -12,9 +12,11 @@ import frc.robot.RobotMap;
 public class Shoot extends Command {
 
     /* Variables set when calling the command */
-    double shootRPM = 0;
-    double counter = 0;
     double approxSpeed = 0;
+    boolean tapeFound;
+    double degreesOff;
+    boolean shotOnce = false;
+    int waitCounter;
 
     public Shoot() {
         /* Require the spinner subsystem */
@@ -23,13 +25,15 @@ public class Shoot extends Command {
         requires(Robot.indexer);
         requires(Robot.shootControl);
         requires(Robot.driveTrain);
+        requires(Robot.lights);
+    }
 
-
-        counter = 0;
-
-        shootRPM = 2700.0;
-
-        approxSpeed = (shootRPM / Config.maxShootRPM) + 0.2;
+    /*
+     * Function runs only once when the command starts
+     */
+    protected void initialize() {
+        Robot.limelight.ledOn();
+        Robot.lights.setPurple();
     }
 
     /*
@@ -37,61 +41,63 @@ public class Shoot extends Command {
      */
     protected void execute() {
 
-        /*
-         * 
-         */
-        /*if (counter < 50) {
-            Robot.intake.stop();
-            Robot.ballTransport.moveForShooter();
-            Robot.indexer.moveForShooter();
-            counter = counter + 1;
-        } else {
-            System.out.println("RPM: "+RobotMap.shooterEncoder.getVelocity());
-            if (Math.abs(RobotMap.shooterEncoder.getVelocity()) < shootRPM) {
-                Robot.ballTransport.stop();
-                Robot.indexer.stop();
-                Robot.shooter.shoot(approxSpeed);
-            } else {
-                Robot.ballTransport.moveIn();
-                Robot.indexer.moveIn();
-                Robot.shooter.shoot(approxSpeed);
-            }
-        }*/
+        /* Get degrees off, and whether there is a target found */
+        degreesOff = Robot.limelight.getTx();
+        tapeFound = Robot.limelight.hasTarget();
 
-        double targetX = 0.0;
-        if (Math.abs(targetX) <= Config.shootTurnTolerance) {
+        if (tapeFound) {
+            double targetDistance = Robot.limelight.getDistance();
+            double shootRPM = Robot.shooter.calculateRPM(targetDistance);
+            double calculatePercentage = Robot.shooter.calculatePercentage(shootRPM);
+
+            Robot.shooter.shoot(Robot.shooter.calculateSpeed(RobotMap.shooterEncoder.getVelocity(), shootRPM, calculatePercentage));
+            if (Math.abs(degreesOff) > Config.shootTurnTolerance) {
+                if (degreesOff > 0) {
+                    Robot.driveTrain.adjustTargetRight();
+                } else {
+                    Robot.driveTrain.adjustTargetLeft();
+                }
+            } else {
+                Robot.driveTrain.stopTank();
+
+
+
+                if (Math.abs(RobotMap.shooterEncoder.getVelocity() - shootRPM) <= Config.shootRPMTolerance || shotOnce) {
+                    if (waitCounter > 30) {
+                        shotOnce = true;
+                        Robot.shootControl.moveToShooter();
+                        Robot.ballTransport.moveIn();
+                        Robot.indexer.moveIn();
+                        Robot.intake.intake();
+                    } else {
+                        waitCounter = waitCounter + 1;
+                        Robot.shootControl.stop();
+                        Robot.ballTransport.stop();
+                        Robot.indexer.stop();
+                        Robot.intake.stop();
+                    }
+                } else {
+                    waitCounter = 0;
+                    Robot.shootControl.stop();
+                    if (!Robot.ballTransport.hasFirstBall()) {
+                        Robot.ballTransport.moveIn();
+                        Robot.indexer.moveIn();
+                        Robot.intake.intake();
+                    } else {
+                        Robot.ballTransport.stop();
+                        Robot.indexer.stop();
+                        Robot.intake.stop();
+                    }
+                }
+
+
+
+
+            }
+        } else {
+            System.out.println("No Tape found");
             Robot.driveTrain.stopTank();
-            System.out.println("RPM: "+RobotMap.shooterEncoder.getVelocity());
-            if (Math.abs(RobotMap.shooterEncoder.getVelocity()) < shootRPM) {
-                Robot.shootControl.stop();
-                Robot.ballTransport.stop();
-                Robot.indexer.stop();
-                Robot.shooter.shoot(approxSpeed);
-            } else {
-                Robot.shootControl.moveToShooter();
-                Robot.ballTransport.moveIn();
-                Robot.indexer.moveIn();
-                Robot.shooter.shoot(approxSpeed);
-            }
-        } else if (targetX < 0.0) {
-            Robot.shootControl.stop();
-            Robot.shooter.stopShooter();
-            Robot.ballTransport.stop();
-            Robot.indexer.stop();
-            Robot.driveTrain.adjustTargetLeft();
-        } else if (targetX > 0.0) {
-            Robot.shootControl.stop();
-            Robot.shooter.stopShooter();
-            Robot.ballTransport.stop();
-            Robot.indexer.stop();
-            Robot.driveTrain.adjustTargetRight();
         }
-
-        /*if (OI.driver.getRawButton(2)) {
-            Robot.shooter.shoot();
-        } else {
-            Robot.shooter.stopShooter();
-        }*/
     }
 
     @Override
@@ -100,17 +106,19 @@ public class Shoot extends Command {
     }
 
      /*
-     * Sets the spinner to stop once the command is finished
+     * Sets the shooter to stop once the command is finished
      */
     protected void end() {
+        Robot.limelight.ledOff();
+        Robot.lights.setOff();
         Robot.shootControl.stop();
         Robot.shooter.stopShooter();
         Robot.ballTransport.stop();
         Robot.indexer.stop();
         Robot.driveTrain.stopTank();
-        shootRPM = 0;
-        counter = 0;
         approxSpeed = 0;
+        shotOnce = false;
+        waitCounter = 0;
     }
 
     /*

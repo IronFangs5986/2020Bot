@@ -21,7 +21,7 @@ public class OnlyShoot extends Command {
      * Executes the command
      */
     protected void execute() {
-        Robot.shooter.shoot(getSpeed(RobotMap.shooterEncoder.getVelocity(), 1900, 0.43));
+        Robot.shooter.shoot(Robot.shooter.calculateSpeed(RobotMap.shooterEncoder.getVelocity(), 1900, 0.43));
         //Robot.shooter.shootRPM(1700);
     }
 
@@ -45,17 +45,4 @@ public class OnlyShoot extends Command {
         end();
     }
 
-    /*
-     * Calculates speed based on distance to target. Demo of this function can be
-     * found here: https://www.desmos.com/calculator/mjxmn8nmug
-     */
-    private double getSpeed(double current, double total, double approx) {
-        double speed = (-1 / ((-1 - ((total - 1) / 2)) * (-1 - ((total - 1) / 2))));
-        speed = speed * (current - ((total - 1) / 2)) * (current - ((total - 1) / 2));
-        speed = speed + 1;
-        if (speed < approx) {
-            speed = approx;
-        }
-        return speed;
-    }
 }
