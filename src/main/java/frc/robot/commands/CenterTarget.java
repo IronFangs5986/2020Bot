@@ -65,12 +65,14 @@ public class CenterTarget extends Command {
     protected boolean isFinished() {
         if (!OI.autoAlignButton.get()) {
             return true;
-        }
-        if (Math.abs(degreesOff) <= Config.shootTurnTolerance || !tapeFound) {
-            return true;
         } else {
             return false;
         }
+        /*if (Math.abs(degreesOff) <= Config.shootTurnTolerance || !tapeFound) {
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     /*

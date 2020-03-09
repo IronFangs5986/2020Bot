@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
     System.out.println(RobotMap.rightDriveEncoder.getPosition()+" "+driveTrain.getRightDistance());
   
     dashboard.setDistance(limelight.getDistance());
-    dashboard.setCalcRPM(shooter.calculateRPM(RobotMap.distanceSensor.getValue()*0.125));
+    dashboard.setCalcRPM(shooter.calculateRPM(limelight.getDistance()));
   }
 
   /*

@@ -14,7 +14,7 @@ public class Config {
     /* Configuration for color spinner speeds */
     public static double colorSpinSpeed = 0.2;
     public static double colorAdjustSpeed = 0.1;
-    public static double colorRaiseSpeed = 1.0;
+    public static double colorRaiseSpeed = 0.5;
     public static double colorColorSpeed = 0.05;
  
     /* Configuration for intake speed */
@@ -43,9 +43,12 @@ public class Config {
     public static double defaultRevSpeed = 0.37;
 
     /* Shooting parabola variables */
-    public static double shootRPMA = 0.106487;
-    public static double shootRPMB = -15.235;
-    public static double shootRPMC = 1824.18;
+    //public static double shootRPMA = 0.106487;
+    //public static double shootRPMB = -15.235;
+    //public static double shootRPMC = 1824.18;
+    public static double shootRPMA = 0.0216441;
+    public static double shootRPMB = -6.95135;
+    public static double shootRPMC = 1974.3;
 
     /* Limelight variables */
     public static double limelightHeight = 19.875; //inches

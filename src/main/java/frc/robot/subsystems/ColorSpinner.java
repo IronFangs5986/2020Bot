@@ -108,12 +108,12 @@ public class ColorSpinner extends Subsystem {
 
     /* Moves spinnerMotor up */
     public void moveUp() {
-      raiseSpinnerMotor.set(Config.colorRaiseSpeed);
+      raiseSpinnerMotor.set(Config.colorRaiseSpeed * -1);
     }
 
     /* Moves spinnerMotor down */
     public void moveDown() {
-      raiseSpinnerMotor.set(Config.colorRaiseSpeed * -1);
+      raiseSpinnerMotor.set(Config.colorRaiseSpeed);
     }
 
     /* Stops raiseSpinnerMotor */

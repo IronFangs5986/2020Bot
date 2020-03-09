@@ -50,7 +50,8 @@ public class Shooter extends Subsystem {
 
     /* Calculates approximate percentage to spin motor based on RPM to shoot */
     public double calculatePercentage(double rpm) {
-        return 0.35;
+        //return 0.35;
+        return (((0.0233652)*rpm)-0.858592)/100.0;
     }
 
     /*
@@ -63,6 +64,9 @@ public class Shooter extends Subsystem {
         speed = speed + 1;
         if (speed < min) {
             speed = min;
+        }
+        if (speed > 0.8) {
+            speed = 0.8;
         }
         return speed;
     }

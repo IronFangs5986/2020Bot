@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Config;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.TankDrive;
 
 /*
  * This is the Drive subsystem where anything related to drive is found
@@ -21,7 +22,7 @@ public class Drive extends Subsystem {
      */
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDrive());
+        setDefaultCommand(new TankDrive());
     }
 
     /*
