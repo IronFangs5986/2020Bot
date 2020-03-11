@@ -28,6 +28,7 @@ public class CenterTarget extends Command {
      * Function runs only once when the command starts
      */
     protected void initialize() {
+        Robot.limelight.setVision();
         Robot.limelight.ledOn();
     }
 
@@ -80,6 +81,7 @@ public class CenterTarget extends Command {
      */
     protected void end() {
         Robot.driveTrain.stopTank();
+        Robot.limelight.setDrive();
         Robot.limelight.ledOff();
     }
 
