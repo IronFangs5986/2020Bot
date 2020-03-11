@@ -6,15 +6,16 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 /*
  * This class handles all NetworkTable actions that communicate with the Dashboard
+ * 
+ * Author: Francisco Fabregat
  */
 public class Dashboard {
 
     /* Initialize NetworkTables instance */
     static NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
-    /* Fetch tables 'FangsDashboard' and 'ChickenVision' from NetworkTables */
+    /* Fetch table 'FangsDashboard' from NetworkTables */
     NetworkTable table = inst.getTable("FangsDashboard");
-    NetworkTable visionTable = inst.getTable("ChickenVision");
 
     /* Define NetworkTable entries */
     NetworkTableEntry battery = table.getEntry("battery");
@@ -36,10 +37,6 @@ public class Dashboard {
     NetworkTableEntry revSpeed = table.getEntry("revSpeed");
     NetworkTableEntry calcRPM = table.getEntry("calcRPM");
     NetworkTableEntry newTargetDistance = table.getEntry("targetDistance");
-
-    NetworkTableEntry tapeDetected = visionTable.getEntry("tapeDetected");
-    NetworkTableEntry tapeYaw = visionTable.getEntry("tapeYaw");
-    NetworkTableEntry targetDistance = visionTable.getEntry("distance");
 
     /* Send battery voltage to NetworkTables */
     public void setBattery(final Double voltage) {
@@ -68,9 +65,7 @@ public class Dashboard {
         autoList.setStringArray(list);
     }
 
-    /*
-     * Send the current robot mode to NetworkTables (Disabled, Teleop, Autonomous)
-     */
+    /* Send the current robot mode to NetworkTables (Disabled, Teleop, Autonomous) */
     public void setRobotMode(final String mode) {
         robotMode.setString(mode);
     }
@@ -111,32 +106,22 @@ public class Dashboard {
         fifthBall.setBoolean(fifth);
     }
 
-    /* Get the current tape yaw from NetworkTables */
-    public double getTapeYaw() {
-        return tapeYaw.getDouble(0.0);
-    }
-
-    /* Check if tape can be seen from NetworkTables */
-    public boolean getTapeDetected() {
-        return tapeDetected.getBoolean(false);
-    }
-
+    /* Set rev speed to Dashboard for operator to visualize shooter status*/
     public void setRevSpeed(final double speed) {
         revSpeed.setDouble(speed);
     }
 
+    /* Gets what rev speed is displayed in the Dashboard */
     public double getRevSpeed() {
         return revSpeed.getDouble(Config.defaultRevSpeed);
     }
 
+    /* Display calculated shooting RPM to Dashboard */
     public void setCalcRPM(final double rpm) {
         calcRPM.setDouble(rpm);
     }
 
-    public double getTargetDistance() {
-        return targetDistance.getDouble(0.0);
-    }
-
+    /* Send calculated distance from robot to target by Limelight */
     public void setDistance(final double distance) {
         newTargetDistance.setDouble(distance);
     }

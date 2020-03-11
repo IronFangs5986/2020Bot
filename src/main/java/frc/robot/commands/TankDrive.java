@@ -64,11 +64,11 @@ public class TankDrive extends Command {
             } else if (OI.robotSpinRightButton.get() || OI.driver.getRawButton(2)) {
                 Robot.driveTrain.spinAdjustRight();
             } else {
-                /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
+                /* Sets the tankDrive to the 2 drive axis  */
                 Robot.driveTrain.tankDrive(leftSpeed, rightSpeed);
             }
         } else {
-            /* Sets the arcadeDrive to the 2 drive axis and strafe axis */
+            /* Sets the tankDrive to the 2 drive axis */
             Robot.driveTrain.tankDrive(leftSpeed, rightSpeed);
         }
 

@@ -6,6 +6,8 @@ import frc.robot.Robot;
 
 /*
  * This command centers the robot with the target
+ * 
+ * Author: Francisco Fabregat
  */
 public class CenterTarget extends Command {
 
@@ -37,6 +39,7 @@ public class CenterTarget extends Command {
         degreesOff = Robot.limelight.getTx();
         tapeFound = Robot.limelight.hasTarget();
 
+        /* If the Limelight finds tape, adjust the robot accordingly until it is centered with the target */
         if (tapeFound) {
             if (Math.abs(degreesOff) > Config.shootTurnTolerance) {
                 if (degreesOff > 0) {

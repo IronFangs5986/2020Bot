@@ -1,5 +1,10 @@
 package frc.robot;
 
+/*
+ * This class contains all variables that can be edited in order to further configure and calibrate the robot. 
+ * 
+ * Author: Francisco Fabregat
+ */
 public class Config {
 
     /* Configuration for drivetrain speeds */
@@ -50,10 +55,14 @@ public class Config {
     public static double shootRPMB = -6.95135;
     public static double shootRPMC = 1974.3;
 
+    public static double shootPercentageM = 0.0233652;
+    public static double shootPercentageB = -0.858592;
+
     /* Limelight variables */
     public static double limelightHeight = 19.875; //inches
     public static double targetHeight = 98.19; //inches
     public static double limelightAngle = 24.0; //Degrees
 
+    /* Define robot width */
     public static double robotWidth = 0.0;
 }

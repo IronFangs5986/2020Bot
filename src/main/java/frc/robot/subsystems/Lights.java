@@ -7,6 +7,8 @@ import frc.robot.commands.PoliceLights;
 
 /*
  * This is the lights subsystem where anything related to lights is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Lights extends Subsystem {
     

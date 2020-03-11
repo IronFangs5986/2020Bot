@@ -7,6 +7,8 @@ import frc.robot.RobotMap;
 
 /*
  * This command turns the robot a certain amount of degrees over a certain radius
+ * 
+ * Author: Francisco Fabregat
  */
 public class TurnDrive extends Command {
 

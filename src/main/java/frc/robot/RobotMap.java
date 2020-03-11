@@ -3,23 +3,22 @@ package frc.robot;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.util.Color;
 
 /*
  * All universal variables and robot components are found here
+ * 
+ * Author: Francisco Fabregat
  */
 public class RobotMap {
 
@@ -55,6 +54,7 @@ public class RobotMap {
   public static CANEncoder leftDriveEncoder;
   public static CANEncoder rightDriveEncoder;
 
+  /* Initialize PID Controller for shooter motor*/
   public static CANPIDController shooterPIDController;
 
   /* Initialize I2C port */
@@ -63,15 +63,7 @@ public class RobotMap {
   /* Initialize Color Sensor */
   public static ColorSensorV3 colorSensor;
 
-  /* Initialize Color Sensor ColorMatch */
-  public static ColorMatch colorMatch;
-
-  /* Initialize Color Sensor color targets */
-  public static Color BlueTarget;
-  public static Color GreenTarget;
-  public static Color RedTarget;
-  public static Color YellowTarget;
-
+  /* Initialize solenoids for LEDs */
   public static Solenoid leftRedLights;
   public static Solenoid leftBlueLights;
   public static Solenoid rightRedLights;
@@ -86,8 +78,6 @@ public class RobotMap {
   public static Ultrasonic thirdBallUltra;
   public static Ultrasonic fourthBallUltra;
   public static Ultrasonic fifthBallUltra;
-
-  public static AnalogInput distanceSensor;
 
   /* Initialize camera and camera server variables */
   public static UsbCamera driverCamera = null;
@@ -106,7 +96,7 @@ public class RobotMap {
     MiddleRightMotor = new CANSparkMax(5, MotorType.kBrushless);
     BackRightMotor = new CANSparkMax(6, MotorType.kBrushless);
 
-
+    /* Set ramp rate for drive motors to decrease current drawn and prevent browning out */
     FrontLeftMotor.setOpenLoopRampRate(0.1);
     MiddleLeftMotor.setOpenLoopRampRate(0.1);
     BackLeftMotor.setOpenLoopRampRate(0.1);
@@ -167,27 +157,13 @@ public class RobotMap {
 
     //0.000214
 
-    /* Define the I2C port */
+    /* Define the I2C port for color sensor */
     i2cPort = I2C.Port.kOnboard;
 
     /* Define the Color Sensor as in the I2C port */
     colorSensor = new ColorSensorV3(i2cPort);
-    
-    /* Define ColorMatch */
-    colorMatch = new ColorMatch();
 
-    /* Define ColorMatch colors */
-    //BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-    //GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-    //RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-    //YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
-
-    BlueTarget = ColorMatch.makeColor(0.420, 1.390, 1.490); //3
-    GreenTarget = ColorMatch.makeColor(0.412, 1.350, 0.603); //2
-    RedTarget = ColorMatch.makeColor(1.050, 0.790, 0.321); //1
-    YellowTarget = ColorMatch.makeColor(1.600, 2.850, 0.670); //4
-
-    //trackingLight = new Solenoid(0);
+    /* Define solenoids for LEDs */
     leftRedLights = new Solenoid(0);
     leftBlueLights = new Solenoid(1);
     rightRedLights = new Solenoid(2);
@@ -203,13 +179,12 @@ public class RobotMap {
     fourthBallUltra = new Ultrasonic(6, 7);
     fifthBallUltra = new Ultrasonic(8, 9);
 
+    /* Set ultrasonic sensors to always get information */
     firstBallUltra.setAutomaticMode(true);
     secondBallUltra.setAutomaticMode(true);
     thirdBallUltra.setAutomaticMode(true);
     fourthBallUltra.setAutomaticMode(true);
     fifthBallUltra.setAutomaticMode(true);
-
-    distanceSensor = new AnalogInput(0);
     
     /* Define and start camera server */
     UsbCamera server = CameraServer.getInstance().startAutomaticCapture(0);

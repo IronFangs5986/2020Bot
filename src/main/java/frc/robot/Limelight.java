@@ -6,6 +6,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 /*
  * This class handles all NetworkTable actions that communicate with the Limelight
+ * 
+ * Author: Francisco Fabregat
  */
 public class Limelight {
 
@@ -85,7 +87,7 @@ public class Limelight {
 
     /* Get distance to target */
     public double getDistance() {
-        return ((Config.targetHeight-Config.limelightHeight) / Math.tan(Math.toRadians(Config.limelightAngle)+Math.toRadians(getTy())))-4.0;
+        return ((Config.targetHeight-Config.limelightHeight) / Math.tan(Math.toRadians(Config.limelightAngle)+Math.toRadians(getTy())));
     }
 
 

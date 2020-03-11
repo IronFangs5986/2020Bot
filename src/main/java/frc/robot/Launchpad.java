@@ -6,6 +6,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 /*
  * This class handles all NetworkTable actions that communicate with the Launchpad
+ * 
+ * Author: Francisco Fabregat
  */
 public class Launchpad {
 

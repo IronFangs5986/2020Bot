@@ -8,6 +8,8 @@ import frc.robot.RobotMap;
 
 /*
  * This is the Indexer subsystem where anything related to ball indexer is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Indexer extends Subsystem {
 

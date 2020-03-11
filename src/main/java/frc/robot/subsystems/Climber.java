@@ -8,6 +8,8 @@ import frc.robot.RobotMap;
 
 /*
  * This is the Climber subsystem where anything related to climber is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Climber extends Subsystem {
 

@@ -3,8 +3,12 @@ package frc.robot.autonomous.paths;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.autonomous.actions.AutoShoot;
 import frc.robot.autonomous.actions.StraightDrive;
-import frc.robot.autonomous.actions.TurnInPlace;
 
+/*
+ * This autonomous path shoots Power Cells and moves back
+ * 
+ * Author: Francisco Fabregat
+ */
 public class ShootNMove extends CommandGroup {
     public ShootNMove() {
 
@@ -13,9 +17,6 @@ public class ShootNMove extends CommandGroup {
 
         /* Drives back for 6ft 0in */
         addSequential(new StraightDrive(false, 6, 0, false));
-
-        /* Turns 90 degrees */
-        //addSequential(new TurnInPlace(true, 90.0));
 
     }
 }

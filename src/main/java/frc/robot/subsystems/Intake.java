@@ -8,6 +8,8 @@ import frc.robot.RobotMap;
 
 /*
  * This is the Intake subsystem where anything related to ball intake is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Intake extends Subsystem {
     

@@ -7,6 +7,8 @@ import frc.robot.RobotMap;
 
 /*
  * This command moves the robot straight a certain distance
+ * 
+ * Author: Francisco Fabregat
  */
 public class StraightDrive extends Command {
 

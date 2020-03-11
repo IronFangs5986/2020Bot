@@ -5,9 +5,12 @@ import frc.robot.Launchpad;
 
 /*
  * This class handles the triggers for launchpad buttons
+ * 
+ * Author: Francisco Fabregat
  */
 public class LaunchpadButton extends Trigger {
 
+    /* Initialize buttonId to be set with the given button id */
     int buttonId;
 
     /* Make this class public */
@@ -15,7 +18,7 @@ public class LaunchpadButton extends Trigger {
         buttonId = id;
     }
 
-    /* Will return true when variables in Launchpad are true*/
+    /* Will return true when variables in Launchpad are true */
     @Override
     public boolean get() {
         if (buttonId == 1) {
@@ -48,7 +51,7 @@ public class LaunchpadButton extends Trigger {
             return Launchpad.climbAdjustRightButton;
         } else if (buttonId == 16) {
             return Launchpad.visionOnButton;
-        } else if (buttonId == 17) { // new
+        } else if (buttonId == 17) {
             return Launchpad.autoShootButton;
         } else if (buttonId == 18) {
             return Launchpad.semiAutoShootButton;

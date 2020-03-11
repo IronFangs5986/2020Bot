@@ -18,16 +18,26 @@ public class ManualShoot extends Command {
         requires(Robot.ballTransport);
         requires(Robot.indexer);
         requires(Robot.intake);
+        requires(Robot.lights);
 
         lp = launchpad;
     }
 
     /*
+     * Function runs only once when the command starts
+     */
+    protected void initialize() {
+        Robot.limelight.setVision();
+        Robot.limelight.ledOn();
+        Robot.lights.setPurple();
+    }
+    
+    /*
      * Executes the command
      */
     protected void execute() {
 
-        if (OI.driver.getRawButton(1) || OI.semiAutoShootButton.get()) {
+        if (OI.semiAutoShootButton.get()) {
             Robot.shootControl.moveToShooter();
             Robot.ballTransport.moveIn();
             Robot.indexer.moveIn();
@@ -56,6 +66,9 @@ public class ManualShoot extends Command {
      */
     protected void end() {
         //Config.revSpeed = Config.defaultRevSpeed;
+        Robot.limelight.ledOff();
+        Robot.limelight.setDrive();
+        Robot.lights.setOff();
         Robot.shootControl.stop();
         Robot.ballTransport.stop();
         Robot.indexer.stop();

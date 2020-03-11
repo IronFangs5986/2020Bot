@@ -7,6 +7,8 @@ import frc.robot.RobotMap;
 
 /*
  * This command turns the robot certain degrees
+ * 
+ * Author: Francisco Fabregat
  */
 public class TurnInPlace extends Command {
 

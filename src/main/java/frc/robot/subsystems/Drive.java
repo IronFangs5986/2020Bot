@@ -4,17 +4,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Config;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 
 /*
  * This is the Drive subsystem where anything related to drive is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Drive extends Subsystem {
 
     /* Call DifferentialDrive defined in RobotMap */
     DifferentialDrive robotDrive = RobotMap.robotDrive;
 
+    /* Make this class public */
     public Drive() {}
 
     /*

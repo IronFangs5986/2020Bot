@@ -25,7 +25,9 @@ import frc.robot.subsystems.ShootControl;
 import frc.robot.subsystems.Shooter;
 
 /*
- * This is the "main" class 
+ * This is the "main" class
+ * 
+ * Author: Francisco Fabregat
  */
 public class Robot extends TimedRobot {
 
@@ -43,9 +45,6 @@ public class Robot extends TimedRobot {
   public static Climber climber;
   public static ShootControl shootControl;
   public static Lights lights;
-
-  /* Initialize the tracking camera */
-  //public static Tracking trackingCam;
 
   /* Define default autonomous mode id */
   private int mode = 0;
@@ -82,21 +81,13 @@ public class Robot extends TimedRobot {
     lights = new Lights();
     oi = new OI();
 
-    /* Define the tracking camera and start stream 1 */
-    //trackingCam = new Tracking();
-    //trackingCam.startCameraStream1();
-
     /* Push autonomous list to Dashboard */
     dashboard.setAutonomousList(autoList);
 
     /* Select default autonomous mode */
     dashboard.setAutonomous(0);
 
-    RobotMap.colorMatch.addColorMatch(RobotMap.BlueTarget);
-    RobotMap.colorMatch.addColorMatch(RobotMap.GreenTarget);
-    RobotMap.colorMatch.addColorMatch(RobotMap.RedTarget);
-    RobotMap.colorMatch.addColorMatch(RobotMap.YellowTarget);
-
+    /* Set default rev speed in dashboard */
     dashboard.setRevSpeed(Config.defaultRevSpeed);
   }
 
@@ -121,20 +112,17 @@ public class Robot extends TimedRobot {
     /* Send ball information to Dashboard*/
     dashboard.setBalls(ballTransport.hasFirstBall(), ballTransport.hasSecondBall(), ballTransport.hasThirdBall(), ballTransport.hasFourthBall(), ballTransport.hasFifthBall());
 
-    /* Send calculated rpm to Dashboard */
-    /*if (dashboard.getTapeDetected()) {
-      dashboard.setCalcRPM(shooter.calculateRPM(dashboard.getTargetDistance()));
+    /* Send distance and calculated shooting RPM to dashboard ONLY if tape is detected by the Limelight */
+    if (limelight.hasTarget()) {
+      dashboard.setDistance(limelight.getDistance());
+      dashboard.setCalcRPM(shooter.calculateRPM(limelight.getDistance()));
     } else {
+      dashboard.setDistance(0.0);
       dashboard.setCalcRPM(0.0);
-    }*/
-    //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
-    //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
-    //System.out.println(RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
-    //System.out.println(colorSpinner.getColor()+" "+RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
-    System.out.println(RobotMap.rightDriveEncoder.getPosition()+" "+driveTrain.getRightDistance());
-  
-    dashboard.setDistance(limelight.getDistance());
-    dashboard.setCalcRPM(shooter.calculateRPM(limelight.getDistance()));
+    }
+
+    /* Prints debug information in console*/
+    printDebug();
   }
 
   /*
@@ -218,5 +206,14 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
 
+  }
+
+  /* Prints debug information in the console */
+  private void printDebug() {
+    //System.out.println("Vel" +RobotMap.spinnerEncoder.getVelocity());
+    //System.out.println(RobotMap.fifthBallUltra.getRangeInches());
+    //System.out.println(RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
+    //System.out.println(colorSpinner.getColor()+" "+RobotMap.colorSensor.getRed()+" "+RobotMap.colorSensor.getGreen()+" "+RobotMap.colorSensor.getBlue());
+    System.out.println(RobotMap.rightDriveEncoder.getPosition()+" "+driveTrain.getRightDistance());
   }
 }

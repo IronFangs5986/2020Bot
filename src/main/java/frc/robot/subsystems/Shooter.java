@@ -5,11 +5,12 @@ import com.revrobotics.ControlType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Config;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /*
  * This is the Shooter subsystem where anything related to shooter is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class Shooter extends Subsystem {
 
@@ -50,8 +51,7 @@ public class Shooter extends Subsystem {
 
     /* Calculates approximate percentage to spin motor based on RPM to shoot */
     public double calculatePercentage(double rpm) {
-        //return 0.35;
-        return (((0.0233652)*rpm)-0.858592)/100.0;
+        return ((Config.shootPercentageM*rpm)+Config.shootPercentageB)/100.0;
     }
 
     /*

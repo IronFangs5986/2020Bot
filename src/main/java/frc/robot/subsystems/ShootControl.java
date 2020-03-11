@@ -8,6 +8,8 @@ import frc.robot.RobotMap;
 
 /*
  * This is the Shooter Control subsystem where anything related to shooter control is found
+ * 
+ * Author: Francisco Fabregat
  */
 public class ShootControl extends Subsystem {
 
@@ -36,7 +38,6 @@ public class ShootControl extends Subsystem {
     public void keepBallsIn() {
         controlMotor.set(Config.controlKeepInSpeed * -1);
     }
-
 
     /* Stops the shoot control */
     public void stop() {

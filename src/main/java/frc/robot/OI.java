@@ -22,6 +22,8 @@ import frc.robot.triggers.LaunchpadButton;
 
 /*
  * This class defines everything related to joysticks and controls
+ * 
+ * Author: Francisco Fabregat
  */
 public class OI {
 
@@ -79,7 +81,6 @@ public class OI {
     shoot = new JoystickButton(driver, 2);
     intake = new JoystickButton(driver, 3);
     reverse = new JoystickButton(driver, 4);
-    //rawShoot = new JoystickButton(driver, 11);
 
     /* Handle button presses */
 

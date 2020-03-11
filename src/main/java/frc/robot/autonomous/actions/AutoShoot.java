@@ -7,6 +7,8 @@ import frc.robot.RobotMap;
 
 /*
  * This command shoots balls in autonomous
+ * 
+ * Author: Francisco Fabregat
  */
 public class AutoShoot extends Command {
 
@@ -42,6 +44,7 @@ public class AutoShoot extends Command {
      */
     protected void initialize() {
         //rpm = Robot.shooter.calculateRPM(inches);
+        Robot.limelight.setVision();
         Robot.limelight.ledOn();
         Robot.lights.setPurple();
         Robot.dashboard.setRevSpeed(moveSpeed);
@@ -129,10 +132,12 @@ public class AutoShoot extends Command {
      */
     protected void end() {
         shotOnce = false;
+        Robot.limelight.setDrive();
         Robot.limelight.ledOff();
         Robot.lights.setOff();
         Robot.dashboard.setRevSpeed(Config.defaultRevSpeed);
         Robot.indexer.stop();
+        Robot.intake.stop();
         Robot.ballTransport.stop();
         Robot.shootControl.stop();
         Robot.shooter.stopShooter();

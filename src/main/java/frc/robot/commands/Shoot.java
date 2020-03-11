@@ -32,6 +32,7 @@ public class Shoot extends Command {
      * Function runs only once when the command starts
      */
     protected void initialize() {
+        Robot.limelight.setVision();
         Robot.limelight.ledOn();
         Robot.lights.setPurple();
     }
@@ -59,9 +60,6 @@ public class Shoot extends Command {
                 }
             } else {
                 Robot.driveTrain.stopTank();
-
-
-
                 if (Math.abs(RobotMap.shooterEncoder.getVelocity() - shootRPM) <= Config.shootRPMTolerance || shotOnce) {
                     if (waitCounter > 30) {
                         shotOnce = true;
@@ -89,10 +87,6 @@ public class Shoot extends Command {
                         Robot.intake.stop();
                     }
                 }
-
-
-
-
             }
         } else {
             System.out.println("No Tape found");
@@ -109,12 +103,14 @@ public class Shoot extends Command {
      * Sets the shooter to stop once the command is finished
      */
     protected void end() {
+        Robot.limelight.setDrive();
         Robot.limelight.ledOff();
         Robot.lights.setOff();
         Robot.shootControl.stop();
         Robot.shooter.stopShooter();
         Robot.ballTransport.stop();
         Robot.indexer.stop();
+        Robot.intake.stop();
         Robot.driveTrain.stopTank();
         approxSpeed = 0;
         shotOnce = false;
